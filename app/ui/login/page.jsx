@@ -56,7 +56,7 @@ const Login = ({ toggleView }) => {
           />
         </div>
         <div className="flex gap-2 mt-5 justify-center">
-          <p>Don't have an account?</p>
+          <p>Dont have an account?</p>
           <a className="text-blue-800 cursor-pointer" onClick={toggleView}>
             Sign up for free
           </a>
