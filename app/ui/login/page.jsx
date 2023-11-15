@@ -4,7 +4,7 @@ import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
 import { useRouter } from "next/navigation";
 
-const Login = () => {
+const Login = ({ toggleView }) => {
   const [showPassword, setShowPassword] = useState("");
 
   const toggleShowPassword = () => {
@@ -17,7 +17,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-[600px] border-2 rounded-md w-[auto] bg-white">
+    <div className="h-[600px] border-2 rounded-md w-[1000px] bg-white">
       <div className="flex flex-col justify-center items-center pt-8">
         <p className="text-[28px] font-bold">Welcome back!!!</p>
         <div className="flex flex-col items-center justify-center text-[grey]">
@@ -54,6 +54,12 @@ const Login = () => {
             className={`h-[60px] w-[600px] rounded-md bg-orange-300 font-[600] text-[#1c2536] text-[20px]`}
             onClick={handleLogin}
           />
+        </div>
+        <div className="flex gap-2 mt-5 justify-center">
+          <p>Don't have an account?</p>
+          <a className="text-blue-800 cursor-pointer" onClick={toggleView}>
+            Sign up for free
+          </a>
         </div>
       </form>
     </div>
