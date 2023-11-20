@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import MenuLink from "./menuLink/menuLink";
 import {
   MdAttachMoney,
@@ -9,6 +10,8 @@ import {
   MdSupervisedUserCircle,
 } from "react-icons/md";
 import Image from "next/image";
+import { useAuth } from "@/app/context/AuthContext";
+import { jwtDecode } from "jwt-decode";
 
 const menuItems = [
   {
@@ -49,9 +52,16 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
+  const [user, setUser] = useState({});
+  const token = localStorage.getItem("access_token");
+
+  useEffect(() => {
+    const decoded_user = jwtDecode(token);
+    setUser(decoded_user);
+  }, [token]);
   return (
     <div className="sticky top-[40px]">
-      <div className="flex items-center gap-[20px] mb-[20px]">
+      <div className="flex items-center gap-[20px] mb-[20px] bg-amber-300 h-[100px] p-[20px] rounded-md">
         <Image
           src={
             "https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-profile-line-black-icon-png-image_691065.jpg"
@@ -62,8 +72,10 @@ const Sidebar = () => {
           className="rounded-[50%] object-cover"
         />
         <div className="flex flex-col">
-          <span className="font-[500]">Nicholas Kipkoech</span>
-          <span className="text-[12px] text-[#e5e5e5]">Administrator</span>
+          <span className="font-[500] text-[20px]">{user.name}</span>
+          <span className="text-[14px] text-[#000000] font-[600]">
+            {user.role}
+          </span>
         </div>
       </div>
       <ul className="list-none">

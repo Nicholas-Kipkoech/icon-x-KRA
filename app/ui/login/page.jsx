@@ -3,17 +3,22 @@ import React, { useState } from "react";
 import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/AuthContext";
 
 const Login = ({ toggleView }) => {
   const [showPassword, setShowPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const toggleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  const { login } = useAuth();
+
   const router = useRouter();
   const handleLogin = () => {
-    router.push("/dashboard");
+    login(email, password);
   };
 
   return (
@@ -28,6 +33,8 @@ const Login = ({ toggleView }) => {
       <form className="h-[400px] mt-2 p-10 flex flex-col">
         <CustomInput
           name={`Email`}
+          value={email}
+          onchange={(e) => setEmail(e.target.value)}
           type={`email`}
           className={`h-[60px] w-[600px] border p-5 rounded-md`}
           placeholder={`Enter email...`}
@@ -35,6 +42,8 @@ const Login = ({ toggleView }) => {
 
         <CustomInput
           name={`Password`}
+          value={password}
+          onchange={(e) => setPassword(e.target.value)}
           type={showPassword ? `text` : `password`}
           placeholder={`Enter password...`}
           className={`h-[60px] w-[600px] border p-5 rounded-md`}
