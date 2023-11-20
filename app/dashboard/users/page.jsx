@@ -1,8 +1,6 @@
 "use client";
 import { fetchCompanyUsers } from "@/app/services/adminServices";
-import { CustomTable } from "@/app/ui/reusableComponents/CustomTable";
-import HeaderBar from "@/app/ui/reusableComponents/HeaderBar";
-import { Table } from "antd";
+import { ConfigProvider, Table } from "antd";
 import React, { useEffect, useState } from "react";
 
 export const formatDate = (serverDate) => {
@@ -65,7 +63,15 @@ const Users = () => {
         <p className="text-[30px]">Loading data......</p>
       ) : (
         <div className="mt-10">
-          <Table dataSource={users} columns={columns} loading={loading} />
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#ff2146",
+              },
+            }}
+          >
+            <Table dataSource={users} columns={columns} loading={loading} />
+          </ConfigProvider>
         </div>
       )}
     </div>
