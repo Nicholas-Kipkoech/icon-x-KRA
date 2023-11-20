@@ -52,32 +52,44 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
+  const { logout } = useAuth();
   const [user, setUser] = useState({});
-  const token = localStorage.getItem("access_token");
 
   useEffect(() => {
+    const token = localStorage.getItem("access_token");
     const decoded_user = jwtDecode(token);
     setUser(decoded_user);
-  }, [token]);
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <div className="sticky top-[40px]">
       <div className="flex items-center gap-[20px] mb-[20px] bg-amber-300 h-[100px] p-[20px] rounded-md">
-        <Image
-          src={
-            "https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-profile-line-black-icon-png-image_691065.jpg"
-          }
-          alt=""
-          width="50"
-          height="50"
-          className="rounded-[50%] object-cover"
-        />
-        <div className="flex flex-col">
-          <span className="font-[500] text-[20px]">{user.name}</span>
-          <span className="text-[14px] text-[#000000] font-[600]">
-            {user.role}
-          </span>
-        </div>
+        {Object.keys(user).length > 1 ? (
+          <>
+            <Image
+              src={
+                "https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-profile-line-black-icon-png-image_691065.jpg"
+              }
+              alt=""
+              width="50"
+              height="50"
+              className="rounded-[50%] object-cover"
+            />
+            <div className="flex flex-col">
+              <span className="font-[500] text-[20px]">{user.name}</span>
+              <span className="text-[14px] text-[#000000] font-[600]">
+                {user.role}
+              </span>
+            </div>
+          </>
+        ) : (
+          <p>Loading user....</p>
+        )}
       </div>
+
       <ul className="list-none">
         {menuItems.map((cat) => (
           <li key={cat.title}>
@@ -88,7 +100,10 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <div className="flex gap-[10px] cursor-pointer p-[20px] items-center border-none rounded-[10px] m-[5px]  w-[100%] text-white bg-[#404746] mt-20">
+      <div
+        className="flex gap-[10px] cursor-pointer p-[20px] items-center border-none rounded-[10px] m-[5px]  w-[100%] text-white bg-[#404746] mt-20"
+        onClick={handleLogout}
+      >
         <MdLogout size={30} />
         Logout
       </div>
