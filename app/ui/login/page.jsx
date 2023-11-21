@@ -3,22 +3,40 @@ import React, { useState } from "react";
 import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/context/AuthContext";
+import axios from "axios";
+
+const url = "https://etims-icon.onrender.com";
 
 const Login = ({ toggleView }) => {
   const [showPassword, setShowPassword] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const { login } = useAuth();
-
   const router = useRouter();
-  const handleLogin = () => {
-    login(email, password);
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(`${url}/api/user/login`, {
+        email,
+        password,
+      });
+      if (response.status === 200) {
+        const userData = response.data;
+        localStorage.setItem("access_token", userData.access_token);
+        router.push("/dashboard");
+      } else {
+        console.log("Login failed!!!");
+      }
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,10 +76,11 @@ const Login = ({ toggleView }) => {
         </div>
         <div className="mt-10">
           <CustomButton
-            name={"Login"}
+            name={loading ? `Logging in..` : `Login`}
             type={`button`}
             className={`h-[60px] w-[600px] rounded-md bg-orange-300 font-[600] text-[#1c2536] text-[20px]`}
             onClick={handleLogin}
+            disabled={loading}
           />
         </div>
         <div className="flex gap-2 mt-5 justify-center">

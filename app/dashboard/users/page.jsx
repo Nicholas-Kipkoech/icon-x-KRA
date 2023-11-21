@@ -1,6 +1,6 @@
 "use client";
 import { fetchCompanyUsers } from "@/app/services/adminServices";
-import { ConfigProvider, Table } from "antd";
+import { ConfigProvider, Table, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 
 export const formatDate = (serverDate) => {
@@ -59,9 +59,7 @@ const Users = () => {
 
   return (
     <div>
-      {loading ? (
-        <p className="text-[30px]">Loading data......</p>
-      ) : (
+      <Spin spinning={loading} delay={500}>
         <div className="mt-10">
           <ConfigProvider
             theme={{
@@ -73,7 +71,7 @@ const Users = () => {
             <Table dataSource={users} columns={columns} loading={loading} />
           </ConfigProvider>
         </div>
-      )}
+      </Spin>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import {
   MdSupervisedUserCircle,
 } from "react-icons/md";
 import Image from "next/image";
-import { useAuth } from "@/app/context/AuthContext";
+import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 
 const menuItems = [
@@ -52,9 +52,8 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
-  const { logout } = useAuth();
   const [user, setUser] = useState({});
-
+  const router = useRouter();
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     const decoded_user = jwtDecode(token);
@@ -62,7 +61,8 @@ const Sidebar = () => {
   }, []);
 
   const handleLogout = () => {
-    logout();
+    localStorage.removeItem("access_token");
+    router.push("/");
   };
   return (
     <div className="sticky top-[40px]">
