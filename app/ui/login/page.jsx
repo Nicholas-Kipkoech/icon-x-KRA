@@ -5,6 +5,7 @@ import CustomButton from "../reusableComponents/CustomButton";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useCustomToast } from "@/app/hooks/useToast";
+import { Spin } from "antd";
 
 const url = "https://etims-icon.onrender.com";
 
@@ -34,8 +35,13 @@ const Login = ({ toggleView }) => {
       if (response.status === 200) {
         const userData = response.data;
         localStorage.setItem("access_token", userData?.access_token);
-        showToast("Loggin successfully!!");
-        router.push("/dashboard");
+        console.log(userData?.user.name);
+        if (userData?.user.name === null || userData?.user.name === "") {
+          toggleView();
+        } else {
+          showToast("Loggin successfully!!");
+          router.push("/dashboard");
+        }
       }
     } catch (error) {
       showToast("An error occurred during login", error);
@@ -54,23 +60,26 @@ const Login = ({ toggleView }) => {
         </div>
       </div>
       <form className="h-[400px] mt-2 p-10 flex flex-col">
-        <CustomInput
-          name={`Email`}
-          value={email}
-          onchange={(e) => setEmail(e.target.value)}
-          type={`email`}
-          className={`h-[60px] w-[600px] border p-5 rounded-md`}
-          placeholder={`Enter email...`}
-        />
+        <Spin spinning={loading} delay={500}>
+          <CustomInput
+            name={`Email`}
+            value={email}
+            onchange={(e) => setEmail(e.target.value)}
+            type={`email`}
+            className={`h-[60px] w-[600px] border p-5 rounded-md`}
+            placeholder={`Enter email...`}
+          />
 
-        <CustomInput
-          name={`Password`}
-          value={password}
-          onchange={(e) => setPassword(e.target.value)}
-          type={showPassword ? `text` : `password`}
-          placeholder={`Enter password...`}
-          className={`h-[60px] w-[600px] border p-5 rounded-md`}
-        />
+          <CustomInput
+            name={`Password`}
+            value={password}
+            onchange={(e) => setPassword(e.target.value)}
+            type={showPassword ? `text` : `password`}
+            placeholder={`Enter password...`}
+            className={`h-[60px] w-[600px] border p-5 rounded-md`}
+          />
+        </Spin>
+
         <div className="flex gap-2 mt-8">
           <input
             type="checkbox"
@@ -87,12 +96,6 @@ const Login = ({ toggleView }) => {
             onClick={handleLogin}
             disabled={loading}
           />
-        </div>
-        <div className="flex gap-2 mt-5 justify-center">
-          <p>Dont have an account?</p>
-          <a className="text-blue-800 cursor-pointer" onClick={toggleView}>
-            Sign up for free
-          </a>
         </div>
       </form>
     </div>

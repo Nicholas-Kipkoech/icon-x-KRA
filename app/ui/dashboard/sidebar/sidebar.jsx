@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import MenuLink from "./menuLink/menuLink";
 import {
   MdAttachMoney,
+  MdBusiness,
   MdDashboard,
   MdHelpCenter,
   MdLogout,
@@ -13,52 +14,67 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 
-const menuItems = [
-  {
-    title: "Pages",
-    list: [
-      {
-        title: "Dashboard",
-        path: "/dashboard",
-        icon: <MdDashboard />,
-      },
-      {
-        title: "Users",
-        path: "/dashboard/users",
-        icon: <MdSupervisedUserCircle />,
-      },
-      {
-        title: "Transactions",
-        path: "/dashboard/transactions",
-        icon: <MdAttachMoney />,
-      },
-    ],
-  },
-  {
-    title: "User",
-    list: [
-      {
-        title: "Settings",
-        path: "/dashboard/settings",
-        icon: <MdOutlineSettings />,
-      },
-      {
-        title: "Help",
-        path: "/dashboard/help",
-        icon: <MdHelpCenter />,
-      },
-    ],
-  },
-];
-
 const Sidebar = () => {
   const [user, setUser] = useState({});
   const router = useRouter();
+
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     const decoded_user = jwtDecode(token);
     setUser(decoded_user);
   }, []);
+
+  const menuItems = [
+    {
+      title: "Pages",
+      list: [
+        {
+          title: "Dashboard",
+          path: "/dashboard",
+          icon: <MdDashboard />,
+        },
+        {
+          title: "Users",
+          path: "/dashboard/users",
+          icon: <MdSupervisedUserCircle />,
+        },
+        {
+          title: "Transactions",
+          path: "/dashboard/transactions",
+          icon: <MdAttachMoney />,
+        },
+      ],
+    },
+    {
+      title: "User",
+      list: [
+        {
+          title: "Settings",
+          path: "/dashboard/settings",
+          icon: <MdOutlineSettings />,
+        },
+        {
+          title: "Help",
+          path: "/dashboard/help",
+          icon: <MdHelpCenter />,
+        },
+      ],
+    },
+    {
+      title: "Company",
+      list:
+        user.role === "Superadmin"
+          ? [
+              {
+                title: "Company Settings",
+                path: "/dashboard/companies",
+                icon: <MdBusiness />,
+              },
+              // Add more items as needed
+            ]
+          : [], // Empty array if not a superadmin
+    },
+  ];
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
