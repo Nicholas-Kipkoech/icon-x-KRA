@@ -4,10 +4,13 @@ import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useCustomToast } from "@/app/hooks/useToast";
 
 const url = "https://etims-icon.onrender.com";
 
 const Login = ({ toggleView }) => {
+  const showToast = useCustomToast();
+
   const [showPassword, setShowPassword] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +23,9 @@ const Login = ({ toggleView }) => {
   const router = useRouter();
   const handleLogin = async () => {
     try {
+      if (password === "" || email === "") {
+        showToast("All fields are required!!");
+      }
       setLoading(true);
       const response = await axios.post(`${url}/api/user/login`, {
         email,
@@ -27,13 +33,12 @@ const Login = ({ toggleView }) => {
       });
       if (response.status === 200) {
         const userData = response.data;
-        localStorage.setItem("access_token", userData.access_token);
+        localStorage.setItem("access_token", userData?.access_token);
+        showToast("Loggin successfully!!");
         router.push("/dashboard");
-      } else {
-        console.log("Login failed!!!");
       }
     } catch (error) {
-      console.error("An error occurred during login:", error);
+      showToast("An error occurred during login", error);
     } finally {
       setLoading(false);
     }
