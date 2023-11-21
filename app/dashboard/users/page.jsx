@@ -1,7 +1,9 @@
 "use client";
 import { fetchCompanyUsers } from "@/app/services/adminServices";
+import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { ConfigProvider, Table, Spin } from "antd";
 import React, { useEffect, useState } from "react";
+import AddUser from "./AddUser";
 
 export const formatDate = (serverDate) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -12,13 +14,15 @@ export const formatDate = (serverDate) => {
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const fetchUsers = async () => {
     setLoading(true);
     const data = await fetchCompanyUsers();
-    setUsers(data.users);
     setLoading(false);
+    setUsers(data?.users);
   };
 
   useEffect(() => {
@@ -30,6 +34,9 @@ const Users = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      render: (_, item) => (
+        <div className="text-[12px]">{(item?.name).toUpperCase()}</div>
+      ),
     },
     {
       title: "Email",
@@ -40,6 +47,19 @@ const Users = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      render: (_, item) => (
+        <div>
+          {item?.status === "Active" ? (
+            <p className="bg-[green] p-2 text-center rounded-md text-white">
+              Active
+            </p>
+          ) : (
+            <p className="bg-[#e2e2e2] p-2 text-center rounded-md text-[black]">
+              Inactive
+            </p>
+          )}
+        </div>
+      ),
     },
     {
       title: "Created at",
@@ -52,26 +72,42 @@ const Users = () => {
       dataIndex: "role",
       key: "role",
       render: (_, item) => (
-        <p>{item?.role === "Normal_user" ? "Normal User" : "Admin"}</p>
+        <div>
+          {item?.role === "Normal_user" ? (
+            <p className="bg-[#6eb7db] text-center p-2 rounded-md">
+              Normal User
+            </p>
+          ) : (
+            <p className="bg-[#6e8a1a] text-white text-center rounded-md p-2">
+              Admin
+            </p>
+          )}
+        </div>
       ),
     },
   ];
 
   return (
-    <div>
+    <div className="mt-6">
+      <div className="flex justify-end mb-5">
+        <CustomButton
+          name={"Add User"}
+          className={"bg-[#d3e4ed] p-2 w-[200px] rounded-md text-black"}
+          onClick={() => setShowForm(true)}
+        />
+      </div>
       <Spin spinning={loading} delay={500}>
-        <div className="mt-10">
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#ff2146",
-              },
-            }}
-          >
-            <Table dataSource={users} columns={columns} loading={loading} />
-          </ConfigProvider>
-        </div>
+        <Table
+          columns={columns}
+          dataSource={users}
+          loading={loading || saved}
+        />
       </Spin>
+      <AddUser
+        isOpen={showForm}
+        handleClose={() => setShowForm(false)}
+        onUserSaved={fetchUsers}
+      />
     </div>
   );
 };

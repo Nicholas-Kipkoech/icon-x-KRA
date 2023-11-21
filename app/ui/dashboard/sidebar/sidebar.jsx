@@ -61,12 +61,12 @@ const Sidebar = () => {
       ],
     },
     {
-      title: "Company",
+      title: "Company Settings",
       list:
         user.role === "Superadmin"
           ? [
               {
-                title: "Company Settings",
+                title: "Enrolled Companies",
                 path: "/dashboard/companies",
                 icon: <MdBusiness />,
               },

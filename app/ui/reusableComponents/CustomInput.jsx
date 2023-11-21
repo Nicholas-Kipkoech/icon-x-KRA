@@ -7,6 +7,7 @@ const CustomInput = ({
   value,
   onchange,
   placeholder,
+  required,
 }) => {
   return (
     <div className="flex flex-col mt-3">
@@ -17,6 +18,7 @@ const CustomInput = ({
         value={value}
         onChange={onchange}
         placeholder={placeholder}
+        required={required}
       />
     </div>
   );
