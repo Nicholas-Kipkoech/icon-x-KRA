@@ -19,6 +19,10 @@ export const createCompanyUser = async (data) => {
   const res = await PrivateAxiosUtility.post(`/user/company/create`, data);
   return res?.data;
 };
+export const createCompany = async (data) => {
+  const res = await PrivateAxiosUtility.post(`/company/create`, data);
+  return res?.data;
+};
 
 export const fetchCompanyById = async (id) => {
   const res = await PrivateAxiosUtility.get(`/company/fetch/${id}`);

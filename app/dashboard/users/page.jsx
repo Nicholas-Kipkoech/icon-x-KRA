@@ -21,17 +21,24 @@ const Users = () => {
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchUsers = async () => {
     setLoading(true);
-    const data = await fetchCompanyUsers();
+    const response = await fetchCompanyUsers();
     setLoading(false);
-    setUsers(data?.users);
+    // Filter the companies based on the search term
+    const filteredData = response?.users.filter((user) =>
+      user?.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setUsers(filteredData);
   };
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm]);
 
   const columns = [
     {
@@ -105,20 +112,34 @@ const Users = () => {
 
   return (
     <div className="mt-6">
-      <div className="flex justify-end mb-5">
+      <div className="flex justify-between mb-5">
+        <div>
+          <input
+            placeholder="search user.."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border h-[50px] p-2 w-[400px] border-cyan-800 rounded-md"
+          />
+        </div>
         <CustomButton
           name={"Add User"}
-          className={"bg-[#d3e4ed] p-2 w-[200px] rounded-md text-black"}
+          className={
+            "bg-[#d3e4ed] p-2 w-[200px] h-[50px] rounded-md text-black"
+          }
           onClick={() => setShowForm(true)}
         />
       </div>
-      <Spin spinning={loading} delay={500}>
-        <Table
-          columns={columns}
-          dataSource={users}
-          loading={loading || saved}
+      {users.length > 1 ? (
+        <Spin spinning={loading} delay={500}>
+          <Table columns={columns} dataSource={users} loading={loading} />
+        </Spin>
+      ) : (
+        <Spin
+          size="large"
+          tip="Loading"
+          className="flex justify-center items-center"
         />
-      </Spin>
+      )}
 
       <AddUser
         isOpen={showForm}
