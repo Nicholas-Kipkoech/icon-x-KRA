@@ -29,7 +29,7 @@ const Users = () => {
     setLoading(false);
     // Filter the companies based on the search term
     const filteredData = response?.users.filter((user) =>
-      user?.name.toLowerCase().includes(searchTerm.toLowerCase())
+      user?.name?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     setUsers(filteredData);
