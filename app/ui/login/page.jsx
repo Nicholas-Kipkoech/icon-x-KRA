@@ -35,7 +35,7 @@ const Login = ({ toggleView }) => {
       if (response.status === 200) {
         const userData = response.data;
         localStorage.setItem("access_token", userData?.access_token);
-        console.log(userData?.user.name);
+
         if (userData?.user.name === null || userData?.user.name === "") {
           toggleView();
         } else {

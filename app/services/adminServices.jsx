@@ -1,7 +1,7 @@
 import { PrivateAxiosUtility } from "./axiosUtility";
 
 export const fetchCompanyUsers = async () => {
-  const res = await PrivateAxiosUtility.get(`/company/fetch/users`);
+  const res = await PrivateAxiosUtility.get(`/user/companyUsers/fetch`);
   return res?.data;
 };
 
