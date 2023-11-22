@@ -47,7 +47,7 @@ const Users = () => {
       key: "name",
       render: (_, item) => (
         <div className="text-[12px]" key={_}>
-          {(item?.name).toUpperCase()}
+          {item.name ? (item?.name).toUpperCase() : "Not Updated"}
         </div>
       ),
     },
