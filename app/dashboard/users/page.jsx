@@ -129,16 +129,12 @@ const Users = () => {
           onClick={() => setShowForm(true)}
         />
       </div>
-      {users.length > 1 ? (
+      {users.length > 0 ? (
         <Spin spinning={loading} delay={500}>
           <Table columns={columns} dataSource={users} loading={loading} />
         </Spin>
       ) : (
-        <Spin
-          size="large"
-          tip="Loading"
-          className="flex justify-center items-center"
-        />
+        <p>No data available</p>
       )}
 
       <AddUser

@@ -49,7 +49,7 @@ const AddCompany = ({ handleClose, isOpen, onCompanySaved }) => {
       showToast("Company created successfully!!");
       handleClose();
     } catch (error) {
-      showToast("Something went wrong!!!", "error");
+      showToast("Something went wrong!!!", "error", error?.message);
     }
   };
 
