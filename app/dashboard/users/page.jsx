@@ -1,9 +1,13 @@
 "use client";
-import { fetchCompanyUsers } from "@/app/services/adminServices";
+import {
+  fetchCompanyById,
+  fetchCompanyUsers,
+} from "@/app/services/adminServices";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { ConfigProvider, Table, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import AddUser from "./AddUser";
+import Company from "./Company";
 
 export const formatDate = (serverDate) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -35,7 +39,9 @@ const Users = () => {
       dataIndex: "name",
       key: "name",
       render: (_, item) => (
-        <div className="text-[12px]">{(item?.name).toUpperCase()}</div>
+        <div className="text-[12px]" key={_}>
+          {(item?.name).toUpperCase()}
+        </div>
       ),
     },
     {
@@ -44,11 +50,21 @@ const Users = () => {
       key: "email",
     },
     {
+      title: "Company",
+      dataIndex: "company",
+      key: "company",
+      render: (_, item) => (
+        <div key={_}>
+          <Company companyId={item?.company} />
+        </div>
+      ),
+    },
+    {
       title: "Status",
       dataIndex: "status",
       key: "status",
       render: (_, item) => (
-        <div>
+        <div key={_}>
           {item?.status === "Active" ? (
             <p className="bg-[green] p-2 text-center rounded-md text-white">
               Active
@@ -65,14 +81,14 @@ const Users = () => {
       title: "Created at",
       dataIndex: "created_at",
       key: "created_at",
-      render: (_, item) => <div>{formatDate(item?.created_at)}</div>,
+      render: (_, item) => <div key={_}>{formatDate(item?.created_at)}</div>,
     },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
       render: (_, item) => (
-        <div>
+        <div key={_}>
           {item?.role === "Normal_user" ? (
             <p className="bg-[#6eb7db] text-center p-2 rounded-md">
               Normal User
@@ -103,6 +119,7 @@ const Users = () => {
           loading={loading || saved}
         />
       </Spin>
+
       <AddUser
         isOpen={showForm}
         handleClose={() => setShowForm(false)}

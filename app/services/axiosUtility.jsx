@@ -22,7 +22,7 @@ export const AxiosUtility = axios.create({
 
 PrivateAxiosUtility.interceptors.request.use(async (req) => {
   const state = await localStorage?.getItem("access_token");
-  console.log(state);
+
   let token;
   // check if access-token exists
   if (state) {

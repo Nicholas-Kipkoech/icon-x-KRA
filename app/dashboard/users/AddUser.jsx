@@ -89,6 +89,8 @@ const AddUser = ({ handleClose, isOpen, onUserSaved }) => {
         <div className="mt-3">
           <label htmlFor="company">Company</label>
           <Select
+            showSearch
+            placeholder="select company.."
             className="w-[100%] h-[50px]"
             id="company"
             options={options}
