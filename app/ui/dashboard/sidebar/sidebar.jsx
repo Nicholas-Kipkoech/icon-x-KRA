@@ -117,7 +117,7 @@ const Sidebar = () => {
         ))}
       </ul>
       <div
-        className="flex gap-[10px] cursor-pointer p-[20px] items-center border-none rounded-[10px] m-[5px]  w-[100%] text-white bg-[#404746] mt-20"
+        className="flex gap-[10px] cursor-pointer p-[20px] items-center text-center justify-center border-none rounded-[10px] m-[2px]  w-[100%] text-white bg-[#ff2121] mt-[15px]"
         onClick={handleLogout}
       >
         <MdLogout size={30} />

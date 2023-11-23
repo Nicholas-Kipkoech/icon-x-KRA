@@ -20,7 +20,6 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [saved, setSaved] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchUsers = async () => {
