@@ -28,3 +28,23 @@ export const fetchCompanyById = async (id) => {
   const res = await PrivateAxiosUtility.get(`/company/fetch/${id}`);
   return res?.data;
 };
+
+export const updateCompanyUser = async (id, data) => {
+  const res = await PrivateAxiosUtility.patch(
+    `/user/company/update/${id}`,
+    data
+  );
+  return res?.data;
+};
+export const updateCompany = async (id, data) => {
+  const res = await PrivateAxiosUtility.patch(`/company/update/${id}`, data);
+  return res?.data;
+};
+export const deleteCompanyUser = async (id) => {
+  const res = await PrivateAxiosUtility.delete(`/user/company/delete/${id}`);
+  return res?.data;
+};
+export const deleteCompany = async (id) => {
+  const res = await PrivateAxiosUtility.delete(`/company/delete/${id}`);
+  return res?.data;
+};

@@ -1,15 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Table, Spin } from "antd";
-import { fetchCompanies } from "@/app/services/adminServices";
+import { deleteCompany, fetchCompanies } from "@/app/services/adminServices";
 import { formatDate } from "../users/page";
 import AddCompany from "./AddCompany";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import CustomInput from "@/app/ui/reusableComponents/CustomInput";
+import { useCustomToast } from "@/app/hooks/useToast";
 const Companies = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [editData, setEditData] = useState({});
+  const [mode, setMode] = useState("create");
+  const showToast = useCustomToast();
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -29,6 +33,23 @@ const Companies = () => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
+
+  const handleDelete = async (id) => {
+    await deleteCompany(id);
+
+    showToast("company deleted successfully");
+    fetchData();
+  };
+  const handleClose = () => {
+    setShowForm(false);
+    setMode("create"); // Reset the mode to 'create'
+    setEditData({});
+  };
+  const handleEdit = (company) => {
+    setEditData(company);
+    setMode("edit");
+    setShowForm(true);
+  };
 
   const columns = [
     {
@@ -103,11 +124,13 @@ const Companies = () => {
           <CustomButton
             name={"Edit"}
             className={"text-[#718000] bg-blue-200 p-2 w-[60px] rounded-md"}
+            onClick={() => handleEdit(item)}
           />
 
           <CustomButton
             name={"Delete"}
-            className={"text-[red] bg-blue-200 p-2 w-[60px] rounded-md"}
+            className={"text-[red] bg-blue-200 p-2 w-[auto] rounded-md"}
+            onClick={() => handleDelete(item?._id)}
           />
         </div>
       ),
@@ -137,19 +160,14 @@ const Companies = () => {
           <Table columns={columns} dataSource={data} loading={loading} />
         </Spin>
       ) : (
-        <Spin
-          size="large"
-          tip="Loading"
-          className="flex justify-center items-center"
-        />
+        <Spin size="large" className="flex justify-center items-center" />
       )}
 
       <AddCompany
         isOpen={showForm}
-        handleClose={() => {
-          setShowForm(false);
-          fetchData();
-        }}
+        handleClose={handleClose}
+        editData={editData}
+        mode={mode}
         onCompanySaved={fetchData}
       />
     </div>

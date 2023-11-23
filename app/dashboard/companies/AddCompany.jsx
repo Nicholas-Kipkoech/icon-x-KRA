@@ -2,19 +2,46 @@ import React, { useEffect, useState } from "react";
 import { Modal, Select } from "antd";
 import CustomInput from "@/app/ui/reusableComponents/CustomInput";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
-import { createCompany } from "@/app/services/adminServices";
+import { createCompany, updateCompany } from "@/app/services/adminServices";
 import { useCustomToast } from "@/app/hooks/useToast";
 
-const AddCompany = ({ handleClose, isOpen, onCompanySaved }) => {
+const AddCompany = ({
+  handleClose,
+  isOpen,
+  onCompanySaved,
+  mode,
+  editData,
+}) => {
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const [logo, setLogo] = useState("");
   const [status, setStatus] = useState("");
   const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
   const [adminsInput, setAdminsInput] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const showToast = useCustomToast();
+  console.log(editData);
+  useEffect(() => {
+    if (mode === "edit") {
+      setId(editData?._id);
+      setCode(editData?.company_code);
+      setName(editData?.company_name);
+      setStatus(editData?.status);
+      setLogo(editData?.logo_url);
+      setEmail(editData?.company_email);
+      setAdminsInput(editData?.admins[0].email);
+    } else {
+      setCode("");
+      setName("");
+      setStatus("");
+      setLogo("");
+      setEmail("");
+      setAdminsInput("");
+    }
+  }, [mode, editData]);
+
   const handleCreateCompany = async () => {
     try {
       if (name === "" || code === "" || email === "" || adminsInput === "") {
@@ -53,6 +80,52 @@ const AddCompany = ({ handleClose, isOpen, onCompanySaved }) => {
     }
   };
 
+  const handleUpdateCompany = async () => {
+    try {
+      if (name === "" || code === "" || email === "" || adminsInput === "") {
+        showToast("All fields should not be empty!!!", "error");
+        return;
+      }
+
+      const adminsArray = adminsInput.split(",").map((admin) => admin.trim());
+
+      if (adminsArray.length === 0) {
+        showToast("Please enter at least one admin email", "error");
+        return;
+      }
+
+      setLoading(true);
+      let formData = new FormData();
+      formData.append("company_name", name);
+      formData.append("company_code", code);
+      formData.append("logo_url", logo);
+      formData.append("company_email", email);
+      formData.append("status", status);
+      // Append each admin email individually
+      adminsArray.forEach((adminEmail) => {
+        formData.append("admins[]", adminEmail);
+      });
+
+      await updateCompany(id, formData);
+
+      onCompanySaved();
+
+      setLoading(false);
+      showToast("Company updated successfully!!");
+      handleClose();
+    } catch (error) {
+      showToast("Something went wrong!!!", "error", error?.message);
+    }
+  };
+
+  const handleSave = async () => {
+    if (mode === "edit") {
+      await handleUpdateCompany();
+    } else {
+      await handleCreateCompany();
+    }
+  };
+
   const options = [
     {
       label: "Active",
@@ -72,7 +145,7 @@ const AddCompany = ({ handleClose, isOpen, onCompanySaved }) => {
       centered
       footer={null}
       onCancel={handleClose}
-      title={"Add Company"}
+      title={mode === "edit" ? "Update Company" : "Add Company"}
     >
       <form>
         <CustomInput
@@ -136,7 +209,7 @@ const AddCompany = ({ handleClose, isOpen, onCompanySaved }) => {
           <CustomButton
             name={loading ? `Saving..` : `Save`}
             disabled={loading}
-            onClick={handleCreateCompany}
+            onClick={handleSave}
             type={"button"}
             className={
               "bg-green-500 p-3 w-[150px] rounded-md text-white font-[700] text-[16px]"

@@ -1,5 +1,6 @@
 "use client";
 import {
+  deleteCompanyUser,
   fetchCompanyById,
   fetchCompanyUsers,
 } from "@/app/services/adminServices";
@@ -8,6 +9,7 @@ import { ConfigProvider, Table, Spin, Popconfirm } from "antd";
 import React, { useEffect, useState } from "react";
 import AddUser from "./AddUser";
 import Company from "./Company";
+import { useCustomToast } from "@/app/hooks/useToast";
 
 export const formatDate = (serverDate) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -21,6 +23,10 @@ const Users = () => {
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [mode, setMode] = useState("create");
+  const [editData, setEditData] = useState({});
+
+  const showToast = useCustomToast();
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -38,6 +44,24 @@ const Users = () => {
     fetchUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
+
+  const handleEdit = (user) => {
+    setMode("edit");
+    setEditData(user);
+    setShowForm(true);
+  };
+  const handleClose = () => {
+    setShowForm(false);
+    setMode("create"); // Reset the mode to 'create'
+    setEditData({});
+  };
+
+  const handleDelete = async (id) => {
+    await deleteCompanyUser(id);
+
+    showToast("User deleted successfully!!");
+    fetchUsers();
+  };
 
   const columns = [
     {
@@ -107,12 +131,14 @@ const Users = () => {
         <div key={_} className="flex gap-2">
           <CustomButton
             name={"Edit"}
-            className={"text-[#718000] bg-blue-200 p-2 w-[60px] rounded-md"}
+            className={"text-[#718000] bg-blue-200 p-2 w-[auto] rounded-md"}
+            onClick={() => handleEdit(item)}
           />
 
           <CustomButton
             name={"Delete"}
-            className={"text-[red] bg-blue-200 p-2 w-[60px] rounded-md"}
+            onClick={() => handleDelete(item._id)}
+            className={"text-[red] bg-blue-200 p-2 w-[auto] rounded-md"}
           />
         </div>
       ),
@@ -135,7 +161,9 @@ const Users = () => {
           className={
             "bg-[#d3e4ed] p-2 w-[200px] h-[50px] rounded-md text-black"
           }
-          onClick={() => setShowForm(true)}
+          onClick={() => {
+            setShowForm(true);
+          }}
         />
       </div>
       {users.length > 0 ? (
@@ -148,8 +176,10 @@ const Users = () => {
 
       <AddUser
         isOpen={showForm}
-        handleClose={() => setShowForm(false)}
+        handleClose={handleClose}
         onUserSaved={fetchUsers}
+        mode={mode}
+        editData={editData}
       />
     </div>
   );

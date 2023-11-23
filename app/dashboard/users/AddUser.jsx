@@ -5,25 +5,35 @@ import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import {
   createCompanyUser,
   fetchCompanies,
+  updateCompanyUser,
 } from "@/app/services/adminServices";
 import { useCustomToast } from "@/app/hooks/useToast";
 
-const AddUser = ({ handleClose, isOpen, onUserSaved }) => {
+const AddUser = ({ handleClose, isOpen, onUserSaved, mode, editData }) => {
   const [companies, setCompanies] = useState([]);
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [id, setId] = useState("");
 
-  const fetchData = async () => {
-    const data = await fetchCompanies();
-    setCompanies(data?.companies);
-  };
-  const showToast = useCustomToast();
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (mode === "edit") {
+      setName(editData?.name);
+      setId(editData?._id);
+      setPassword(editData?.password);
+      setEmail(editData?.email);
+      setCompany(editData?.company);
+    } else {
+      setName("");
+      setCompany("");
+      setEmail("");
+      setPassword("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, editData]);
+
   const handleCreateCompany = async () => {
     try {
       if (name === "" || password === "" || company === "" || email === "") {
@@ -38,7 +48,6 @@ const AddUser = ({ handleClose, isOpen, onUserSaved }) => {
       await createCompanyUser(formData);
 
       onUserSaved();
-
       setLoading(false);
       showToast("User created successfully!!");
       handleClose();
@@ -47,6 +56,44 @@ const AddUser = ({ handleClose, isOpen, onUserSaved }) => {
     }
   };
 
+  const handleEdit = async () => {
+    try {
+      if (name === "" || password === "" || company === "" || email === "") {
+        showToast("All fields should not be empty!!!", "error");
+      }
+      setLoading(true);
+      let formData = new FormData();
+      formData.append("name", name);
+      formData.append("password", password);
+      formData.append("email", email);
+      formData.append("company", company);
+      await updateCompanyUser(id, formData);
+
+      onUserSaved();
+      setLoading(false);
+      showToast("User updated successfully!!");
+      handleClose();
+    } catch (error) {
+      showToast("Something went wrong!!!", "error");
+    }
+  };
+
+  const handleSaveCompanyUser = async () => {
+    if (mode === "edit") {
+      await handleEdit();
+    } else {
+      await handleCreateCompany();
+    }
+  };
+
+  const fetchData = async () => {
+    const data = await fetchCompanies();
+    setCompanies(data?.companies);
+  };
+  const showToast = useCustomToast();
+  useEffect(() => {
+    fetchData();
+  }, []);
   const options = companies.map((company) => {
     return {
       label: (company?.company_name).toUpperCase(),
@@ -62,6 +109,7 @@ const AddUser = ({ handleClose, isOpen, onUserSaved }) => {
       centered
       footer={null}
       onCancel={handleClose}
+      title={mode === "create" ? "Add User" : "Update User"}
     >
       <form>
         <CustomInput
@@ -109,7 +157,7 @@ const AddUser = ({ handleClose, isOpen, onUserSaved }) => {
           <CustomButton
             name={loading ? `Saving..` : `Save`}
             disabled={loading}
-            onClick={handleCreateCompany}
+            onClick={handleSaveCompanyUser}
             type={"button"}
             className={
               "bg-green-500 p-3 w-[150px] rounded-md text-white font-[700] text-[16px]"
