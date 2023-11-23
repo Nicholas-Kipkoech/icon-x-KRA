@@ -72,9 +72,9 @@ const Users = () => {
       render: (_, item) => (
         <div key={_}>
           {item?.status === "Active" ? (
-            <p className="p-2 text-center rounded-md">Active</p>
+            <p className=" text-center rounded-md">Active</p>
           ) : (
-            <p className="p-2 text-center rounded-md ">Inactive</p>
+            <p className=" text-center rounded-md ">Inactive</p>
           )}
         </div>
       ),
