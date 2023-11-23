@@ -4,7 +4,7 @@ import {
   fetchCompanyUsers,
 } from "@/app/services/adminServices";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
-import { ConfigProvider, Table, Spin } from "antd";
+import { ConfigProvider, Table, Spin, Popconfirm } from "antd";
 import React, { useEffect, useState } from "react";
 import AddUser from "./AddUser";
 import Company from "./Company";
@@ -72,19 +72,15 @@ const Users = () => {
       render: (_, item) => (
         <div key={_}>
           {item?.status === "Active" ? (
-            <p className="bg-[green] p-2 text-center rounded-md text-white">
-              Active
-            </p>
+            <p className="p-2 text-center rounded-md">Active</p>
           ) : (
-            <p className="bg-[#e2e2e2] p-2 text-center rounded-md text-[black]">
-              Inactive
-            </p>
+            <p className="p-2 text-center rounded-md ">Inactive</p>
           )}
         </div>
       ),
     },
     {
-      title: "Created at",
+      title: "Created In",
       dataIndex: "created_at",
       key: "created_at",
       render: (_, item) => <div key={_}>{formatDate(item?.created_at)}</div>,
@@ -96,14 +92,28 @@ const Users = () => {
       render: (_, item) => (
         <div key={_}>
           {item?.role === "Normal_user" ? (
-            <p className="bg-[#6eb7db] text-center p-2 rounded-md">
-              Normal User
-            </p>
+            <p className="text-center p-2 rounded-md">Normal User</p>
           ) : (
-            <p className="bg-[#6e8a1a] text-white text-center rounded-md p-2">
-              Admin
-            </p>
+            <p className="text-center rounded-md p-2">Admin</p>
           )}
+        </div>
+      ),
+    },
+    {
+      title: "Actions",
+      dataIndex: "created_at",
+      key: "created_at",
+      render: (_, item) => (
+        <div key={_} className="flex gap-2">
+          <CustomButton
+            name={"Edit"}
+            className={"text-[#718000] bg-blue-200 p-2 w-[60px] rounded-md"}
+          />
+
+          <CustomButton
+            name={"Delete"}
+            className={"text-[red] bg-blue-200 p-2 w-[60px] rounded-md"}
+          />
         </div>
       ),
     },
@@ -133,7 +143,7 @@ const Users = () => {
           <Table columns={columns} dataSource={users} loading={loading} />
         </Spin>
       ) : (
-        <p>No data available</p>
+        <p>No data loading...</p>
       )}
 
       <AddUser

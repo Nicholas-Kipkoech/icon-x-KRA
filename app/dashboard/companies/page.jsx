@@ -70,13 +70,9 @@ const Companies = () => {
       render: (_, item) => (
         <div>
           {item?.status === "Active" ? (
-            <p className="bg-[green] p-2 text-center rounded-md text-white">
-              Active
-            </p>
+            <p className=" p-2 text-center rounded-md">Active</p>
           ) : (
-            <p className="bg-[#e2e2e2] p-2 text-center rounded-md text-[black]">
-              Inactive
-            </p>
+            <p className=" p-2 text-center rounded-md ">Inactive</p>
           )}
         </div>
       ),
@@ -93,10 +89,28 @@ const Companies = () => {
       key: "created_by",
     },
     {
-      title: "Created at",
+      title: "Created In",
       dataIndex: "created_at",
       key: "created_at",
       render: (_, item) => <div>{formatDate(item.created_at)}</div>,
+    },
+    {
+      title: "Actions",
+      dataIndex: "created_at",
+      key: "created_at",
+      render: (_, item) => (
+        <div key={_} className="flex gap-2">
+          <CustomButton
+            name={"Edit"}
+            className={"text-[#718000] bg-blue-200 p-2 w-[60px] rounded-md"}
+          />
+
+          <CustomButton
+            name={"Delete"}
+            className={"text-[red] bg-blue-200 p-2 w-[60px] rounded-md"}
+          />
+        </div>
+      ),
     },
   ];
   return (
