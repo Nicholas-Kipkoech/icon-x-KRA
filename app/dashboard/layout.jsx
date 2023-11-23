@@ -10,7 +10,12 @@ const Layout = ({ children }) => {
       </div>
       <div className="w-4/5 p-[20px]">
         <Navbar />
-        {children}
+        <div className="overflow-y-auto">
+          {/* Set a max height if needed */}
+          <div className="max-h-[calc(100vh-60px)] overflow-y-auto">
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   );
