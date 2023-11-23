@@ -18,9 +18,7 @@ const Signup = ({ toggleView }) => {
 
   const handleUpdateUser = async () => {
     setLoading(true);
-    if (password !== password2) {
-      showToast("Password should be the same!!", "error");
-    }
+
     let formData = new FormData();
     formData.append("name", name);
     formData.append("newPassword", password);
@@ -54,27 +52,12 @@ const Signup = ({ toggleView }) => {
           />
 
           <CustomInput
-            name={`Email`}
-            type={`Email`}
-            placeholder={`Enter email...`}
-            className={`h-[50px] w-[350px] border p-5 rounded-md`}
-          />
-          <CustomInput
             name={`Password`}
             type={`password`}
             value={password}
             onchange={(e) => setPassword(e.target.value)}
             className={`h-[50px] w-[350px] border p-5 rounded-md`}
             placeholder={`Enter password...`}
-          />
-
-          <CustomInput
-            name={`Confirm Password`}
-            type={`password`}
-            value={password2}
-            onchange={(e) => setPassword2(e.target.value)}
-            placeholder={`Confirm password...`}
-            className={`h-[50px] w-[350px] border p-5 rounded-md`}
           />
         </div>
         <div className="mt-10 flex gap-2">

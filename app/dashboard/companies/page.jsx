@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Table, Spin } from "antd";
+import Link from "next/link";
 import { deleteCompany, fetchCompanies } from "@/app/services/adminServices";
 import { formatDate } from "../users/page";
 import AddCompany from "./AddCompany";
@@ -74,9 +75,12 @@ const Companies = () => {
       dataIndex: "company_name",
       key: "company_name",
       render: (_, item) => (
-        <div className="text-[#e25454] font-[700] p-2 text-center rounded-md">
+        <Link
+          href={`companies/${item?._id}`}
+          className="text-[#e25454] font-[700] p-2 text-center rounded-md"
+        >
           {(item?.company_name).toUpperCase()}
-        </div>
+        </Link>
       ),
     },
     {
