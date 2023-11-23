@@ -155,7 +155,7 @@ const Companies = () => {
           onClick={() => setShowForm(true)}
         />
       </div>
-      {data.length > 1 ? (
+      {data.length > 0 ? (
         <Spin spinning={loading} delay={500}>
           <Table columns={columns} dataSource={data} loading={loading} />
         </Spin>
