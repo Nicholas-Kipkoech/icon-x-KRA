@@ -41,25 +41,15 @@ const CompanyDetails = ({ params: { companyDetails } }) => {
       key: "email",
     },
     {
-      title: "Company",
-      dataIndex: "company",
-      key: "company",
-      render: (_, item) => (
-        <div key={_}>
-          <Company companyId={companyDetails} />
-        </div>
-      ),
-    },
-    {
       title: "Status",
       dataIndex: "status",
       key: "status",
       render: (_, item) => (
         <div key={_}>
           {item?.status === "Active" ? (
-            <p className=" text-center rounded-md">Active</p>
+            <p className=" text-center rounded-md flex ">Active</p>
           ) : (
-            <p className=" text-center rounded-md ">Inactive</p>
+            <p className=" text-center rounded-md flex ">Inactive</p>
           )}
         </div>
       ),
@@ -77,9 +67,11 @@ const CompanyDetails = ({ params: { companyDetails } }) => {
       render: (_, item) => (
         <div key={_}>
           {item?.role === "Normal_user" ? (
-            <p className="text-center p-2 rounded-md">Normal User</p>
+            <p className="text-center p-2 rounded-md flex font-[700]">
+              Normal User
+            </p>
           ) : (
-            <p className="text-center rounded-md p-2">Admin</p>
+            <p className="text-center rounded-md p-2 flex font-[700]">Admin</p>
           )}
         </div>
       ),
@@ -88,9 +80,14 @@ const CompanyDetails = ({ params: { companyDetails } }) => {
 
   return (
     <div>
-      <div className="flex mt-10 p-2 justify-center gap-8 border bg-[#817a39] text-white rounded-md">
+      <div className="flex mt-10 p-2 justify-center gap-8 border bg-[#ccc47e] h-[400px] items-center text-black rounded-md">
         {loading ? (
-          <Spin spinning={loading} delay={500} size="large" />
+          <Spin
+            spinning={loading}
+            delay={500}
+            size="large"
+            className="text-white"
+          />
         ) : (
           <>
             <Image

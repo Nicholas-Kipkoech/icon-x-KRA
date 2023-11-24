@@ -127,13 +127,17 @@ const AddUser = ({ handleClose, isOpen, onUserSaved, mode, editData }) => {
           value={email}
           onchange={(e) => setEmail(e.target.value)}
         />
-        <CustomInput
-          name={"Password"}
-          placeholder={`Enter user's password`}
-          className={"h-[50px] border rounded-md p-2"}
-          value={password}
-          onchange={(e) => setPassword(e.target.value)}
-        />
+        {mode === "edit" ? (
+          <></>
+        ) : (
+          <CustomInput
+            name={"Password"}
+            placeholder={`Enter user's password`}
+            className={"h-[50px] border rounded-md p-2"}
+            value={password}
+            onchange={(e) => setPassword(e.target.value)}
+          />
+        )}
         <div className="mt-3">
           <label htmlFor="company">Company</label>
           <Select
