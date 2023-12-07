@@ -1,7 +1,6 @@
 "use client";
 import { fetchCompanyById } from "@/app/services/adminServices";
 import React, { useEffect, useState } from "react";
-import { Spin } from "antd";
 
 const Company = ({ companyId }) => {
   const [company, setCompany] = useState("");
@@ -13,7 +12,9 @@ const Company = ({ companyId }) => {
   };
 
   useEffect(() => {
-    fetchCompany(companyId);
+    if (companyId) {
+      fetchCompany(companyId);
+    }
   }, [companyId]);
 
   setTimeout(() => {
