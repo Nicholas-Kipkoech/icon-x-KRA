@@ -1,41 +1,59 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
+import { fetchTransactions } from "@/app/services/adminServices";
+import Company from "../users/Company";
 const Transactions = () => {
   const [toggle, setToggle] = useState("requests");
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    const getTransactions = async () => {
+      const { transactions } = await fetchTransactions();
+      console.log(transactions);
+      setRequests(transactions);
+    };
+    getTransactions();
+  }, []);
 
   const Requests = [
-    {
-      title: "User",
-      dataIndex: "company_code",
-      key: "company_code",
-    },
+    // {
+    //   title: "User",
+    //   dataIndex: "company_code",
+    //   key: "company_code",
+    //   render: (_, item) => <div>{item.user}</div>,
+    // },
     {
       title: "Company",
       dataIndex: "company_code",
       key: "company_code",
+      render: (_, item) => (
+        <div key={_}>
+          <Company companyId={item?.company} />
+        </div>
+      ),
     },
     {
       title: "Trader No",
-      dataIndex: "company_code",
-      key: "company_code",
+      dataIndex: "trdInvcNo",
+      key: "trdInvcNo",
     },
     {
       title: "Invoice No",
-      dataIndex: "company_code",
-      key: "company_code",
+      dataIndex: "invcNo",
+      key: "invcNo",
     },
     {
       title: "Original Invoice No",
-      dataIndex: "company_code",
-      key: "company_code",
+      dataIndex: "orgInvcNo",
+      key: "orgInvcNo",
     },
     {
       title: "Reciept Type Code",
-      dataIndex: "company_code",
-      key: "company_code",
+      dataIndex: "rcptTyCd",
+      key: "rcptTyCd",
     },
   ];
   const Responses = [
@@ -73,7 +91,7 @@ const Transactions = () => {
   const renderTable = () => {
     switch (toggle) {
       case "requests":
-        return <Table columns={Requests} />;
+        return <Table columns={Requests} dataSource={requests} />;
       case "responses":
         return <Table columns={Responses} />;
     }

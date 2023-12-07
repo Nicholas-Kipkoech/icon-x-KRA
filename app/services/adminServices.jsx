@@ -48,3 +48,8 @@ export const deleteCompany = async (id) => {
   const res = await PrivateAxiosUtility.delete(`/company/delete/${id}`);
   return res?.data;
 };
+
+export const fetchTransactions = async () => {
+  const res = await PrivateAxiosUtility.get(`/etims/fetch-transactions`);
+  return res.data;
+};
