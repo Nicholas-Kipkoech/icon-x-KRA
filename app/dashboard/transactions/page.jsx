@@ -5,16 +5,20 @@ import { Table } from "antd";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { fetchTransactions } from "@/app/services/adminServices";
 import Company from "../users/Company";
+import AddTransactions from "./AddTransactions";
 const Transactions = () => {
   const [toggle, setToggle] = useState("requests");
   const [requests, setRequests] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const getTransactions = async () => {
+    setLoading(true);
+    const { transactions } = await fetchTransactions();
+    setRequests(transactions);
+    setLoading(false);
+  };
   useEffect(() => {
-    const getTransactions = async () => {
-      const { transactions } = await fetchTransactions();
-      console.log(transactions);
-      setRequests(transactions);
-    };
     getTransactions();
   }, []);
 
@@ -91,7 +95,9 @@ const Transactions = () => {
   const renderTable = () => {
     switch (toggle) {
       case "requests":
-        return <Table columns={Requests} dataSource={requests} />;
+        return (
+          <Table columns={Requests} dataSource={requests} loading={loading} />
+        );
       case "responses":
         return <Table columns={Responses} />;
     }
@@ -117,7 +123,26 @@ const Transactions = () => {
           } p-2 justify-center items-center flex text-black font-bold border rounded-md w-[100%] `}
         />
       </div>
+      {toggle === "requests" ? (
+        <div className="flex justify-end">
+          <CustomButton
+            name={"Add Transaction"}
+            type={"button"}
+            onClick={() => setShowForm(true)}
+            className={
+              "h-[40px] bg-[#8383f5] p-5 flex items-center text-black rounded-md mt-3"
+            }
+          />
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="mt-3">{renderTable()}</div>
+      <AddTransactions
+        isOpen={showForm}
+        onSaved={() => getTransactions()}
+        handleClose={() => setShowForm(false)}
+      />
     </div>
   );
 };

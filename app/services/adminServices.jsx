@@ -53,3 +53,7 @@ export const fetchTransactions = async () => {
   const res = await PrivateAxiosUtility.get(`/etims/fetch-transactions`);
   return res.data;
 };
+export const addTransaction = async (data) => {
+  const res = await PrivateAxiosUtility.post(`/etims/saveTrnsSalesOsdc`, data);
+  return res.data;
+};

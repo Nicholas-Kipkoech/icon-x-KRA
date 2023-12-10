@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import MenuLink from "./menuLink/menuLink";
 import {
+  MdArchitecture,
   MdAttachMoney,
   MdBusiness,
   MdDashboard,
@@ -37,6 +38,16 @@ const Sidebar = () => {
           title: "Users",
           path: "/dashboard/users",
           icon: <MdSupervisedUserCircle />,
+        },
+      ],
+    },
+    {
+      title: "ETIMS Management",
+      list: [
+        {
+          title: "View Item Info",
+          path: "/dashboard/item-info",
+          icon: <MdArchitecture />,
         },
         {
           title: "Transactions",
@@ -81,7 +92,7 @@ const Sidebar = () => {
     router.push("/");
   };
   return (
-    <div className="sticky top-0 h-[100vh] bg-[#d99a5b] p-[20px]">
+    <div className="sticky top-0 h-[900px] max-h-[1200px]  bg-[#d99a5b] p-[20px] ">
       <div className="flex items-center gap-[20px] mb-[20px] bg-amber-300 h-[100px] p-[20px] rounded-md">
         {Object.keys(user).length > 1 ? (
           <>
@@ -106,7 +117,7 @@ const Sidebar = () => {
         )}
       </div>
 
-      <ul className="list-none">
+      <ul className="list-none ">
         {menuItems.map((cat) => (
           <li key={cat.title}>
             <span>{cat.title}</span>
