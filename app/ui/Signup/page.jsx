@@ -44,6 +44,7 @@ const Signup = ({ toggleView }) => {
         <div className="flex gap-2 flex-wrap items-center justify-center">
           <CustomInput
             name={`Full Name`}
+            required
             type={`text`}
             value={name}
             onchange={(e) => setName(e.target.value)}
@@ -52,6 +53,7 @@ const Signup = ({ toggleView }) => {
           />
 
           <CustomInput
+            required
             name={`Password`}
             type={`password`}
             value={password}

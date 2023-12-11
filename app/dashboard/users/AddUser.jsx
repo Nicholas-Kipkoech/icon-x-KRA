@@ -117,9 +117,11 @@ const AddUser = ({ handleClose, isOpen, onUserSaved, mode, editData }) => {
           placeholder={`Enter user's name`}
           className={"h-[50px] border rounded-md p-2"}
           value={name}
+          required
           onchange={(e) => setName(e.target.value)}
         />
         <CustomInput
+          required
           name={"Email"}
           type={"email"}
           placeholder={`Enter user's email`}
@@ -131,6 +133,7 @@ const AddUser = ({ handleClose, isOpen, onUserSaved, mode, editData }) => {
           <></>
         ) : (
           <CustomInput
+            required
             name={"Password"}
             placeholder={`Enter user's password`}
             className={"h-[50px] border rounded-md p-2"}
@@ -145,6 +148,7 @@ const AddUser = ({ handleClose, isOpen, onUserSaved, mode, editData }) => {
             placeholder="select company.."
             className="w-[100%] h-[50px]"
             id="company"
+            defaultValue={options[0]?.value}
             options={options}
             onChange={(value) => setCompany(value)}
           />

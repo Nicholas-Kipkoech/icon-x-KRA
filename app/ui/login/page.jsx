@@ -64,6 +64,7 @@ const Login = ({ toggleView }) => {
           <CustomInput
             name={`Email`}
             value={email}
+            required
             onchange={(e) => setEmail(e.target.value)}
             type={`email`}
             className={`h-[60px] w-[600px] border p-5 rounded-md`}
@@ -73,6 +74,7 @@ const Login = ({ toggleView }) => {
           <CustomInput
             name={`Password`}
             value={password}
+            required
             onchange={(e) => setPassword(e.target.value)}
             type={showPassword ? `text` : `password`}
             placeholder={`Enter password...`}
