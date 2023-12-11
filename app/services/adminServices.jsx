@@ -64,3 +64,7 @@ export const fetchItemInfo = async () => {
   });
   return res.data;
 };
+export const fetchTransactionsById = async (id) => {
+  const res = await PrivateAxiosUtility.get(`/etims/fetch-transactions/${id}`);
+  return res.data;
+};
