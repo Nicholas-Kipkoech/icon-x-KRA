@@ -57,3 +57,10 @@ export const addTransaction = async (data) => {
   const res = await PrivateAxiosUtility.post(`/etims/saveTrnsSalesOsdc`, data);
   return res.data;
 };
+
+export const fetchItemInfo = async () => {
+  const res = await PrivateAxiosUtility.post(`/etims/selectItemClsList`, {
+    lastReqDt: "20190524000000",
+  });
+  return res.data;
+};

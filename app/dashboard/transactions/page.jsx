@@ -9,12 +9,15 @@ import AddTransactions from "./AddTransactions";
 const Transactions = () => {
   const [toggle, setToggle] = useState("requests");
   const [requests, setRequests] = useState([]);
+  const [responses, setResponses] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const getTransactions = async () => {
     setLoading(true);
-    const { transactions } = await fetchTransactions();
+    const { transactions, txResponse } = await fetchTransactions();
+    setResponses(txResponse);
+    console.log(txResponse);
     setRequests(transactions);
     setLoading(false);
   };
@@ -23,12 +26,11 @@ const Transactions = () => {
   }, []);
 
   const Requests = [
-    // {
-    //   title: "User",
-    //   dataIndex: "company_code",
-    //   key: "company_code",
-    //   render: (_, item) => <div>{item.user}</div>,
-    // },
+    {
+      title: "Transaction ID",
+      dataIndex: "transactionID",
+      key: "transactionID",
+    },
     {
       title: "Company",
       dataIndex: "company_code",
@@ -63,33 +65,34 @@ const Transactions = () => {
   const Responses = [
     {
       title: "Transaction ID",
-      dataIndex: "company_code",
-      key: "company_code",
+      dataIndex: "transactionID",
+      key: "transactionID",
     },
     {
-      title: "Current Receipt No",
-      dataIndex: "company_code",
-      key: "company_code",
-    },
-    {
-      title: "Total Receipt No",
-      dataIndex: "company_code",
-      key: "company_code",
+      title: "Company",
+      dataIndex: "company",
+      key: "company",
+      render: (_, item) => <Company companyId={item.company} />,
     },
     {
       title: "Internal Data",
-      dataIndex: "company_code",
+      dataIndex: "intrlData",
+      key: "intrlData",
+    },
+    {
+      title: "Reciept Signature",
+      dataIndex: "rcptSign",
+      key: "rcptSign",
+    },
+    {
+      title: "Control Unit Date",
+      dataIndex: "sdcDateTime",
       key: "company_code",
     },
     {
-      title: "Recipt Signature",
-      dataIndex: "company_code",
-      key: "company_code",
-    },
-    {
-      title: "Control Unit DateTime",
-      dataIndex: "company_code",
-      key: "company_code",
+      title: "Result Message",
+      dataIndex: "resultMsg",
+      key: "resultMsg",
     },
   ];
   const renderTable = () => {
@@ -99,7 +102,9 @@ const Transactions = () => {
           <Table columns={Requests} dataSource={requests} loading={loading} />
         );
       case "responses":
-        return <Table columns={Responses} />;
+        return (
+          <Table columns={Responses} dataSource={responses} loading={loading} />
+        );
     }
   };
 

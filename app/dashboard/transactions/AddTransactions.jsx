@@ -7,6 +7,22 @@ import { addTransaction, fetchCompanies } from "@/app/services/adminServices";
 import { useCustomToast } from "@/app/hooks/useToast";
 
 const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
+  function formatDateToCustomFormat(selectedDate) {
+    if (selectedDate) {
+      const date = new Date(selectedDate);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      const seconds = String(date.getSeconds()).padStart(2, "0");
+      const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}`;
+      return formattedDate;
+    } else {
+      return "";
+    }
+  }
+
   const showToast = useCustomToast();
   // State variables for main fields
   const [trdInvcNo, setTrdInvcNo] = useState(0);
@@ -128,7 +144,13 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
     };
     setItemList((prevItemList) => [...prevItemList, newItem]);
   };
-
+  const handleRemoveLastItem = () => {
+    setItemList((prevItemList) => {
+      const newList = [...prevItemList];
+      newList.pop(); // Remove the last item
+      return newList;
+    });
+  };
   // Function to handle form submission
   const handleSubmit = async () => {
     try {
@@ -144,11 +166,11 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
         rcptTyCd,
         pmtTyCd,
         salesSttsCd,
-        cfmDt,
-        salesDt,
-        stockRlsDt,
-        cnclReqDt,
-        cnclDt,
+        cfmDt: formatDateToCustomFormat(cfmDt),
+        salesDt: salesDt.replace(/-/g, ""),
+        stockRlsDt: formatDateToCustomFormat(stockRlsDt),
+        cnclReqDt: formatDateToCustomFormat(cnclReqDt),
+        cnclDt: formatDateToCustomFormat(cnclDt),
         rfdDt,
         rfdRsnCd,
         totItemCnt,
@@ -180,7 +202,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
         receipt: {
           custTin: receiptCustTin,
           custMblNo: receiptCustMblNo,
-          rcptPbctDt,
+          rcptPbctDt: formatDateToCustomFormat(rcptPbctDt),
           trdeNm,
           adrs,
           topMsg,
@@ -193,9 +215,10 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
       setLoading(false);
       showToast("Sales information added successfully");
       onSaved();
+      handleClose();
     } catch (error) {
-      showToast("Something went wrong!!!", "error");
       setLoading(false);
+      showToast(error.response?.data?.data?.resultMsg, "error");
     }
   };
 
@@ -228,6 +251,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 placeholder="Select company.."
                 className="w-[80%] h-[50px]"
                 id="company"
+                defaultValue={options[0]?.value}
                 options={options}
                 onChange={(value) => setCompany(value)}
               />
@@ -732,7 +756,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 className={"h-[40px]  border rounded-md p-2"}
               />
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-2">
               <CustomButton
                 name={itemList.length > 0 ? "Add another item" : "Add item"}
                 className={
@@ -740,6 +764,17 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 }
                 onClick={handleAddItem}
               />
+              {itemList.length > 0 ? (
+                <CustomButton
+                  name={"Remove Item"}
+                  className={
+                    "bg-[#ce2a2a] p-3 mt-3 h-[50px] text-white font-bold rounded-md w-[200px] mb-5"
+                  }
+                  onClick={handleRemoveLastItem}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </>
         )}
