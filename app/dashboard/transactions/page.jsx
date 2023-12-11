@@ -6,6 +6,7 @@ import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { fetchTransactions } from "@/app/services/adminServices";
 import Company from "../users/Company";
 import AddTransactions from "./AddTransactions";
+import Link from "next/link";
 const Transactions = () => {
   const [toggle, setToggle] = useState("requests");
   const [requests, setRequests] = useState([]);
@@ -17,7 +18,7 @@ const Transactions = () => {
     setLoading(true);
     const { transactions, txResponse } = await fetchTransactions();
     setResponses(txResponse);
-    console.log(txResponse);
+
     setRequests(transactions);
     setLoading(false);
   };
@@ -30,6 +31,9 @@ const Transactions = () => {
       title: "Transaction ID",
       dataIndex: "transactionID",
       key: "transactionID",
+      render: (_, item) => (
+        <Link href={`transactions/${item?._id}`}>{item.transactionID}</Link>
+      ),
     },
     {
       title: "Company",
