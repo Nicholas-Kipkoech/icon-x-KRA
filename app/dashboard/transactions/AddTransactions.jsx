@@ -184,7 +184,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
         cnclDt: formatDateToCustomFormat(cnclDt),
         rfdDt: formatDateToCustomFormat(rfdDt),
         rfdRsnCd,
-        totItemCnt,
+        totItemCnt: itemList?.length,
         taxblAmtA,
         taxblAmtB,
         taxblAmtC,
@@ -366,9 +366,9 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               />
               <CustomInput
                 name={"Total Item Count"}
-                value={totItemCnt}
-                onchange={(e) => setTotItemCnt(e.target.value)}
+                value={itemList.length}
                 type={"number"}
+                disabled
                 required
                 className={"h-[40px]  border rounded-md p-2"}
               />

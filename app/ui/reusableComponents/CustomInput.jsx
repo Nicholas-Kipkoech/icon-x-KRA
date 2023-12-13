@@ -1,6 +1,14 @@
 import React from "react";
 
-const CustomInput = ({ name, className, type, value, onchange, required }) => {
+const CustomInput = ({
+  name,
+  className,
+  type,
+  value,
+  onchange,
+  required,
+  disabled,
+}) => {
   return (
     <div className="flex flex-col mt-3">
       <label className="flex gap-x-0.5 mb-1">
@@ -18,6 +26,7 @@ const CustomInput = ({ name, className, type, value, onchange, required }) => {
         onChange={onchange}
         placeholder={name}
         required={required}
+        disabled={disabled}
       />
     </div>
   );
