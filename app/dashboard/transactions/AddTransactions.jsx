@@ -117,6 +117,17 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
     };
   });
 
+  const purchaseOptions = [
+    {
+      value: "N",
+      label: "No",
+    },
+    {
+      value: "Y",
+      label: "Yes",
+    },
+  ];
+
   // Function to handle adding a new item
   const handleAddItem = () => {
     const newItem = {
@@ -171,7 +182,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
         stockRlsDt: formatDateToCustomFormat(stockRlsDt),
         cnclReqDt: formatDateToCustomFormat(cnclReqDt),
         cnclDt: formatDateToCustomFormat(cnclDt),
-        rfdDt,
+        rfdDt: formatDateToCustomFormat(rfdDt),
         rfdRsnCd,
         totItemCnt,
         taxblAmtA,
@@ -505,13 +516,16 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 required
                 className={"h-[40px]  border rounded-md p-2"}
               />
-              <CustomInput
-                name={"Purchase Accept Y/N"}
-                value={prchrAcptcYn}
-                onchange={(e) => setPrchrAcptcYn(e.target.value)}
-                required
-                className={"h-[40px]  border rounded-md p-2"}
-              />
+              <div className="mt-2">
+                <label htmlFor="prchrAcptcYn">Purchase Accept Y/N</label>
+                <Select
+                  className="w-[80%] h-[50px]"
+                  id="prchrAcptcYn"
+                  defaultValue={purchaseOptions[1]?.value}
+                  options={purchaseOptions}
+                  onChange={(value) => setPrchrAcptcYn(value)}
+                />
+              </div>
               <CustomInput
                 name={"Remark"}
                 className={"h-[40px]  border rounded-md p-2"}
@@ -595,13 +609,16 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 onchange={(e) => setBtmMsg(e.target.value)}
                 className={"h-[40px]  border rounded-md p-2"}
               />
-              <CustomInput
-                name={"Purchase Accept Y/N"}
-                value={receiptPrchrAcptcYn}
-                onchange={(e) => setReceiptPrchrAcptcYn(e.target.value)}
-                required
-                className={"h-[40px]  border rounded-md p-2"}
-              />
+              <div className="mt-2">
+                <label htmlFor="prchrAcptcYn">Purchase Accept Y/N</label>
+                <Select
+                  className="w-[80%] h-[50px]"
+                  id="prchrAcptcYn"
+                  defaultValue={purchaseOptions[1]?.value}
+                  options={purchaseOptions}
+                  onChange={(value) => setReceiptPrchrAcptcYn(value)}
+                />
+              </div>
             </div>
             <p className="flex justify-center text-[20px] mt-2 underline">
               Deal sale registration item information
