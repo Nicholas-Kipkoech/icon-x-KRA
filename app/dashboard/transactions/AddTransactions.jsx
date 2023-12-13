@@ -519,9 +519,10 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               <div className="mt-2">
                 <label htmlFor="prchrAcptcYn">Purchase Accept Y/N</label>
                 <Select
+                  showSearch
+                  placeholder="Yes or No?"
                   className="w-[80%] h-[50px]"
                   id="prchrAcptcYn"
-                  defaultValue={purchaseOptions[1]?.value}
                   options={purchaseOptions}
                   onChange={(value) => setPrchrAcptcYn(value)}
                 />
@@ -612,9 +613,10 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               <div className="mt-2">
                 <label htmlFor="prchrAcptcYn">Purchase Accept Y/N</label>
                 <Select
+                  showSearch
+                  placeholder="Yes or No?"
                   className="w-[80%] h-[50px]"
                   id="prchrAcptcYn"
-                  defaultValue={purchaseOptions[1]?.value}
                   options={purchaseOptions}
                   onChange={(value) => setReceiptPrchrAcptcYn(value)}
                 />
