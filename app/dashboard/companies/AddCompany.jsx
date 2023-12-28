@@ -76,7 +76,9 @@ const AddCompany = ({
       showToast("Company created successfully!!");
       handleClose();
     } catch (error) {
-      showToast("Something went wrong!!!", "error", error?.message);
+      setLoading(false);
+      console.log(error);
+      showToast(error.response?.data?.error, "error");
     }
   };
 
@@ -114,7 +116,9 @@ const AddCompany = ({
       showToast("Company updated successfully!!");
       handleClose();
     } catch (error) {
-      showToast("Something went wrong!!!", "error", error?.message);
+      setLoading(false);
+      console.log(error);
+      // showToast(error.response?.data?.data?.resultMsg, "error");
     }
   };
 
@@ -149,6 +153,7 @@ const AddCompany = ({
     >
       <form>
         <CustomInput
+          required
           name={"Company Name"}
           placeholder={`Enter company's name`}
           className={"h-[50px] border rounded-md p-2"}
@@ -157,6 +162,7 @@ const AddCompany = ({
         />
         <CustomInput
           name={"Company Code"}
+          required
           type={"text"}
           placeholder={`Enter company's code`}
           className={"h-[50px] border rounded-md p-2"}
@@ -183,6 +189,7 @@ const AddCompany = ({
           />
         </div>
         <CustomInput
+          required
           name={"Company Email"}
           placeholder={`Enter company's email`}
           className={"h-[50px] border rounded-md p-2"}
@@ -191,6 +198,7 @@ const AddCompany = ({
         />
 
         <CustomInput
+          required
           name={"Company Admins"}
           placeholder={`Enter company's admins`}
           className={"h-[50px] border rounded-md p-2"}

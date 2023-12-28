@@ -30,7 +30,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [custTin, setCustTin] = useState("");
   const [custNm, setCustNm] = useState("");
   const [salesTyCd, setSalesTyCd] = useState("");
-  const [rcptTyCd, setRcptTyCd] = useState("");
+  const [rcptTyCd, setRcptTyCd] = useState("S");
   const [pmtTyCd, setPmtTyCd] = useState("");
   const [salesSttsCd, setSalesSttsCd] = useState("");
   const [cfmDt, setCfmDt] = useState("");

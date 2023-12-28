@@ -18,7 +18,6 @@ const Transactions = () => {
     setLoading(true);
     const { transactions, txResponse } = await fetchTransactions();
     setResponses(txResponse);
-
     setRequests(transactions);
     setLoading(false);
   };
@@ -66,6 +65,8 @@ const Transactions = () => {
       key: "rcptTyCd",
     },
   ];
+  const url =
+    " https://etims-sbx.kra.go.ke/common/link/etims/receipt/indexEtimsReceiptData?Data=P000597676Q00";
   const Responses = [
     {
       title: "Transaction ID",
@@ -94,9 +95,18 @@ const Transactions = () => {
       key: "company_code",
     },
     {
-      title: "Result Message",
+      title: "Reciepts",
       dataIndex: "resultMsg",
       key: "resultMsg",
+      render: (_, item) => (
+        <a
+          target="_blank"
+          className="h-[20px] bg-[#8c8cbe] border rounded-md p-[5px] text-white"
+          href={`${url}${item?.rcptSign}`}
+        >
+          View Receipt
+        </a>
+      ),
     },
   ];
   const renderTable = () => {
