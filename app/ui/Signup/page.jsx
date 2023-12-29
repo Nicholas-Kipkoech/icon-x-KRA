@@ -5,6 +5,7 @@ import CustomButton from "../reusableComponents/CustomButton";
 import axios from "axios";
 import { updateUser } from "@/app/services/adminServices";
 import { useCustomToast } from "@/app/hooks/useToast";
+import { Select } from "antd";
 
 const url = "https://etims-icon.onrender.com";
 
@@ -35,31 +36,54 @@ const Signup = ({ toggleView }) => {
   return (
     <div className="h-[600px] border-2 rounded-md w-[1000px] bg-white">
       <div className="flex flex-col justify-center items-center pt-8">
-        <p className="text-[28px] font-bold">Update your account</p>
+        <p className="text-[28px] font-bold">Create your account</p>
         <div className="flex flex-col items-center justify-center text-[grey]">
-          <p>Enter your details below to update your account and get started</p>
+          <p>Enter your details below to create your account and get started</p>
         </div>
       </div>
-      <form className="h-[400px] mt-2 p-5 flex flex-col items-center justify-center">
-        <div className="flex gap-2 flex-wrap items-center justify-center">
+      <form className="h-[500px] mt-2 p-5 flex flex-col items-center justify-center">
+        <div className="flex gap-2  flex-wrap items-center justify-center">
           <CustomInput
-            name={`Full Name`}
+            name={`Organization Name`}
             required
             type={`text`}
-            value={name}
-            onchange={(e) => setName(e.target.value)}
             className={`h-[50px] w-[350px] border p-5 rounded-md`}
-            placeholder={`Enter full names...`}
           />
-
           <CustomInput
             required
-            name={`Password`}
-            type={`password`}
-            value={password}
-            onchange={(e) => setPassword(e.target.value)}
+            name={`Organization Email`}
+            type={`text`}
             className={`h-[50px] w-[350px] border p-5 rounded-md`}
-            placeholder={`Enter password...`}
+          />{" "}
+          <CustomInput
+            required
+            name={`Organization Email`}
+            type={`text`}
+            className={`h-[50px] w-[350px] border p-5 rounded-md`}
+          />{" "}
+          <CustomInput
+            required
+            name={`Organization Phone`}
+            type={`text`}
+            className={`h-[50px] w-[350px] border p-5 rounded-md`}
+          />{" "}
+          <div className="flex flex-col">
+            <label>Segment</label>
+            <Select className="h-[50px] w-[350px]  rounded-md" />
+          </div>
+          <div className="flex flex-col">
+            <label>Family of Business</label>
+            <Select className="h-[50px] w-[350px]  rounded-md" />
+          </div>
+          <div className="flex flex-col">
+            <label>Class of Business</label>
+            <Select className="h-[50px] w-[350px]  rounded-md" />
+          </div>
+          <CustomInput
+            required
+            name={`Company Location`}
+            type={`text`}
+            className={`h-[50px] w-[350px] border p-5 rounded-md`}
           />
         </div>
         <div className="mt-10 flex gap-2">
@@ -70,9 +94,9 @@ const Signup = ({ toggleView }) => {
             onClick={toggleView}
           />
           <CustomButton
-            name={loading ? `Updating...` : `Update`}
+            name={loading ? `Creating...` : `create`}
             type={`button`}
-            onClick={handleUpdateUser}
+            onClick={toggleView}
             className={`h-[50px] w-[350px] rounded-md bg-orange-300 font-[600] text-[#1c2536] text-[20px]`}
           />
         </div>

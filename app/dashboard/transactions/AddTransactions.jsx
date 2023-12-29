@@ -31,8 +31,8 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [custNm, setCustNm] = useState("");
   const [salesTyCd, setSalesTyCd] = useState("");
   const [rcptTyCd, setRcptTyCd] = useState("S");
-  const [pmtTyCd, setPmtTyCd] = useState("");
-  const [salesSttsCd, setSalesSttsCd] = useState("");
+  const [pmtTyCd, setPmtTyCd] = useState("01");
+  const [salesSttsCd, setSalesSttsCd] = useState("02");
   const [cfmDt, setCfmDt] = useState("");
   const [salesDt, setSalesDt] = useState("");
   const [stockRlsDt, setStockRlsDt] = useState("");
@@ -83,9 +83,9 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [itemClsCd, setItemClsCd] = useState("");
   const [itemNm, setItemNm] = useState("");
   const [bcd, setBcd] = useState("");
-  const [pkgUnitCd, setPkgUnitCd] = useState("");
+  const [pkgUnitCd, setPkgUnitCd] = useState("NT");
   const [pkg, setPkg] = useState(0);
-  const [qtyUnitCd, setQtyUnitCd] = useState("");
+  const [qtyUnitCd, setQtyUnitCd] = useState("U");
   const [qty, setQty] = useState(0);
   const [prc, setPrc] = useState(0);
   const [splyAmt, setSplyAmt] = useState(0);
@@ -95,7 +95,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [isrccNm, setIsrccNm] = useState("");
   const [isrcRt, setIsrcRt] = useState("");
   const [isrcAmt, setIsrcAmt] = useState("");
-  const [taxTyCd, setTaxTyCd] = useState("");
+  const [taxTyCd, setTaxTyCd] = useState("B");
   const [taxblAmt, setTaxblAmt] = useState(0);
   const [taxAmt, setTaxAmt] = useState(0);
   const [totAmtItem, setTotAmtItem] = useState(0);

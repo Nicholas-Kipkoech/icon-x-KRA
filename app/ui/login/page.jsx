@@ -99,6 +99,12 @@ const Login = ({ toggleView }) => {
             disabled={loading}
           />
         </div>
+        <div className="flex mt-3 justify-center ">
+          <p>Dont have an account?</p>
+          <p onClick={toggleView} className="text-[blue] cursor-pointer">
+            Signup
+          </p>
+        </div>
       </form>
     </div>
   );
