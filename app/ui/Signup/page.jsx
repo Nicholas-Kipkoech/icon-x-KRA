@@ -19,9 +19,13 @@ const Signup = ({ toggleView }) => {
     setSegment(segments);
   };
 
-  const getFamilies = async (segment_code) => {
+  console.log("selected", selectedSegment);
+
+  const getFamilies = async (code) => {
     try {
-      const { families } = await fetchFamilies(segment_code);
+      const { families } = await fetchFamilies({
+        segment_code: code,
+      });
       console.log("Families Response:", families);
       setFamily(families);
     } catch (error) {
