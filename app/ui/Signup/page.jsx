@@ -2,36 +2,15 @@
 import React, { useState } from "react";
 import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
-import axios from "axios";
-import { updateUser } from "@/app/services/adminServices";
 import { useCustomToast } from "@/app/hooks/useToast";
 import { Select } from "antd";
 
 const url = "https://etims-icon.onrender.com";
 
 const Signup = ({ toggleView }) => {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
   const [loading, setLoading] = useState(false);
 
   const showToast = useCustomToast();
-
-  const handleUpdateUser = async () => {
-    setLoading(true);
-
-    let formData = new FormData();
-    formData.append("name", name);
-    formData.append("newPassword", password);
-    const response = await updateUser(formData);
-    if (response?.success) {
-      setLoading(false);
-      showToast("Account updated successfully!!");
-      toggleView();
-    } else {
-      showToast("Something went wrong!!", "error");
-    }
-  };
 
   return (
     <div className="h-[600px] border-2 rounded-md w-[1000px] bg-white">
@@ -94,7 +73,7 @@ const Signup = ({ toggleView }) => {
             onClick={toggleView}
           />
           <CustomButton
-            name={loading ? `Creating...` : `create`}
+            name={loading ? `Creating...` : `Create`}
             type={`button`}
             onClick={toggleView}
             className={`h-[50px] w-[350px] rounded-md bg-orange-300 font-[600] text-[#1c2536] text-[20px]`}

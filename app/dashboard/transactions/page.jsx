@@ -35,16 +35,6 @@ const Transactions = () => {
       ),
     },
     {
-      title: "Company",
-      dataIndex: "company_code",
-      key: "company_code",
-      render: (_, item) => (
-        <div key={_}>
-          <Company companyId={item?.company} />
-        </div>
-      ),
-    },
-    {
       title: "Trader No",
       dataIndex: "trdInvcNo",
       key: "trdInvcNo",
@@ -72,12 +62,6 @@ const Transactions = () => {
       title: "Transaction ID",
       dataIndex: "transactionID",
       key: "transactionID",
-    },
-    {
-      title: "Company",
-      dataIndex: "company",
-      key: "company",
-      render: (_, item) => <Company companyId={item.company} />,
     },
     {
       title: "Internal Data",

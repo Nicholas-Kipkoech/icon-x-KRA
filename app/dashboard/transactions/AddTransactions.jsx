@@ -209,7 +209,6 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
         regrNm,
         modrId,
         modrNm,
-        company,
         receipt: {
           custTin: receiptCustTin,
           custMblNo: receiptCustMblNo,
@@ -257,7 +256,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
         ) : (
           <>
             <div className="flex flex-wrap justify-evenly border rounded p-4">
-              <Select
+              {/* <Select
                 showSearch
                 placeholder="Select company.."
                 className="w-[80%] h-[50px]"
@@ -265,7 +264,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 defaultValue={options[0]?.value}
                 options={options}
                 onChange={(value) => setCompany(value)}
-              />
+              /> */}
               <CustomInput
                 name={"Trader Invoice Number"}
                 required
