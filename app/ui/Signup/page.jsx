@@ -1,16 +1,31 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
 import { useCustomToast } from "@/app/hooks/useToast";
 import { Select } from "antd";
-
-const url = "https://etims-icon.onrender.com";
+import { fetchSegments } from "@/app/services/adminServices";
 
 const Signup = ({ toggleView }) => {
   const [loading, setLoading] = useState(false);
+  const [segment, setSegment] = useState([]);
+  const [selectedSegment, setSelectedSegment] = useState("");
 
   const showToast = useCustomToast();
+
+  const getSegments = async () => {
+    const { segments } = await fetchSegments();
+    setSegment(segments);
+  };
+  const segmentOptions = segment.map((seg) => {
+    return {
+      label: seg?.segment_name,
+      value: seg?.segment_code,
+    };
+  });
+  useEffect(() => {
+    getSegments();
+  }, []);
 
   return (
     <div className="h-[600px] border-2 rounded-md w-[1000px] bg-white">
@@ -42,7 +57,13 @@ const Signup = ({ toggleView }) => {
           />{" "}
           <div className="flex flex-col">
             <label>Segment</label>
-            <Select className="h-[50px] w-[350px]  rounded-md" />
+            <Select
+              className="h-[50px] w-[350px]  rounded-md"
+              options={segmentOptions}
+              placeholder="Select segment..."
+              defaultValue={segmentOptions[0]?.value}
+              onChange={(value) => setSelectedSegment(value)}
+            />
           </div>
           <div className="flex flex-col">
             <label>Family of Business</label>
