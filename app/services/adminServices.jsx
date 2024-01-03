@@ -74,3 +74,9 @@ export const fetchSegments = async () => {
   const res = await PrivateAxiosUtility.get(`/organization/fetch/segment`);
   return res.data;
 };
+export const fetchFamilies = async (segment_code) => {
+  const res = await PrivateAxiosUtility.get(`/organization/fetch/family`, {
+    segment_code: segment_code,
+  });
+  return res.data;
+};

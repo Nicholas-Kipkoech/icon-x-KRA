@@ -4,11 +4,12 @@ import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
 import { useCustomToast } from "@/app/hooks/useToast";
 import { Select } from "antd";
-import { fetchSegments } from "@/app/services/adminServices";
+import { fetchFamilies, fetchSegments } from "@/app/services/adminServices";
 
 const Signup = ({ toggleView }) => {
   const [loading, setLoading] = useState(false);
   const [segment, setSegment] = useState([]);
+  const [family, setFamily] = useState([]);
   const [selectedSegment, setSelectedSegment] = useState("");
 
   const showToast = useCustomToast();
@@ -17,6 +18,17 @@ const Signup = ({ toggleView }) => {
     const { segments } = await fetchSegments();
     setSegment(segments);
   };
+
+  const getFamilies = async (segment_code) => {
+    try {
+      const { families } = await fetchFamilies(segment_code);
+      console.log("Families Response:", families);
+      setFamily(families);
+    } catch (error) {
+      console.error("Error fetching families:", error);
+    }
+  };
+
   const segmentOptions = segment.map((seg) => {
     return {
       label: seg?.segment_name,
@@ -27,6 +39,11 @@ const Signup = ({ toggleView }) => {
     getSegments();
   }, []);
 
+  useEffect(() => {
+    if (selectedSegment !== "") {
+      getFamilies(selectedSegment);
+    }
+  }, [selectedSegment]);
   return (
     <div className="h-[600px] border-2 rounded-md w-[1000px] bg-white">
       <div className="flex flex-col justify-center items-center pt-8">
