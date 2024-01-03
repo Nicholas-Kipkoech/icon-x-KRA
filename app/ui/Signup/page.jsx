@@ -36,12 +36,6 @@ const Signup = ({ toggleView }) => {
           />{" "}
           <CustomInput
             required
-            name={`Organization Email`}
-            type={`text`}
-            className={`h-[50px] w-[350px] border p-5 rounded-md`}
-          />{" "}
-          <CustomInput
-            required
             name={`Organization Phone`}
             type={`text`}
             className={`h-[50px] w-[350px] border p-5 rounded-md`}
@@ -58,12 +52,6 @@ const Signup = ({ toggleView }) => {
             <label>Class of Business</label>
             <Select className="h-[50px] w-[350px]  rounded-md" />
           </div>
-          <CustomInput
-            required
-            name={`Company Location`}
-            type={`text`}
-            className={`h-[50px] w-[350px] border p-5 rounded-md`}
-          />
         </div>
         <div className="mt-10 flex gap-2">
           <CustomButton
