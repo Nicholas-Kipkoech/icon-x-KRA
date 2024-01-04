@@ -45,11 +45,6 @@ const Sidebar = () => {
       title: "ETIMS Management",
       list: [
         {
-          title: "View Item Info",
-          path: "/dashboard/item-info",
-          icon: <MdArchitecture />,
-        },
-        {
           title: "Transactions",
           path: "/dashboard/transactions",
           icon: <MdAttachMoney />,

@@ -5,6 +5,16 @@ import CustomInput from "@/app/ui/reusableComponents/CustomInput";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { addTransaction, fetchCompanies } from "@/app/services/adminServices";
 import { useCustomToast } from "@/app/hooks/useToast";
+import CustomSelect from "@/app/ui/reusableComponents/CustomSelect";
+import {
+  invoiceStatusOptions,
+  packagingUnitOptions,
+  paymentTypeOptions,
+  purchaseOptions,
+  quantityUnitOptions,
+  recieptTypeOptions,
+  taxTypeOptions,
+} from "./options";
 
 const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   function formatDateToCustomFormat(selectedDate) {
@@ -30,9 +40,9 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [custTin, setCustTin] = useState("");
   const [custNm, setCustNm] = useState("");
   const [salesTyCd, setSalesTyCd] = useState("");
-  const [rcptTyCd, setRcptTyCd] = useState("S");
-  const [pmtTyCd, setPmtTyCd] = useState("01");
-  const [salesSttsCd, setSalesSttsCd] = useState("02");
+  const [rcptTyCd, setRcptTyCd] = useState("");
+  const [pmtTyCd, setPmtTyCd] = useState("");
+  const [salesSttsCd, setSalesSttsCd] = useState("");
   const [cfmDt, setCfmDt] = useState("");
   const [salesDt, setSalesDt] = useState("");
   const [stockRlsDt, setStockRlsDt] = useState("");
@@ -99,21 +109,6 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [taxAmt, setTaxAmt] = useState(0);
   const [totAmtItem, setTotAmtItem] = useState(0);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const purchaseOptions = [
-    {
-      value: "N",
-      label: "No",
-    },
-    {
-      value: "Y",
-      label: "Yes",
-    },
-  ];
 
   // Function to handle adding a new item
   const handleAddItem = () => {
@@ -218,6 +213,41 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
     }
   };
 
+  const get_financial_figures = (taxTypeCode, quantity, unitPrice) => {
+    const taxableAmount = quantity * unitPrice;
+    let totalTax = 0;
+    if (taxTypeCode == "A") {
+      totalTax = taxableAmount * 0;
+    } else if (taxTypeCode == "B") {
+      totalTax = taxableAmount * (16 / 100);
+    } else if (taxTypeCode == "C") {
+      totalTax = taxableAmount * 0;
+    } else if (taxTypeCode == "D") {
+      totalTax = taxableAmount * 0;
+    } else if (taxTypeCode == "E") {
+      totalTax = taxableAmount * (8 / 100);
+    } else {
+      console.error("Invalid tax type code");
+    }
+    const totalAmount = taxableAmount + totalTax;
+    return {
+      totalAmount: totalAmount,
+      totalTax: totalTax.toFixed(2),
+      taxableAmount: taxableAmount,
+    };
+  };
+
+  useEffect(() => {
+    const { totalAmount, totalTax, taxableAmount } = get_financial_figures(
+      taxTyCd,
+      qty,
+      prc
+    );
+    setTotAmtItem(totalAmount);
+    setTaxAmt(totalTax);
+    setTaxblAmt(taxableAmount);
+  }, [taxTyCd, qty, prc]);
+
   return (
     <Modal
       style={{ margin: "0 0", padding: "0 0" }}
@@ -270,25 +300,29 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 onchange={(e) => setCustNm(e.target.value)}
                 className={"h-[40px] border rounded-md p-2"}
               />
-              <CustomInput
+              <CustomSelect
                 name={"Receipt Type Code"}
-                value={rcptTyCd}
-                onchange={(e) => setRcptTyCd(e.target.value)}
-                required
-                className={"h-[40px] border rounded-md p-2"}
+                required={true}
+                placeholder="Select reciept type code"
+                options={recieptTypeOptions}
+                onChange={(value) => setRcptTyCd(value)}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
               />
-              <CustomInput
+              <CustomSelect
                 name={"Payment Type Code"}
-                value={pmtTyCd}
-                onchange={(e) => setPmtTyCd(e.target.value)}
-                className={"h-[40px] border rounded-md p-2"}
+                required={false}
+                placeholder="Select payment type code"
+                options={paymentTypeOptions}
+                onChange={(value) => setPmtTyCd(value)}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
               />
-              <CustomInput
+              <CustomSelect
                 name={"Invoice Status Code"}
-                required
-                value={salesSttsCd}
-                onchange={(e) => setSalesSttsCd(e.target.value)}
-                className={"h-[40px] border rounded-md p-2"}
+                required={false}
+                placeholder="Select invoice status code"
+                options={invoiceStatusOptions}
+                onChange={(value) => setSalesSttsCd(value)}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
               />
               <CustomInput
                 name={"Validated Date"}
@@ -351,6 +385,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               <CustomInput
                 name={"Taxable Amount A"}
                 value={taxblAmtA}
+                disabled
                 onchange={(e) => setTaxblAmtA(e.target.value)}
                 type={"number"}
                 required
@@ -359,6 +394,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               <CustomInput
                 name={"Taxable Amount B"}
                 value={taxblAmtB}
+                disabled
                 onchange={(e) => setTaxblAmtB(e.target.value)}
                 type={"number"}
                 required
@@ -366,6 +402,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               />
               <CustomInput
                 name={"Taxable Amount C"}
+                disabled
                 value={taxblAmtC}
                 onchange={(e) => setTaxblAmtC(e.target.value)}
                 type={"number"}
@@ -378,9 +415,11 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 onchange={(e) => setTaxblAmtD(e.target.value)}
                 type={"number"}
                 required
+                disabled
                 className={"h-[40px]  border rounded-md p-2"}
               />
               <CustomInput
+                disabled
                 name={"Taxable Amount E"}
                 value={taxblAmtE}
                 onchange={(e) => setTaxblAmtE(e.target.value)}
@@ -390,6 +429,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               />
               <CustomInput
                 name={"Tax Rate A"}
+                disabled
                 value={taxRtA}
                 onchange={(e) => setTaxRtA(e.target.value)}
                 type={"number"}
@@ -398,6 +438,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               />
               <CustomInput
                 name={"Tax Rate B"}
+                disabled
                 value={taxRtB}
                 onchange={(e) => setTaxRtB(e.target.value)}
                 type={"number"}
@@ -406,6 +447,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               />
               <CustomInput
                 name={"Tax Rate C"}
+                disabled
                 value={taxRtC}
                 onchange={(e) => setTaxRtC(e.target.value)}
                 type={"number"}
@@ -413,6 +455,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 className={"h-[40px]  border rounded-md p-2"}
               />
               <CustomInput
+                disabled
                 name={"Tax Rate D"}
                 value={taxRtD}
                 onchange={(e) => setTaxRtD(e.target.value)}
@@ -421,6 +464,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 className={"h-[40px]  border rounded-md p-2"}
               />
               <CustomInput
+                disabled
                 name={"Tax Rate E"}
                 value={taxRtE}
                 onchange={(e) => setTaxRtE(e.target.value)}
@@ -429,6 +473,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 className={"h-[40px]  border rounded-md p-2"}
               />
               <CustomInput
+                disabled
                 name={"Tax Amount A"}
                 value={taxAmtA}
                 onchange={(e) => setTaxAmtA(e.target.value)}
@@ -438,6 +483,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               />
               <CustomInput
                 name={"Tax Amount B"}
+                disabled
                 value={taxAmtB}
                 onchange={(e) => setTaxAmtB(e.target.value)}
                 type={"number"}
@@ -586,17 +632,13 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 onchange={(e) => setBtmMsg(e.target.value)}
                 className={"h-[40px]  border rounded-md p-2"}
               />
-              <div className="mt-2">
-                <label htmlFor="prchrAcptcYn">Purchase Accept Y/N</label>
-                <Select
-                  showSearch
-                  placeholder="Yes or No?"
-                  className="w-[80%] h-[50px]"
-                  id="prchrAcptcYn"
-                  options={purchaseOptions}
-                  onChange={(value) => setReceiptPrchrAcptcYn(value)}
-                />
-              </div>
+              <CustomSelect
+                required
+                name={"Purchase Accept Y/N"}
+                options={purchaseOptions}
+                placeholder={"Select purchase accept"}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
+              />
             </div>
             <p className="flex justify-center text-[20px] mt-2 underline">
               Deal sale registration item information
@@ -631,13 +673,14 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 onchange={(e) => setBcd(e.target.value)}
                 className={"h-[40px]  border rounded-md p-2"}
               />{" "}
-              <CustomInput
+              <CustomSelect
                 name={"Packaging Unit Code"}
-                value={pkgUnitCd}
-                onchange={(e) => setPkgUnitCd(e.target.value)}
                 required
-                className={"h-[40px]  border rounded-md p-2"}
-              />{" "}
+                placeholder={"Select packaging unit"}
+                options={packagingUnitOptions}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
+                onChange={(value) => setPkgUnitCd(value)}
+              />
               <CustomInput
                 name={"Package"}
                 value={pkg}
@@ -646,12 +689,13 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 required
                 className={"h-[40px]  border rounded-md p-2"}
               />
-              <CustomInput
+              <CustomSelect
                 name={"Quantity Unit Code"}
-                value={qtyUnitCd}
-                onchange={(e) => setQtyUnitCd(e.target.value)}
                 required
-                className={"h-[40px]  border rounded-md p-2"}
+                placeholder={"Select quantity code"}
+                options={quantityUnitOptions}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
+                onChange={(value) => setQtyUnitCd(value)}
               />
               <CustomInput
                 name={"Quantity"}
@@ -719,24 +763,27 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 type={"number"}
                 className={"h-[40px]  border rounded-md p-2"}
               />
-              <CustomInput
+              <CustomSelect
                 name={"Taxation Type Code"}
-                value={taxTyCd}
-                onchange={(e) => setTaxTyCd(e.target.value)}
-                required
-                className={"h-[40px]  border rounded-md p-2"}
+                required={true}
+                placeholder={"Select taxation type"}
+                options={taxTypeOptions}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
+                onChange={(value) => setTaxTyCd(value)}
               />
               <CustomInput
                 name={"Taxable Amount"}
                 value={taxblAmt}
                 onchange={(e) => setTaxblAmt(e.target.value)}
                 type={"number"}
+                disabled
                 required
                 className={"h-[40px]  border rounded-md p-2"}
               />
               <CustomInput
                 name={"Tax Amount"}
                 value={taxAmt}
+                disabled
                 onchange={(e) => setTaxAmt(e.target.value)}
                 required
                 type={"number"}
@@ -744,6 +791,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               />
               <CustomInput
                 name={"Total Amount"}
+                disabled
                 value={totAmtItem}
                 onchange={(e) => setTotAmtItem(e.target.value)}
                 type={"number"}
