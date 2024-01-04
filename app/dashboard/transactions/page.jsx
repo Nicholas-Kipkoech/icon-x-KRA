@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { fetchTransactions } from "@/app/services/adminServices";
-import Company from "../users/Company";
 import AddTransactions from "./AddTransactions";
 import Link from "next/link";
 const Transactions = () => {

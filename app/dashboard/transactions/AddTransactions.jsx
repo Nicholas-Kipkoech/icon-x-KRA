@@ -66,7 +66,6 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [modrId, setModrId] = useState("");
   const [itemList, setItemList] = useState([]);
   const [modrNm, setModrNm] = useState("");
-  const [company, setCompany] = useState("");
 
   // State variables for sales receipt information
   const [receiptCustTin, setReceiptCustTin] = useState("");
@@ -99,23 +98,11 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [taxblAmt, setTaxblAmt] = useState(0);
   const [taxAmt, setTaxAmt] = useState(0);
   const [totAmtItem, setTotAmtItem] = useState(0);
-  const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const fetchData = async () => {
-    const data = await fetchCompanies();
-    setCompanies(data?.companies);
-  };
 
   useEffect(() => {
     fetchData();
   }, []);
-  const options = companies.map((company) => {
-    return {
-      label: (company?.company_name).toUpperCase(),
-      value: company?._id,
-    };
-  });
 
   const purchaseOptions = [
     {
@@ -168,7 +155,6 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
       setLoading(true);
       // Logic for form submission
       const formData = {
-        company,
         trdInvcNo,
         orgInvcNo,
         custTin,
@@ -256,15 +242,6 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
         ) : (
           <>
             <div className="flex flex-wrap justify-evenly border rounded p-4">
-              {/* <Select
-                showSearch
-                placeholder="Select company.."
-                className="w-[80%] h-[50px]"
-                id="company"
-                defaultValue={options[0]?.value}
-                options={options}
-                onChange={(value) => setCompany(value)}
-              /> */}
               <CustomInput
                 name={"Trader Invoice Number"}
                 required

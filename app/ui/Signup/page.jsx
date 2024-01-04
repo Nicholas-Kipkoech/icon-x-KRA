@@ -5,6 +5,7 @@ import CustomButton from "../reusableComponents/CustomButton";
 import { useCustomToast } from "@/app/hooks/useToast";
 import { Select } from "antd";
 import {
+  createOrganization,
   fetchClasses,
   fetchFamilies,
   fetchSegments,
@@ -20,6 +21,9 @@ const Signup = ({ toggleView }) => {
   const [selectedSegment, setSelectedSegment] = useState("");
   const [selectedFamily, setSelectedFamily] = useState("");
   const [selectedClass, setSelectedClass] = useState("");
+  const [organizationName, setOrganizationName] = useState("");
+  const [organizationEmail, setOrganizationEmail] = useState("");
+  const [organizationPhone, setOrganizationPhone] = useState("");
   const [classesOptions, setClassesOptions] = useState([]);
   const [segmentOptions, setSegmentOptions] = useState([]);
   const [familyOptions, setFamilyOptions] = useState([]);
@@ -100,6 +104,30 @@ const Signup = ({ toggleView }) => {
     getSegments();
   }, []);
 
+  const handleCreateOrg = async () => {
+    try {
+      console.log(organizationName);
+      setLoading(true);
+      await axios.post(`${ENDPOINT}/organization/create`, {
+        organization_name: organizationName,
+        organization_email: organizationEmail,
+        organization_phone: organizationPhone,
+        business_class: selectedClass,
+        business_segment: selectedSegment,
+        business_family: selectedFamily,
+      });
+      setLoading(false);
+      showToast(
+        "Account created successfully credentials has been sent to your email!"
+      );
+      toggleView();
+    } catch (error) {
+      showToast(error.response.data.error, "error");
+      setLoading(false);
+      console.error("error", error.response.data.error);
+    }
+  };
+
   return (
     <div className="h-[600px] border-2 rounded-md w-[1000px] bg-white">
       <div className="flex flex-col justify-center items-center pt-8">
@@ -113,6 +141,7 @@ const Signup = ({ toggleView }) => {
           <CustomInput
             name={`Organization Name`}
             required
+            onchange={(e) => setOrganizationName(e.target.value)}
             type={`text`}
             className={`h-[50px] w-[350px] border p-5 rounded-md`}
           />
@@ -120,11 +149,13 @@ const Signup = ({ toggleView }) => {
             required
             name={`Organization Email`}
             type={`text`}
+            onchange={(e) => setOrganizationEmail(e.target.value)}
             className={`h-[50px] w-[350px] border p-5 rounded-md`}
           />{" "}
           <CustomInput
             required
             name={`Organization Phone`}
+            onchange={(e) => setOrganizationPhone(e.target.value)}
             type={`text`}
             className={`h-[50px] w-[350px] border p-5 rounded-md`}
           />{" "}
@@ -167,7 +198,7 @@ const Signup = ({ toggleView }) => {
           <CustomButton
             name={loading ? `Creating...` : `Create`}
             type={`button`}
-            onClick={toggleView}
+            onClick={handleCreateOrg}
             className={`h-[50px] w-[350px] rounded-md bg-orange-300 font-[600] text-[#1c2536] text-[20px]`}
           />
         </div>
