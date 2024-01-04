@@ -74,3 +74,17 @@ export const fetchSegments = async () => {
   const res = await PrivateAxiosUtility.get(`/organization/fetch/segment`);
   return res.data;
 };
+
+export const fetchClasses = async (code) => {
+  const res = await PrivateAxiosUtility.get(
+    `/organization/fetch/classes/${code}`
+  );
+  return res.data;
+};
+
+export const fetchFamilies = async (code) => {
+  const res = await PrivateAxiosUtility.get(
+    `/organization/fetch/family/${code}`
+  );
+  return res.data;
+};

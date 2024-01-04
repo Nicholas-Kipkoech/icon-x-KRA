@@ -4,7 +4,11 @@ import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
 import { useCustomToast } from "@/app/hooks/useToast";
 import { Select } from "antd";
-import { fetchFamilies, fetchSegments } from "@/app/services/adminServices";
+import {
+  fetchClasses,
+  fetchFamilies,
+  fetchSegments,
+} from "@/app/services/adminServices";
 import axios from "axios";
 import { ENDPOINT } from "@/app/services/axiosUtility";
 
@@ -16,6 +20,9 @@ const Signup = ({ toggleView }) => {
   const [selectedSegment, setSelectedSegment] = useState("");
   const [selectedFamily, setSelectedFamily] = useState("");
   const [selectedClass, setSelectedClass] = useState("");
+  const [classesOptions, setClassesOptions] = useState([]);
+  const [segmentOptions, setSegmentOptions] = useState([]);
+  const [familyOptions, setFamilyOptions] = useState([]);
 
   const showToast = useCustomToast();
 
@@ -31,10 +38,7 @@ const Signup = ({ toggleView }) => {
 
   const getFamilies = async (code) => {
     try {
-      const res = await axios.get(
-        `${ENDPOINT}/organization/fetch/family/${code}`
-      );
-      const { families } = res.data;
+      const { families } = await fetchFamilies(code);
       setFamily(families);
     } catch (error) {
       console.error("error fetching families...", error);
@@ -43,10 +47,7 @@ const Signup = ({ toggleView }) => {
 
   const getClasses = async (code) => {
     try {
-      const res = await axios.get(
-        `${ENDPOINT}/organization/fetch/classes/${code}`
-      );
-      const { classes } = res.data;
+      const { classes } = await fetchClasses(code);
       setClasses(classes);
     } catch (error) {
       console.error("Error fetching classes..", error);
@@ -65,25 +66,36 @@ const Signup = ({ toggleView }) => {
     }
   }, [selectedFamily]);
 
-  const familyOptions = family.map((fam) => {
-    return {
-      label: fam?.family_name,
-      value: fam?.family_code,
-    };
-  });
+  useEffect(() => {
+    // Update familyOptions when family state changes
+    setFamilyOptions(
+      family.map((fam) => ({
+        label: fam?.family_name,
+        value: fam?.family_code,
+      }))
+    );
+  }, [family]);
 
-  const segmentOptions = segment.map((seg) => {
-    return {
-      label: seg?.segment_name,
-      value: seg?.segment_code,
-    };
-  });
-  const classesOptions = classes.map((_class) => {
-    return {
-      label: _class?.class_name,
-      value: _class?.class_code,
-    };
-  });
+  useEffect(() => {
+    // Update segmentOptions when segment state changes
+    setSegmentOptions(
+      segment.map((seg) => ({
+        label: seg?.segment_name,
+        value: seg?.segment_code,
+      }))
+    );
+  }, [segment]);
+
+  useEffect(() => {
+    // Update classesOptions when classes state changes
+    setClassesOptions(
+      classes.map((_class) => ({
+        label: _class?.class_name,
+        value: _class?.class_code,
+      }))
+    );
+  }, [classes]);
+
   useEffect(() => {
     getSegments();
   }, []);
