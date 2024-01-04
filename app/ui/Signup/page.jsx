@@ -5,33 +5,72 @@ import CustomButton from "../reusableComponents/CustomButton";
 import { useCustomToast } from "@/app/hooks/useToast";
 import { Select } from "antd";
 import { fetchFamilies, fetchSegments } from "@/app/services/adminServices";
+import axios from "axios";
+import { ENDPOINT } from "@/app/services/axiosUtility";
 
 const Signup = ({ toggleView }) => {
   const [loading, setLoading] = useState(false);
   const [segment, setSegment] = useState([]);
   const [family, setFamily] = useState([]);
+  const [classes, setClasses] = useState([]);
   const [selectedSegment, setSelectedSegment] = useState("");
+  const [selectedFamily, setSelectedFamily] = useState("");
+  const [selectedClass, setSelectedClass] = useState("");
 
   const showToast = useCustomToast();
 
   const getSegments = async () => {
-    const { segments } = await fetchSegments();
-    setSegment(segments);
+    try {
+      const { segments } = await fetchSegments();
+      console.log("Segments Response:", segments);
+      setSegment(segments);
+    } catch (error) {
+      console.error("Error fetching segments:", error);
+    }
   };
-
-  console.log("selected", selectedSegment);
 
   const getFamilies = async (code) => {
     try {
-      const { families } = await fetchFamilies({
-        segment_code: code,
-      });
-      console.log("Families Response:", families);
+      const res = await axios.get(
+        `${ENDPOINT}/organization/fetch/family/${code}`
+      );
+      const { families } = res.data;
       setFamily(families);
     } catch (error) {
-      console.error("Error fetching families:", error);
+      console.error("error fetching families...", error);
     }
   };
+
+  const getClasses = async (code) => {
+    try {
+      const res = await axios.get(
+        `${ENDPOINT}/organization/fetch/classes/${code}`
+      );
+      const { classes } = res.data;
+      setClasses(classes);
+    } catch (error) {
+      console.error("Error fetching classes..", error);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedSegment !== "") {
+      getFamilies(selectedSegment);
+    }
+  }, [selectedSegment]);
+
+  useEffect(() => {
+    if (selectedFamily !== "") {
+      getClasses(selectedFamily);
+    }
+  }, [selectedFamily]);
+
+  const familyOptions = family.map((fam) => {
+    return {
+      label: fam?.family_name,
+      value: fam?.family_code,
+    };
+  });
 
   const segmentOptions = segment.map((seg) => {
     return {
@@ -39,15 +78,16 @@ const Signup = ({ toggleView }) => {
       value: seg?.segment_code,
     };
   });
+  const classesOptions = classes.map((_class) => {
+    return {
+      label: _class?.class_name,
+      value: _class?.class_code,
+    };
+  });
   useEffect(() => {
     getSegments();
   }, []);
 
-  useEffect(() => {
-    if (selectedSegment !== "") {
-      getFamilies(selectedSegment);
-    }
-  }, [selectedSegment]);
   return (
     <div className="h-[600px] border-2 rounded-md w-[1000px] bg-white">
       <div className="flex flex-col justify-center items-center pt-8">
@@ -88,11 +128,21 @@ const Signup = ({ toggleView }) => {
           </div>
           <div className="flex flex-col">
             <label>Family of Business</label>
-            <Select className="h-[50px] w-[350px]  rounded-md" />
+            <Select
+              className="h-[50px] w-[350px]  rounded-md"
+              placeholder="Select family..."
+              options={familyOptions}
+              onChange={(value) => setSelectedFamily(value)}
+            />
           </div>
           <div className="flex flex-col">
             <label>Class of Business</label>
-            <Select className="h-[50px] w-[350px]  rounded-md" />
+            <Select
+              className="h-[50px] w-[350px]  rounded-md"
+              options={classesOptions}
+              placeholder="Select class.."
+              onChange={(value) => setSelectedClass(value)}
+            />
           </div>
         </div>
         <div className="mt-10 flex gap-2">
