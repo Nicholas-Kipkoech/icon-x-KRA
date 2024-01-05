@@ -48,8 +48,6 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
     }
   }, [classCode]);
 
-  console.log(_comodities);
-
   const comoditiesOptions = _comodities.map((comodity) => {
     return {
       value: comodity?.comodity_code,
@@ -236,6 +234,36 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
       showToast(error.response?.data?.data?.resultMsg, "error");
     }
   };
+
+  useEffect(() => {
+    const calculateTotalsAlgorithm = () => {
+      const totalsByTaxTyCd = itemList.reduce((totals, item) => {
+        const { taxTyCd, taxblAmt } = item;
+        totals[taxTyCd] = (totals[taxTyCd] || 0) + taxblAmt;
+        return totals;
+      }, {});
+
+      // Calculate totalTotAmt (total of all totAmt values)
+      const totalTotAmt = itemList.reduce(
+        (total, item) => total + item.totAmt,
+        0
+      );
+
+      return { totalsByTaxTyCd, totalTotAmt };
+    };
+
+    const { totalsByTaxTyCd, totalTotAmt } = calculateTotalsAlgorithm();
+
+    // Update state variables for each tax type
+    setTaxblAmtA(totalsByTaxTyCd["A"] || 0);
+    setTaxblAmtB(totalsByTaxTyCd["B"] || 0);
+    setTaxblAmtC(totalsByTaxTyCd["C"] || 0);
+    setTaxblAmtD(totalsByTaxTyCd["D"] || 0);
+    setTaxblAmtE(totalsByTaxTyCd["E"] || 0);
+
+    // Update state variable for totalTotAmt
+    setTotAmt(totalTotAmt);
+  }, [itemList]);
 
   const get_financial_figures = (taxTypeCode, quantity, unitPrice) => {
     const taxableAmount = quantity * unitPrice;
@@ -520,11 +548,13 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 onchange={(e) => setTaxAmtC(e.target.value)}
                 type={"number"}
                 required
+                disabled
                 className={"h-[40px]  border rounded-md p-2"}
               />
               <CustomInput
                 name={"Tax Amount D"}
                 value={taxAmtD}
+                disabled
                 onchange={(e) => setTaxAmtD(e.target.value)}
                 type={"number"}
                 required
@@ -533,6 +563,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               <CustomInput
                 name={"Tax Amount E"}
                 value={taxAmtE}
+                disabled
                 onchange={(e) => setTaxAmtE(e.target.value)}
                 type={"number"}
                 required
@@ -541,6 +572,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               <CustomInput
                 name={"Total Taxable Amount"}
                 value={totTaxblAmt}
+                disabled
                 onchange={(e) => setTotTaxblAmt(e.target.value)}
                 type={"number"}
                 required
@@ -551,28 +583,27 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 value={totTaxAmt}
                 onchange={(e) => setTotTaxAmt(e.target.value)}
                 type={"number"}
+                disabled
                 required
                 className={"h-[40px]  border rounded-md p-2"}
               />
               <CustomInput
                 name={"Total  Amount"}
                 value={totAmt}
+                disabled
                 onchange={(e) => setTotAmt(e.target.value)}
                 type={"number"}
                 required
                 className={"h-[40px]  border rounded-md p-2"}
               />
-              <div className="mt-2">
-                <label htmlFor="prchrAcptcYn">Purchase Accept Y/N</label>
-                <Select
-                  showSearch
-                  placeholder="Yes or No?"
-                  className="w-[80%] h-[50px]"
-                  id="prchrAcptcYn"
-                  options={purchaseOptions}
-                  onChange={(value) => setPrchrAcptcYn(value)}
-                />
-              </div>
+              <CustomSelect
+                required
+                name={"Purchase Accept Y/N"}
+                placeholder="Yes or No?"
+                options={purchaseOptions}
+                onChange={(value) => setPrchrAcptcYn(value)}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
+              />
               <CustomInput
                 name={"Remark"}
                 className={"h-[40px]  border rounded-md p-2"}

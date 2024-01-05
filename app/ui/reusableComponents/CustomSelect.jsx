@@ -26,6 +26,7 @@ const CustomSelect = ({
         className={className}
         defaultValue={defaultValue}
         onChange={onChange}
+        showSearch={true}
       />
     </div>
   );
