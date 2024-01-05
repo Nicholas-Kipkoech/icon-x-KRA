@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Modal, Select, Spin } from "antd";
 import CustomInput from "@/app/ui/reusableComponents/CustomInput";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
-import { addTransaction, fetchCompanies } from "@/app/services/adminServices";
+import {
+  addTransaction,
+  fetchComodities,
+  fetchCompanies,
+} from "@/app/services/adminServices";
 import { useCustomToast } from "@/app/hooks/useToast";
 import CustomSelect from "@/app/ui/reusableComponents/CustomSelect";
 import {
@@ -17,23 +21,41 @@ import {
 } from "./options";
 
 import { jwtDecode } from "jwt-decode";
+import { formatDateToCustomFormat } from "@/app/ui/reusableFunctions/Utils";
 
 const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
-  function formatDateToCustomFormat(selectedDate) {
-    if (selectedDate) {
-      const date = new Date(selectedDate);
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      const hours = String(date.getHours()).padStart(2, "0");
-      const minutes = String(date.getMinutes()).padStart(2, "0");
-      const seconds = String(date.getSeconds()).padStart(2, "0");
-      const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}`;
-      return formattedDate;
-    } else {
-      return "";
+  const [classCode, setClassCode] = useState("");
+  const [_comodities, setComodities] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    const { business_class } = jwtDecode(token);
+    setClassCode(business_class);
+  }, []);
+
+  const getComidities = async (code) => {
+    try {
+      const { comodities } = await fetchComodities(code);
+      setComodities(comodities);
+    } catch (error) {
+      console.error(error);
     }
-  }
+  };
+
+  useEffect(() => {
+    if (classCode !== "") {
+      getComidities(classCode);
+    }
+  }, [classCode]);
+
+  console.log(_comodities);
+
+  const comoditiesOptions = _comodities.map((comodity) => {
+    return {
+      value: comodity?.comodity_code,
+      label: comodity?.comodity_name,
+    };
+  });
 
   const showToast = useCustomToast();
   // State variables for main fields
@@ -659,8 +681,8 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 name={"Item Classification Code"}
                 required
                 placeholder={"Select item class code"}
-                options={packagingUnitOptions}
-                className={"h-[60px] w-[200px] rounded-md p-2"}
+                options={comoditiesOptions}
+                className={"h-[60px] w-[300px] rounded-md p-2"}
                 onChange={(value) => setItemClsCd(value)}
               />
               <CustomInput
