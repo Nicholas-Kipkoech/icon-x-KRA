@@ -16,6 +16,8 @@ import {
   taxTypeOptions,
 } from "./options";
 
+import { jwtDecode } from "jwt-decode";
+
 const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   function formatDateToCustomFormat(selectedDate) {
     if (selectedDate) {
@@ -653,12 +655,13 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 onchange={(e) => setItemCd(e.target.value)}
                 className={"h-[40px]  border rounded-md p-2"}
               />
-              <CustomInput
+              <CustomSelect
                 name={"Item Classification Code"}
-                value={itemClsCd}
-                onchange={(e) => setItemClsCd(e.target.value)}
                 required
-                className={"h-[40px]  border rounded-md p-2"}
+                placeholder={"Select item class code"}
+                options={packagingUnitOptions}
+                className={"h-[60px] w-[200px] rounded-md p-2"}
+                onChange={(value) => setItemClsCd(value)}
               />
               <CustomInput
                 name={"Item Name"}
