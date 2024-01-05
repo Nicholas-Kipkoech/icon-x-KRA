@@ -72,7 +72,6 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [cnclDt, setCnclDt] = useState("");
   const [rfdDt, setRfdDt] = useState("");
   const [rfdRsnCd, setRfdRsnCd] = useState("");
-  const [totItemCnt, setTotItemCnt] = useState(0);
   const [taxblAmtA, setTaxblAmtA] = useState(0);
   const [taxblAmtB, setTaxblAmtB] = useState(0);
   const [taxblAmtC, setTaxblAmtC] = useState(0);
@@ -114,9 +113,9 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [itemClsCd, setItemClsCd] = useState("");
   const [itemNm, setItemNm] = useState("");
   const [bcd, setBcd] = useState("");
-  const [pkgUnitCd, setPkgUnitCd] = useState("NT");
+  const [pkgUnitCd, setPkgUnitCd] = useState("");
   const [pkg, setPkg] = useState(0);
-  const [qtyUnitCd, setQtyUnitCd] = useState("U");
+  const [qtyUnitCd, setQtyUnitCd] = useState("");
   const [qty, setQty] = useState(0);
   const [prc, setPrc] = useState(0);
   const [splyAmt, setSplyAmt] = useState(0);
@@ -126,7 +125,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
   const [isrccNm, setIsrccNm] = useState("");
   const [isrcRt, setIsrcRt] = useState("");
   const [isrcAmt, setIsrcAmt] = useState("");
-  const [taxTyCd, setTaxTyCd] = useState("B");
+  const [taxTyCd, setTaxTyCd] = useState("");
   const [taxblAmt, setTaxblAmt] = useState(0);
   const [taxAmt, setTaxAmt] = useState(0);
   const [totAmtItem, setTotAmtItem] = useState(0);
@@ -237,8 +236,27 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
 
   useEffect(() => {
     const calculateTotalsAlgorithm = () => {
-      const totalsByTaxTyCd = itemList.reduce((totals, item) => {
+      const totalTaxAmountByTaxTyCd = itemList.reduce((totals, item) => {
+        const { taxAmt, taxTyCd } = item;
+        totals[taxTyCd] = (totals[taxTyCd] || 0) + Number(taxAmt);
+        return totals;
+      }, {});
+      const totalsTaxableAmountByTaxTyCd = itemList.reduce((totals, item) => {
         const { taxTyCd, taxblAmt } = item;
+        const getTaxRate = (taxTypeCode) => {
+          if (taxTypeCode === "A") {
+            setTaxRtA(0);
+          } else if (taxTypeCode === "B") {
+            setTaxRtB(16);
+          } else if (taxTypeCode === "C") {
+            setTaxRtC(0);
+          } else if (taxTypeCode === "D") {
+            setTaxRtD(0);
+          } else if (taxTypeCode === "E") {
+            setTaxRtE(8);
+          }
+        };
+        getTaxRate(taxTyCd);
         totals[taxTyCd] = (totals[taxTyCd] || 0) + taxblAmt;
         return totals;
       }, {});
@@ -249,18 +267,32 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
         0
       );
 
-      return { totalsByTaxTyCd, totalTotAmt };
+      return {
+        totalsTaxableAmountByTaxTyCd,
+        totalTotAmt,
+        totalTaxAmountByTaxTyCd,
+      };
     };
+    const {
+      totalsTaxableAmountByTaxTyCd,
+      totalTotAmt,
+      totalTaxAmountByTaxTyCd,
+    } = calculateTotalsAlgorithm();
 
-    const { totalsByTaxTyCd, totalTotAmt } = calculateTotalsAlgorithm();
+    //update taxAmounts for each taxcode
+
+    setTaxAmtA(totalTaxAmountByTaxTyCd["A"] || 0);
+    setTaxAmtB(totalTaxAmountByTaxTyCd["B"] || 0);
+    setTaxAmtC(totalTaxAmountByTaxTyCd["C"] || 0);
+    setTaxAmtD(totalTaxAmountByTaxTyCd["D"] || 0);
+    setTaxAmtE(totalTaxAmountByTaxTyCd["E"] || 0);
 
     // Update state variables for each tax type
-    setTaxblAmtA(totalsByTaxTyCd["A"] || 0);
-    setTaxblAmtB(totalsByTaxTyCd["B"] || 0);
-    setTaxblAmtC(totalsByTaxTyCd["C"] || 0);
-    setTaxblAmtD(totalsByTaxTyCd["D"] || 0);
-    setTaxblAmtE(totalsByTaxTyCd["E"] || 0);
-
+    setTaxblAmtA(totalsTaxableAmountByTaxTyCd["A"] || 0);
+    setTaxblAmtB(totalsTaxableAmountByTaxTyCd["B"] || 0);
+    setTaxblAmtC(totalsTaxableAmountByTaxTyCd["C"] || 0);
+    setTaxblAmtD(totalsTaxableAmountByTaxTyCd["D"] || 0);
+    setTaxblAmtE(totalsTaxableAmountByTaxTyCd["E"] || 0);
     // Update state variable for totalTotAmt
     setTotAmt(totalTotAmt);
   }, [itemList]);
@@ -370,7 +402,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
               />
               <CustomSelect
                 name={"Invoice Status Code"}
-                required={false}
+                required
                 placeholder="Select invoice status code"
                 options={invoiceStatusOptions}
                 onChange={(value) => setSalesSttsCd(value)}
@@ -692,6 +724,7 @@ const AddTransactions = ({ handleClose, isOpen, onSaved }) => {
                 name={"Purchase Accept Y/N"}
                 options={purchaseOptions}
                 placeholder={"Select purchase accept"}
+                onChange={(value) => setReceiptPrchrAcptcYn(value)}
                 className={"h-[60px] w-[200px] rounded-md p-2"}
               />
             </div>
