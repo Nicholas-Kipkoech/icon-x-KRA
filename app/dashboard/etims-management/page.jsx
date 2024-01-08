@@ -293,6 +293,12 @@ const AddTransactionsPage = () => {
     setTotAmt(totalTotAmt);
   }, [itemList]);
 
+  const handleRemove = (index) => {
+    const updatedList = [...itemList];
+    updatedList.splice(index, 1);
+    setItemList(updatedList);
+  };
+
   const get_financial_figures = (taxTypeCode, quantity, unitPrice) => {
     const taxableAmount = quantity * unitPrice;
     let totalTax = 0;
@@ -711,9 +717,7 @@ const AddTransactionsPage = () => {
           <p className="flex justify-center text-[20px] mt-2 underline">
             Deal sale registration item information
           </p>
-          <p className="font-bold mb-4 text-[20px]">
-            Items in list : {itemList.length > 0 ? itemList.length : 0}
-          </p>
+
           <div className="flex flex-wrap justify-evenly border rounded p-4">
             <CustomInput
               name={"Item  Code"}
@@ -868,6 +872,23 @@ const AddTransactionsPage = () => {
               className={"h-[40px]  w-[500px] border rounded-md p-2"}
             />
           </div>
+          <div className="h-auto border p-5 mt-3 rounded-md flex gap-4">
+            {itemList.map((item, key) => (
+              <div key={key} className="flex border rounded-md">
+                <div className="p-4">
+                  <p>{item?.itemNm}</p>
+                  <p>KES {item?.prc}</p>
+                  <p>Tax Code {item?.taxTyCd ? item.taxTyCd : "Null"}</p>
+                </div>
+                <div
+                  className="text-[14px] text-red-600 cursor-pointer"
+                  onClick={() => handleRemove(key)}
+                >
+                  X
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="flex justify-end gap-2">
             <CustomButton
               name={itemList.length > 0 ? "Add another item" : "Add item"}
@@ -876,17 +897,6 @@ const AddTransactionsPage = () => {
               }
               onClick={handleAddItem}
             />
-            {itemList.length > 0 ? (
-              <CustomButton
-                name={"Remove Item"}
-                className={
-                  "bg-[#ce2a2a] p-3 mt-3 h-[50px] text-white font-bold rounded-md w-[200px] mb-5"
-                }
-                onClick={handleRemoveLastItem}
-              />
-            ) : (
-              ""
-            )}
           </div>
         </>
       </div>
