@@ -31,14 +31,9 @@ const Sidebar = () => {
       title: "Pages",
       list: [
         {
-          title: "Dashboard",
+          title: "Overview",
           path: "/dashboard",
           icon: <MdDashboard />,
-        },
-        {
-          title: "Users",
-          path: "/dashboard/users",
-          icon: <MdSupervisedUserCircle />,
         },
       ],
     },

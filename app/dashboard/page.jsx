@@ -1,7 +1,8 @@
 import React from "react";
 
 const Dashboard = () => {
-  return <div>Dashboard hello</div>;
+  const user = "Unknown";
+  return <div>Hello {user} user, this page is being worked on....</div>;
 };
 
 export default Dashboard;
