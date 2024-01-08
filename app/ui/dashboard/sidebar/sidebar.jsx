@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import MenuLink from "./menuLink/menuLink";
 import {
+  Md60FpsSelect,
   MdArchitecture,
   MdAttachMoney,
   MdBusiness,
@@ -45,7 +46,12 @@ const Sidebar = () => {
       title: "ETIMS Management",
       list: [
         {
-          title: "Transactions",
+          title: "Sales information",
+          path: "/dashboard/etims-management",
+          icon: <Md60FpsSelect />,
+        },
+        {
+          title: "View transactions",
           path: "/dashboard/transactions",
           icon: <MdAttachMoney />,
         },
