@@ -73,8 +73,8 @@ const Sidebar = () => {
         user.role === "Superadmin"
           ? [
               {
-                title: "Enrolled Companies",
-                path: "/dashboard/companies",
+                title: "Enrolled Organizations",
+                path: "/dashboard/organizations",
                 icon: <MdBusiness />,
               },
               // Add more items as needed
@@ -88,7 +88,7 @@ const Sidebar = () => {
     router.push("/");
   };
   return (
-    <div className="sticky top-0 h-[900px] max-h-[1200px]  bg-[#d99a5b] p-[20px] ">
+    <div className="sticky top-0 h-[100vh] max-h-[1200px]  bg-[#d99a5b] p-[20px] ">
       <div className="flex items-center gap-[20px] mb-[20px] bg-amber-300 h-[100px] p-[20px] rounded-md">
         {Object.keys(user).length > 1 ? (
           <>

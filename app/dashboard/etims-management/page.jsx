@@ -715,7 +715,7 @@ const AddTransactionsPage = () => {
             />
           </div>
           <p className="flex justify-center text-[20px] mt-2 underline">
-            Deal sale registration item information
+            Sale item information
           </p>
 
           <div className="flex flex-wrap justify-evenly border rounded p-4">

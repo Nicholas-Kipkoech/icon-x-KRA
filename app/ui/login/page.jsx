@@ -24,9 +24,6 @@ const Login = ({ toggleView }) => {
   const router = useRouter();
   const handleLogin = async () => {
     try {
-      if (password === "" || email === "") {
-        showToast("All fields are required!!");
-      }
       setLoading(true);
       const response = await axios.post(`${url}/api/user/login`, {
         email,
@@ -44,7 +41,7 @@ const Login = ({ toggleView }) => {
         }
       }
     } catch (error) {
-      showToast("An error occurred during login", error);
+      showToast(error?.response?.data?.error, "error");
     } finally {
       setLoading(false);
     }
