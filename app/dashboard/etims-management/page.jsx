@@ -348,27 +348,27 @@ const AddTransactionsPage = () => {
               value={trdInvcNo}
               onchange={(e) => setTrdInvcNo(e.target.value)}
               type={"number"}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Original Invoice Number"}
               type={"number"}
               value={orgInvcNo}
               onchange={(e) => setOrgInvcNo(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
               required
             />
             <CustomInput
               name={"Customer PIN"}
               value={custTin}
               onchange={(e) => setCustTin(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Customer Name"}
               value={custNm}
               onchange={(e) => setCustNm(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomSelect
               name={"Receipt Type Code"}
@@ -376,7 +376,7 @@ const AddTransactionsPage = () => {
               placeholder="Select reciept type code"
               options={recieptTypeOptions}
               onChange={(value) => setRcptTyCd(value)}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
             <CustomSelect
               name={"Payment Type Code"}
@@ -384,7 +384,7 @@ const AddTransactionsPage = () => {
               placeholder="Select payment type code"
               options={paymentTypeOptions}
               onChange={(value) => setPmtTyCd(value)}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
             <CustomSelect
               name={"Invoice Status Code"}
@@ -392,14 +392,14 @@ const AddTransactionsPage = () => {
               placeholder="Select invoice status code"
               options={invoiceStatusOptions}
               onChange={(value) => setSalesSttsCd(value)}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
             <CustomInput
               name={"Validated Date"}
               required
               value={cfmDt}
               onchange={(e) => setCfmDt(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
               type={"date"}
             />
             <CustomInput
@@ -407,7 +407,7 @@ const AddTransactionsPage = () => {
               value={salesDt}
               onchange={(e) => setSalesDt(e.target.value)}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
               type={"date"}
             />
             <CustomInput
@@ -415,34 +415,34 @@ const AddTransactionsPage = () => {
               value={stockRlsDt}
               onchange={(e) => setStockRlsDt(e.target.value)}
               type={"date"}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Cancel Requested Date"}
               value={cnclReqDt}
               onchange={(e) => setCnclReqDt(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
               type={"date"}
             />
             <CustomInput
               name={"Cancel  Date"}
               value={cnclDt}
               onchange={(e) => setCnclDt(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
               type={"date"}
             />
             <CustomInput
               name={"Credit Note  Date"}
               value={rfdDt}
               onchange={(e) => setRfdDt(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
               type={"date"}
             />
             <CustomInput
               name={"Credit Note  Reason Code"}
               value={rfdRsnCd}
               onchange={(e) => setRfdRsnCd(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Total Item Count"}
@@ -450,7 +450,7 @@ const AddTransactionsPage = () => {
               type={"number"}
               disabled
               required
-              className={"h-[40px]  w-[500px] border rounded-md p-2"}
+              className={"h-[40px]  w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Taxable Amount A"}
@@ -459,7 +459,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxblAmtA(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Taxable Amount B"}
@@ -468,7 +468,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxblAmtB(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Taxable Amount C"}
@@ -477,7 +477,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxblAmtC(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               name={"Taxable Amount D"}
@@ -486,7 +486,7 @@ const AddTransactionsPage = () => {
               type={"number"}
               required
               disabled
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               disabled
@@ -495,7 +495,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxblAmtE(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Tax Rate A"}
@@ -504,7 +504,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxRtA(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               name={"Tax Rate B"}
@@ -513,7 +513,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxRtB(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               name={"Tax Rate C"}
@@ -522,7 +522,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxRtC(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               disabled
@@ -531,7 +531,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxRtD(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               disabled
@@ -540,7 +540,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxRtE(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               disabled
@@ -549,7 +549,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxAmtA(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Tax Amount B"}
@@ -558,7 +558,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxAmtB(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Tax Amount C"}
@@ -567,7 +567,7 @@ const AddTransactionsPage = () => {
               type={"number"}
               required
               disabled
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Tax Amount D"}
@@ -576,7 +576,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxAmtD(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               name={"Tax Amount E"}
@@ -585,7 +585,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxAmtE(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />{" "}
             <CustomInput
               name={"Total Taxable Amount"}
@@ -594,7 +594,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTotTaxblAmt(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />{" "}
             <CustomInput
               name={"Total Tax Amount"}
@@ -603,7 +603,7 @@ const AddTransactionsPage = () => {
               type={"number"}
               disabled
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               name={"Total  Amount"}
@@ -612,7 +612,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTotAmt(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomSelect
               required
@@ -620,11 +620,11 @@ const AddTransactionsPage = () => {
               placeholder="Yes or No?"
               options={purchaseOptions}
               onChange={(value) => setPrchrAcptcYn(value)}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
             <CustomInput
               name={"Remark"}
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
               value={remark}
               onchange={(e) => setRemark(e.target.value)}
             />
@@ -633,28 +633,28 @@ const AddTransactionsPage = () => {
               value={regrId}
               onchange={(e) => setRegrId(e.target.value)}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Registration Name"}
               value={regrNm}
               onchange={(e) => setRegrNm(e.target.value)}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Modifier ID"}
               value={modrId}
               onchange={(e) => setModrId(e.target.value)}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Modifier Name"}
               value={modrNm}
               onchange={(e) => setModrNm(e.target.value)}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
           </div>
           <p className="flex justify-center text-[20px] mt-2 underline">
@@ -665,13 +665,13 @@ const AddTransactionsPage = () => {
               name={"Customer PIN"}
               value={receiptCustTin}
               onchange={(e) => setReceiptCustTin(e.target.value)}
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />{" "}
             <CustomInput
               name={"Customer Mobile Number"}
               value={receiptCustMblNo}
               onchange={(e) => setReceiptCustMblNo(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />{" "}
             <CustomInput
               name={"Receipt Published Date"}
@@ -679,31 +679,31 @@ const AddTransactionsPage = () => {
               onchange={(e) => setRcptPbctDt(e.target.value)}
               required
               type={"date"}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />{" "}
             <CustomInput
               name={"Trand Name"}
               value={trdeNm}
               onchange={(e) => setTrdeNm(e.target.value)}
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               name={"Address"}
               value={adrs}
               onchange={(e) => setAdrs(e.target.value)}
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               name={"Top Message"}
               value={topMsg}
               onchange={(e) => setTopMsg(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Bottom Message"}
               value={btmMsg}
               onchange={(e) => setBtmMsg(e.target.value)}
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomSelect
               required
@@ -711,7 +711,7 @@ const AddTransactionsPage = () => {
               options={purchaseOptions}
               placeholder={"Select purchase accept"}
               onChange={(value) => setReceiptPrchrAcptcYn(value)}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
           </div>
           <p className="flex justify-center text-[20px] mt-2 underline">
@@ -723,14 +723,14 @@ const AddTransactionsPage = () => {
               name={"Item  Code"}
               value={itemCd}
               onchange={(e) => setItemCd(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomSelect
               name={"Item Classification Code"}
               required
               placeholder={"Select item class code"}
               options={comoditiesOptions}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
               onChange={(value) => setItemClsCd(value)}
             />
             <CustomInput
@@ -738,20 +738,20 @@ const AddTransactionsPage = () => {
               value={itemNm}
               onchange={(e) => setItemNm(e.target.value)}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />{" "}
             <CustomInput
               name={"Barcode"}
               value={bcd}
               onchange={(e) => setBcd(e.target.value)}
-              className={"h-[40px]  w-[500px] border rounded-md p-2"}
+              className={"h-[40px]  w-[30vw] border rounded-md p-2"}
             />{" "}
             <CustomSelect
               name={"Packaging Unit Code"}
               required
               placeholder={"Select packaging unit"}
               options={packagingUnitOptions}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
               onChange={(value) => setPkgUnitCd(value)}
             />
             <CustomInput
@@ -760,14 +760,14 @@ const AddTransactionsPage = () => {
               onchange={(e) => setPkg(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomSelect
               name={"Quantity Unit Code"}
               required
               placeholder={"Select quantity code"}
               options={quantityUnitOptions}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
               onChange={(value) => setQtyUnitCd(value)}
             />
             <CustomInput
@@ -776,7 +776,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setQty(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomInput
               name={"Unit Price"}
@@ -784,7 +784,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setPrc(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Supply Amount"}
@@ -792,7 +792,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setSplyAmt(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Discount Rate"}
@@ -800,7 +800,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setDcRt(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Discount Amount"}
@@ -808,40 +808,40 @@ const AddTransactionsPage = () => {
               onchange={(e) => setDcAmt(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Insurance Company Code"}
               value={isrccCd}
               onchange={(e) => setIsrccCd(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Insurance Company Name"}
               value={isrccNm}
               onchange={(e) => setIsrccNm(e.target.value)}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Insurance  Rate"}
               value={isrcRt}
               onchange={(e) => setIsrcRt(e.target.value)}
               type={"number"}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Insurance Amount"}
               value={isrcAmt}
               onchange={(e) => setIsrcAmt(e.target.value)}
               type={"number"}
-              className={"h-[40px] w-[500px]  border rounded-md p-2"}
+              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomSelect
               name={"Taxation Type Code"}
               required={true}
               placeholder={"Select taxation type"}
               options={taxTypeOptions}
-              className={"h-[60px] w-[500px] rounded-md p-2"}
+              className={"h-[60px] w-[30vw] rounded-md p-2"}
               onChange={(value) => setTaxTyCd(value)}
             />
             <CustomInput
@@ -851,7 +851,7 @@ const AddTransactionsPage = () => {
               type={"number"}
               disabled
               required
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Tax Amount"}
@@ -860,7 +860,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTaxAmt(e.target.value)}
               required
               type={"number"}
-              className={"h-[40px] w-[500px] border rounded-md p-2"}
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Total Amount"}
@@ -869,7 +869,7 @@ const AddTransactionsPage = () => {
               onchange={(e) => setTotAmtItem(e.target.value)}
               type={"number"}
               required
-              className={"h-[40px]  w-[500px] border rounded-md p-2"}
+              className={"h-[40px]  w-[30vw] border rounded-md p-2"}
             />
           </div>
           <div className="h-auto border p-5 mt-3 rounded-md flex gap-4">
