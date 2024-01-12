@@ -5,10 +5,13 @@ import { fetchOrganizations } from "@/app/services/adminServices";
 import { formatDate } from "@/app/ui/reusableFunctions/Utils";
 const OrganizationPage = () => {
   const [organizations, setOrganizations] = useState([]);
-  const getOrganizations = async () => {
-    const { registered_organizations } = await fetchOrganizations();
+  const [loading, setLoading] = useState(false);
 
+  const getOrganizations = async () => {
+    setLoading(true);
+    const { registered_organizations } = await fetchOrganizations();
     setOrganizations(registered_organizations);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -56,7 +59,7 @@ const OrganizationPage = () => {
 
   return (
     <div className="mt-[20px]">
-      <Table dataSource={organizations} columns={columns} />
+      <Table dataSource={organizations} columns={columns} loading={loading} />
     </div>
   );
 };
