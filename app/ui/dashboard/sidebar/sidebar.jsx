@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import MenuLink from "./menuLink/menuLink";
 import {
   Md60FpsSelect,
+  MdAdminPanelSettings,
   MdArchitecture,
   MdAttachMoney,
   MdBusiness,
@@ -39,18 +40,37 @@ const Sidebar = () => {
     },
     {
       title: "ETIMS Management",
-      list: [
-        {
-          title: "Sales information",
-          path: "/dashboard/etims-management",
-          icon: <Md60FpsSelect />,
-        },
-        {
-          title: "View transactions",
-          path: "/dashboard/transactions",
-          icon: <MdAttachMoney />,
-        },
-      ],
+      list:
+        user?.role === "Superadmin"
+          ? [
+              {
+                title: "Admin Crud Ops",
+                path: "/dashboard/admin-etims-ops",
+                icon: <MdAdminPanelSettings />,
+              },
+              {
+                title: "Sales information",
+                path: "/dashboard/etims-management",
+                icon: <Md60FpsSelect />,
+              },
+              {
+                title: "View transactions",
+                path: "/dashboard/transactions",
+                icon: <MdAttachMoney />,
+              },
+            ]
+          : [
+              {
+                title: "Sales information",
+                path: "/dashboard/etims-management",
+                icon: <Md60FpsSelect />,
+              },
+              {
+                title: "View transactions",
+                path: "/dashboard/transactions",
+                icon: <MdAttachMoney />,
+              },
+            ],
     },
     {
       title: "User",

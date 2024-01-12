@@ -27,7 +27,7 @@ const Navbar = () => {
         {formattedLastSegment}
       </div>
       <div className="flex items-center gap-[20px]">
-        <div className="flex gap-[20px]">
+        <div className="flex gap-[20px] bg-white rounded-md">
           <MdNotifications size={30} />
         </div>
       </div>
