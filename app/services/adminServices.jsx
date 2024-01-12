@@ -44,13 +44,18 @@ export const fetchFamilies = async (code) => {
   return res.data;
 };
 
-export const createOrganization = async (data) => {
-  const res = await PrivateAxiosUtility.post(`/organization/create`, data);
-  return res.data;
-};
 export const fetchComodities = async (code) => {
   const res = await PrivateAxiosUtility.get(
     `/organization/fetch/comodities/${code}`
   );
+  return res.data;
+};
+export const createOrganization = async (data) => {
+  const res = await PrivateAxiosUtility.post(`/organization/create`, data);
+  return res.data;
+};
+
+export const fetchOrganizations = async () => {
+  const res = await PrivateAxiosUtility.get(`/organization/fetch`);
   return res.data;
 };
