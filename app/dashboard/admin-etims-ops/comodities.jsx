@@ -169,7 +169,7 @@ const Comodities = () => {
         showForm={showForm}
         handleCancel={() => {
           setShowForm(false);
-          getFamilies(selectedSegment);
+          getComodities(selectedClass);
         }}
       />
     </div>
