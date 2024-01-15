@@ -25,15 +25,29 @@ export const fetchTransactionsById = async (id) => {
   return res.data;
 };
 
+export const AddSegmentRequest = async (data) => {
+  const res = await PrivateAxiosUtility.post(`/organization/add/segment`, data);
+  return res.data;
+};
+
 export const fetchSegments = async () => {
   const res = await PrivateAxiosUtility.get(`/organization/fetch/segment`);
   return res.data;
 };
 
+export const AddClassRequest = async (data) => {
+  const res = await PrivateAxiosUtility.post(`/organization/add/class`, data);
+  return res.data;
+};
 export const fetchClasses = async (code) => {
   const res = await PrivateAxiosUtility.get(
     `/organization/fetch/classes/${code}`
   );
+  return res.data;
+};
+
+export const AddFamilyRequest = async (data) => {
+  const res = await PrivateAxiosUtility.post(`/organization/add/family`, data);
   return res.data;
 };
 

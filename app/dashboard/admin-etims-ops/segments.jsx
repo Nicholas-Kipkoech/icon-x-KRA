@@ -53,7 +53,13 @@ const Segments = () => {
         />
         ;
       </div>
-      <AddSegment showForm={showForm} handleCancel={() => setShowForm(false)} />
+      <AddSegment
+        showForm={showForm}
+        handleCancel={() => {
+          setShowForm(false);
+          getSegments();
+        }}
+      />
     </div>
   );
 };
