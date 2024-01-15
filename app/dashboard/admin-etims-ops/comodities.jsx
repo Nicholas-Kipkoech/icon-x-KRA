@@ -10,6 +10,7 @@ import {
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import AddFamily from "./AddFamily";
 import CustomSelect from "@/app/ui/reusableComponents/CustomSelect";
+import AddComodity from "./AddComodity";
 
 const Comodities = () => {
   const [families, setFamilies] = useState([]);
@@ -164,7 +165,7 @@ const Comodities = () => {
         />
         ;
       </div>
-      <AddFamily
+      <AddComodity
         showForm={showForm}
         handleCancel={() => {
           setShowForm(false);

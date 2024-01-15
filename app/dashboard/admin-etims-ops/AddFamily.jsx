@@ -61,7 +61,7 @@ const AddFamily = ({ showForm, handleCancel }) => {
       <Modal
         open={showForm}
         onCancel={handleCancel}
-        title="Add Family By Segment"
+        title="Add Family"
         centered
         footer
       >
