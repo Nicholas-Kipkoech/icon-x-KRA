@@ -517,7 +517,7 @@ const AddTransactionsPage = () => {
             </div>
           )}
           <p className="flex justify-center text-[20px] mt-2 underline">
-            Sales reciept information
+            Sales receipt information
           </p>
           <div className="flex flex-wrap justify-evenly border rounded p-4">
             <CustomInput
@@ -767,7 +767,7 @@ const AddTransactionsPage = () => {
             </div>
           )}
 
-          <div className="h-auto border p-5 mt-3 rounded-md flex gap-4">
+          <div className="h-auto border p-5 mt-3 rounded-md flex flex-wrap gap-4">
             {itemList.map((item, key) => (
               <div key={key} className="flex border rounded-md">
                 <div className="p-4">

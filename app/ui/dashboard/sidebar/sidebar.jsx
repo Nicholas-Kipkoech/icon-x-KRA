@@ -103,8 +103,8 @@ const Sidebar = () => {
     router.push("/");
   };
   return (
-    <div className="sticky top-0 h-[100vh] max-h-[1200px]  bg-[#d99a5b] p-[20px] ">
-      <div className="flex items-center gap-[20px] mb-[20px] bg-amber-300 h-[100px] p-[20px] rounded-md">
+    <div className="sticky top-0 h-[100vh] max-h-[1200px]  bg-[#092332] p-[20px] ">
+      <div className="flex items-center gap-[20px] mb-[20px] bg-[#cb7529] h-[100px] p-[20px] rounded-md">
         {Object.keys(user).length > 1 ? (
           <>
             <Image
@@ -130,7 +130,7 @@ const Sidebar = () => {
 
       <ul className="list-none ">
         {menuItems.map((cat) => (
-          <li key={cat.title}>
+          <li key={cat.title} className="text-white">
             <span>{cat.title}</span>
             {cat.list.map((item) => (
               <MenuLink item={item} key={item.title} />
