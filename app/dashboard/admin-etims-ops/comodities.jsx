@@ -127,18 +127,24 @@ const Comodities = () => {
         <div className="flex justify-between items-center mr-[10px]">
           <CustomSelect
             name={"Select Segment"}
+            placeholder={loading ? "Loading segments" : "Select segment"}
+            required
             options={segmentOptions}
             className={"h-[40px] w-[300px] mb-[10px]"}
             onChange={(value) => setSelectedSegment(value)}
           />
           <CustomSelect
             name={"Select Family"}
+            placeholder={loading ? "Loading families" : "Select family"}
+            required
             options={familiesOptions}
             className={"h-[40px] w-[300px] mb-[10px]"}
             onChange={(value) => setSelectedFamily(value)}
           />
           <CustomSelect
             name={"Select Class"}
+            placeholder={loading ? "Loading classes" : "Select class"}
+            required
             options={classesOptions}
             className={"h-[40px] w-[300px] mb-[10px]"}
             onChange={(value) => setSelectedClass(value)}
