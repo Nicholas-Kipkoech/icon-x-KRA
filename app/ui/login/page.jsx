@@ -36,7 +36,6 @@ const Login = ({ toggleView }) => {
         if (userData?.user.name === null || userData?.user.name === "") {
           toggleView();
         } else {
-          showToast("Loggin successfully!!");
           router.push("/dashboard");
         }
       }

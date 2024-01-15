@@ -32,28 +32,38 @@ const Signup = ({ toggleView }) => {
 
   const getSegments = async () => {
     try {
+      setLoading(true);
       const { segments } = await fetchSegments();
       console.log("Segments Response:", segments);
       setSegment(segments);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching segments:", error);
     }
   };
 
   const getFamilies = async (code) => {
     try {
+      setLoading(true);
       const { families } = await fetchFamilies(code);
       setFamily(families);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
+
       console.error("error fetching families...", error);
     }
   };
 
   const getClasses = async (code) => {
     try {
+      setLoading(true);
       const { classes } = await fetchClasses(code);
       setClasses(classes);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching classes..", error);
     }
   };
@@ -164,7 +174,7 @@ const Signup = ({ toggleView }) => {
             <Select
               className="h-[50px] w-[350px]  rounded-md"
               options={segmentOptions}
-              placeholder="Select segment..."
+              placeholder={loading ? "Loading segments" : "Select segment..."}
               defaultValue={segmentOptions[0]?.value}
               onChange={(value) => setSelectedSegment(value)}
             />
@@ -173,7 +183,7 @@ const Signup = ({ toggleView }) => {
             <label>Family of Business</label>
             <Select
               className="h-[50px] w-[350px]  rounded-md"
-              placeholder="Select family..."
+              placeholder={loading ? "Loading families" : "Select families..."}
               options={familyOptions}
               onChange={(value) => setSelectedFamily(value)}
             />
@@ -183,7 +193,7 @@ const Signup = ({ toggleView }) => {
             <Select
               className="h-[50px] w-[350px]  rounded-md"
               options={classesOptions}
-              placeholder="Select class.."
+              placeholder={loading ? "Loading classes" : "Select classes..."}
               onChange={(value) => setSelectedClass(value)}
             />
           </div>

@@ -49,11 +49,6 @@ const Sidebar = () => {
                 icon: <MdAdminPanelSettings />,
               },
               {
-                title: "Sales information",
-                path: "/dashboard/etims-management",
-                icon: <Md60FpsSelect />,
-              },
-              {
                 title: "View transactions",
                 path: "/dashboard/transactions",
                 icon: <MdAttachMoney />,
