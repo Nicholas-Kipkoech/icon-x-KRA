@@ -5,11 +5,9 @@ import { fetchFamilies, fetchSegments } from "@/app/services/adminServices";
 import Segments from "./segments";
 import Families from "./families";
 import Classes from "./classes";
+import Comodities from "./comodities";
 const EtimsAdminOps = () => {
   const [tableState, setTableState] = useState("segment");
-  const getFamilies = async () => {
-    const { families } = await fetchFamilies();
-  };
 
   const renderTable = () => {
     switch (tableState) {
@@ -19,6 +17,8 @@ const EtimsAdminOps = () => {
         return <Families />;
       case "class":
         return <Classes />;
+      case "comodity":
+        return <Comodities />;
       default:
         return null;
     }
@@ -56,6 +56,15 @@ const EtimsAdminOps = () => {
           onClick={() => setTableState("class")}
         >
           Classes
+        </div>
+        <div
+          className="h-[40px] w-[100%] flex justify-center items-center cursor-pointer"
+          style={{
+            backgroundColor: tableState === "comodity" ? "#dc9435" : "#7f7e7d",
+          }}
+          onClick={() => setTableState("comodity")}
+        >
+          Comodities
         </div>
       </div>
       <div>{renderTable()}</div>

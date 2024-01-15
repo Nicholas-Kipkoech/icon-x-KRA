@@ -64,6 +64,7 @@ export const fetchComodities = async (code) => {
   );
   return res.data;
 };
+
 export const createOrganization = async (data) => {
   const res = await PrivateAxiosUtility.post(`/organization/create`, data);
   return res.data;
