@@ -127,6 +127,12 @@ const AddTransactionsPage = () => {
   const [totAmtItem, setTotAmtItem] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  // user operations
+
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
+
   // Function to handle adding a new item
   const handleAddItem = () => {
     const newItem = {
@@ -334,8 +340,10 @@ const AddTransactionsPage = () => {
     setTaxblAmt(taxableAmount);
   }, [taxTyCd, qty, prc]);
 
+  //className="flex flex-wrap justify-evenly border rounded p-4"
+
   return (
-    <div>
+    <div className="h-[100vh]">
       <div>
         <>
           <p className="text-[30px] flex justify-center p-[10px]">
@@ -358,32 +366,12 @@ const AddTransactionsPage = () => {
               className={"h-[40px] w-[30vw] border rounded-md p-2"}
               required
             />
-            <CustomInput
-              name={"Customer PIN"}
-              value={custTin}
-              onchange={(e) => setCustTin(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Customer Name"}
-              value={custNm}
-              onchange={(e) => setCustNm(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
             <CustomSelect
               name={"Receipt Type Code"}
-              required={true}
+              required
               placeholder="Select reciept type code"
               options={recieptTypeOptions}
               onChange={(value) => setRcptTyCd(value)}
-              className={"h-[60px] w-[30vw] rounded-md p-2"}
-            />
-            <CustomSelect
-              name={"Payment Type Code"}
-              required={false}
-              placeholder="Select payment type code"
-              options={paymentTypeOptions}
-              onChange={(value) => setPmtTyCd(value)}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
             <CustomSelect
@@ -411,208 +399,12 @@ const AddTransactionsPage = () => {
               type={"date"}
             />
             <CustomInput
-              name={"Stock Released Date"}
-              value={stockRlsDt}
-              onchange={(e) => setStockRlsDt(e.target.value)}
-              type={"date"}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Cancel Requested Date"}
-              value={cnclReqDt}
-              onchange={(e) => setCnclReqDt(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-              type={"date"}
-            />
-            <CustomInput
-              name={"Cancel  Date"}
-              value={cnclDt}
-              onchange={(e) => setCnclDt(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-              type={"date"}
-            />
-            <CustomInput
-              name={"Credit Note  Date"}
-              value={rfdDt}
-              onchange={(e) => setRfdDt(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-              type={"date"}
-            />
-            <CustomInput
-              name={"Credit Note  Reason Code"}
-              value={rfdRsnCd}
-              onchange={(e) => setRfdRsnCd(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
               name={"Total Item Count"}
               value={itemList.length}
               type={"number"}
               disabled
               required
               className={"h-[40px]  w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Taxable Amount A"}
-              value={taxblAmtA}
-              disabled
-              onchange={(e) => setTaxblAmtA(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Taxable Amount B"}
-              value={taxblAmtB}
-              disabled
-              onchange={(e) => setTaxblAmtB(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Taxable Amount C"}
-              disabled
-              value={taxblAmtC}
-              onchange={(e) => setTaxblAmtC(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Taxable Amount D"}
-              value={taxblAmtD}
-              onchange={(e) => setTaxblAmtD(e.target.value)}
-              type={"number"}
-              required
-              disabled
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              disabled
-              name={"Taxable Amount E"}
-              value={taxblAmtE}
-              onchange={(e) => setTaxblAmtE(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Tax Rate A"}
-              disabled
-              value={taxRtA}
-              onchange={(e) => setTaxRtA(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Tax Rate B"}
-              disabled
-              value={taxRtB}
-              onchange={(e) => setTaxRtB(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Tax Rate C"}
-              disabled
-              value={taxRtC}
-              onchange={(e) => setTaxRtC(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              disabled
-              name={"Tax Rate D"}
-              value={taxRtD}
-              onchange={(e) => setTaxRtD(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
-            <CustomInput
-              disabled
-              name={"Tax Rate E"}
-              value={taxRtE}
-              onchange={(e) => setTaxRtE(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              disabled
-              name={"Tax Amount A"}
-              value={taxAmtA}
-              onchange={(e) => setTaxAmtA(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Tax Amount B"}
-              disabled
-              value={taxAmtB}
-              onchange={(e) => setTaxAmtB(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Tax Amount C"}
-              value={taxAmtC}
-              onchange={(e) => setTaxAmtC(e.target.value)}
-              type={"number"}
-              required
-              disabled
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Tax Amount D"}
-              value={taxAmtD}
-              disabled
-              onchange={(e) => setTaxAmtD(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Tax Amount E"}
-              value={taxAmtE}
-              disabled
-              onchange={(e) => setTaxAmtE(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />{" "}
-            <CustomInput
-              name={"Total Taxable Amount"}
-              value={totTaxblAmt}
-              disabled
-              onchange={(e) => setTotTaxblAmt(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />{" "}
-            <CustomInput
-              name={"Total Tax Amount"}
-              value={totTaxAmt}
-              onchange={(e) => setTotTaxAmt(e.target.value)}
-              type={"number"}
-              disabled
-              required
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Total  Amount"}
-              value={totAmt}
-              disabled
-              onchange={(e) => setTotAmt(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
             />
             <CustomSelect
               required
@@ -621,12 +413,6 @@ const AddTransactionsPage = () => {
               options={purchaseOptions}
               onChange={(value) => setPrchrAcptcYn(value)}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Remark"}
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-              value={remark}
-              onchange={(e) => setRemark(e.target.value)}
             />
             <CustomInput
               name={"Registration ID"}
@@ -657,22 +443,83 @@ const AddTransactionsPage = () => {
               className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
           </div>
+          <div className="flex gap-2 p-[10px]">
+            <input
+              type="checkbox"
+              checked={show1}
+              onClick={() => setShow1((prev) => !prev)}
+            />
+            <p>{show1 ? "Hide optional fields" : "Show optional fields"}</p>
+          </div>
+          {show1 && (
+            <div className="flex flex-wrap justify-evenly border rounded p-4">
+              <>
+                <CustomInput
+                  name={"Customer PIN"}
+                  value={custTin}
+                  onchange={(e) => setCustTin(e.target.value)}
+                  className={"h-[40px] w-[30vw] border rounded-md p-2"}
+                />
+                <CustomInput
+                  name={"Customer Name"}
+                  value={custNm}
+                  onchange={(e) => setCustNm(e.target.value)}
+                  className={"h-[40px] w-[30vw] border rounded-md p-2"}
+                />
+                <CustomSelect
+                  name={"Payment Type Code"}
+                  placeholder="Select payment type code"
+                  options={paymentTypeOptions}
+                  onChange={(value) => setPmtTyCd(value)}
+                  className={"h-[60px] w-[30vw] rounded-md p-2"}
+                />
+                <CustomInput
+                  name={"Stock Released Date"}
+                  value={stockRlsDt}
+                  onchange={(e) => setStockRlsDt(e.target.value)}
+                  type={"date"}
+                  className={"h-[40px] w-[30vw] border rounded-md p-2"}
+                />
+                <CustomInput
+                  name={"Cancel Requested Date"}
+                  value={cnclReqDt}
+                  onchange={(e) => setCnclReqDt(e.target.value)}
+                  className={"h-[40px] w-[30vw] border rounded-md p-2"}
+                  type={"date"}
+                />
+                <CustomInput
+                  name={"Cancel  Date"}
+                  value={cnclDt}
+                  onchange={(e) => setCnclDt(e.target.value)}
+                  className={"h-[40px] w-[30vw] border rounded-md p-2"}
+                  type={"date"}
+                />
+                <CustomInput
+                  name={"Credit Note  Date"}
+                  value={rfdDt}
+                  onchange={(e) => setRfdDt(e.target.value)}
+                  className={"h-[40px] w-[30vw] border rounded-md p-2"}
+                  type={"date"}
+                />
+                <CustomInput
+                  name={"Credit Note  Reason Code"}
+                  value={rfdRsnCd}
+                  onchange={(e) => setRfdRsnCd(e.target.value)}
+                  className={"h-[40px] w-[30vw] border rounded-md p-2"}
+                />
+                <CustomInput
+                  name={"Remark"}
+                  className={"h-[40px] w-[30vw]  border rounded-md p-2"}
+                  value={remark}
+                  onchange={(e) => setRemark(e.target.value)}
+                />
+              </>
+            </div>
+          )}
           <p className="flex justify-center text-[20px] mt-2 underline">
             Sales reciept information
           </p>
           <div className="flex flex-wrap justify-evenly border rounded p-4">
-            <CustomInput
-              name={"Customer PIN"}
-              value={receiptCustTin}
-              onchange={(e) => setReceiptCustTin(e.target.value)}
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />{" "}
-            <CustomInput
-              name={"Customer Mobile Number"}
-              value={receiptCustMblNo}
-              onchange={(e) => setReceiptCustMblNo(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />{" "}
             <CustomInput
               name={"Receipt Published Date"}
               value={rcptPbctDt}
@@ -681,30 +528,6 @@ const AddTransactionsPage = () => {
               type={"date"}
               className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />{" "}
-            <CustomInput
-              name={"Trand Name"}
-              value={trdeNm}
-              onchange={(e) => setTrdeNm(e.target.value)}
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Address"}
-              value={adrs}
-              onchange={(e) => setAdrs(e.target.value)}
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Top Message"}
-              value={topMsg}
-              onchange={(e) => setTopMsg(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Bottom Message"}
-              value={btmMsg}
-              onchange={(e) => setBtmMsg(e.target.value)}
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
             <CustomSelect
               required
               name={"Purchase Accept Y/N"}
@@ -714,17 +537,64 @@ const AddTransactionsPage = () => {
               className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
           </div>
+          <div className="flex gap-[10px] p-5">
+            <input
+              type="checkbox"
+              checked={show2}
+              onClick={() => setShow2((prev) => !prev)}
+            />
+            <p>
+              {show2
+                ? "Hide reciept optional fields"
+                : "Show reciept optional fields"}
+            </p>
+          </div>
+          {show2 && (
+            <div className="flex flex-wrap justify-evenly border rounded p-4">
+              <CustomInput
+                name={"Customer PIN"}
+                value={receiptCustTin}
+                onchange={(e) => setReceiptCustTin(e.target.value)}
+                className={"h-[40px] w-[30vw]  border rounded-md p-2"}
+              />{" "}
+              <CustomInput
+                name={"Customer Mobile Number"}
+                value={receiptCustMblNo}
+                onchange={(e) => setReceiptCustMblNo(e.target.value)}
+                className={"h-[40px] w-[30vw] border rounded-md p-2"}
+              />{" "}
+              <CustomInput
+                name={"Trand Name"}
+                value={trdeNm}
+                onchange={(e) => setTrdeNm(e.target.value)}
+                className={"h-[40px] w-[30vw]  border rounded-md p-2"}
+              />
+              <CustomInput
+                name={"Address"}
+                value={adrs}
+                onchange={(e) => setAdrs(e.target.value)}
+                className={"h-[40px] w-[30vw]  border rounded-md p-2"}
+              />
+              <CustomInput
+                name={"Top Message"}
+                value={topMsg}
+                onchange={(e) => setTopMsg(e.target.value)}
+                className={"h-[40px] w-[30vw] border rounded-md p-2"}
+              />
+              <CustomInput
+                name={"Bottom Message"}
+                value={btmMsg}
+                onchange={(e) => setBtmMsg(e.target.value)}
+                className={"h-[40px] w-[30vw]  border rounded-md p-2"}
+              />
+            </div>
+          )}
+
           <p className="flex justify-center text-[20px] mt-2 underline">
             Sale item information
           </p>
 
           <div className="flex flex-wrap justify-evenly border rounded p-4">
-            <CustomInput
-              name={"Item  Code"}
-              value={itemCd}
-              onchange={(e) => setItemCd(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
             <CustomSelect
               name={"Item Classification Code"}
               required
@@ -740,12 +610,6 @@ const AddTransactionsPage = () => {
               required
               className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />{" "}
-            <CustomInput
-              name={"Barcode"}
-              value={bcd}
-              onchange={(e) => setBcd(e.target.value)}
-              className={"h-[40px]  w-[30vw] border rounded-md p-2"}
-            />{" "}
             <CustomSelect
               name={"Packaging Unit Code"}
               required
@@ -754,14 +618,6 @@ const AddTransactionsPage = () => {
               className={"h-[60px] w-[30vw] rounded-md p-2"}
               onChange={(value) => setPkgUnitCd(value)}
             />
-            <CustomInput
-              name={"Package"}
-              value={pkg}
-              onchange={(e) => setPkg(e.target.value)}
-              type={"number"}
-              required
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
             <CustomSelect
               name={"Quantity Unit Code"}
               required
@@ -769,6 +625,14 @@ const AddTransactionsPage = () => {
               options={quantityUnitOptions}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
               onChange={(value) => setQtyUnitCd(value)}
+            />
+            <CustomInput
+              name={"Package"}
+              value={pkg}
+              onchange={(e) => setPkg(e.target.value)}
+              type={"number"}
+              required
+              className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
             <CustomInput
               name={"Quantity"}
@@ -810,32 +674,6 @@ const AddTransactionsPage = () => {
               required
               className={"h-[40px] w-[30vw] border rounded-md p-2"}
             />
-            <CustomInput
-              name={"Insurance Company Code"}
-              value={isrccCd}
-              onchange={(e) => setIsrccCd(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Insurance Company Name"}
-              value={isrccNm}
-              onchange={(e) => setIsrccNm(e.target.value)}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Insurance  Rate"}
-              value={isrcRt}
-              onchange={(e) => setIsrcRt(e.target.value)}
-              type={"number"}
-              className={"h-[40px] w-[30vw] border rounded-md p-2"}
-            />
-            <CustomInput
-              name={"Insurance Amount"}
-              value={isrcAmt}
-              onchange={(e) => setIsrcAmt(e.target.value)}
-              type={"number"}
-              className={"h-[40px] w-[30vw]  border rounded-md p-2"}
-            />
             <CustomSelect
               name={"Taxation Type Code"}
               required={true}
@@ -872,11 +710,68 @@ const AddTransactionsPage = () => {
               className={"h-[40px]  w-[30vw] border rounded-md p-2"}
             />
           </div>
+
+          <div className="flex gap-[10px] p-5">
+            <input
+              type="checkbox"
+              checked={show3}
+              onClick={() => setShow3((prev) => !prev)}
+            />
+            <p>
+              {show3
+                ? "Hide item optional fields"
+                : "Show item optional fields"}
+            </p>
+          </div>
+
+          {show3 && (
+            <div className="flex flex-wrap justify-evenly border rounded p-4">
+              <CustomInput
+                name={"Barcode"}
+                value={bcd}
+                onchange={(e) => setBcd(e.target.value)}
+                className={"h-[40px]  w-[30vw] border rounded-md p-2"}
+              />{" "}
+              <CustomInput
+                name={"Item  Code"}
+                value={itemCd}
+                onchange={(e) => setItemCd(e.target.value)}
+                className={"h-[40px] w-[30vw] border rounded-md p-2"}
+              />
+              <CustomInput
+                name={"Insurance Company Code"}
+                value={isrccCd}
+                onchange={(e) => setIsrccCd(e.target.value)}
+                className={"h-[40px] w-[30vw] border rounded-md p-2"}
+              />
+              <CustomInput
+                name={"Insurance Company Name"}
+                value={isrccNm}
+                onchange={(e) => setIsrccNm(e.target.value)}
+                className={"h-[40px] w-[30vw] border rounded-md p-2"}
+              />
+              <CustomInput
+                name={"Insurance  Rate"}
+                value={isrcRt}
+                onchange={(e) => setIsrcRt(e.target.value)}
+                type={"number"}
+                className={"h-[40px] w-[30vw] border rounded-md p-2"}
+              />
+              <CustomInput
+                name={"Insurance Amount"}
+                value={isrcAmt}
+                onchange={(e) => setIsrcAmt(e.target.value)}
+                type={"number"}
+                className={"h-[40px] w-[30vw]  border rounded-md p-2"}
+              />
+            </div>
+          )}
+
           <div className="h-auto border p-5 mt-3 rounded-md flex gap-4">
             {itemList.map((item, key) => (
               <div key={key} className="flex border rounded-md">
                 <div className="p-4">
-                  <p>{item?.itemNm}</p>
+                  <p>Name: {item?.itemNm}</p>
                   <p>KES {item?.prc}</p>
                   <p>Tax Code {item?.taxTyCd ? item.taxTyCd : "Null"}</p>
                 </div>
