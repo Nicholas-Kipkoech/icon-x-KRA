@@ -15,6 +15,7 @@ import { ENDPOINT } from "@/app/services/axiosUtility";
 
 const Signup = ({ toggleView }) => {
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [segment, setSegment] = useState([]);
   const [family, setFamily] = useState([]);
   const [classes, setClasses] = useState([]);
@@ -116,8 +117,7 @@ const Signup = ({ toggleView }) => {
 
   const handleCreateOrg = async () => {
     try {
-      console.log(organizationName);
-      setLoading(true);
+      setSubmitting(true);
       await axios.post(`${ENDPOINT}/organization/create`, {
         organization_name: organizationName,
         organization_email: organizationEmail,
@@ -126,14 +126,14 @@ const Signup = ({ toggleView }) => {
         business_segment: selectedSegment,
         business_family: selectedFamily,
       });
-      setLoading(false);
+      setSubmitting(false);
       showToast(
         "Account created successfully credentials has been sent to your email!"
       );
       toggleView();
     } catch (error) {
       showToast(error.response.data.error, "error");
-      setLoading(false);
+      setSubmitting(false);
       console.error("error", error.response.data.error);
     }
   };
@@ -202,14 +202,14 @@ const Signup = ({ toggleView }) => {
           <CustomButton
             name={"Cancel"}
             type={`button`}
-            className={`h-[50px] w-[350px] rounded-md bg-[grey] font-[600] text-white text-[20px]`}
+            className={`h-[50px] w-[350px] rounded-md bg-[#094b6a] font-[600] text-white text-[20px]`}
             onClick={toggleView}
           />
           <CustomButton
-            name={loading ? `Creating...` : `Create`}
+            name={submitting ? `Creating...` : `Create`}
             type={`button`}
             onClick={handleCreateOrg}
-            className={`h-[50px] w-[350px] rounded-md bg-orange-300 font-[600] text-[#1c2536] text-[20px]`}
+            className={`h-[50px] w-[350px] rounded-md bg-[#cb7529] font-[600] text-[#1c2536] text-[20px]`}
           />
         </div>
       </form>

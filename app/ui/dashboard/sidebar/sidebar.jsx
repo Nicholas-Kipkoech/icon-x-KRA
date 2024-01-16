@@ -83,9 +83,9 @@ const Sidebar = () => {
       ],
     },
     {
-      title: "Company Settings",
+      title: user?.role === "Superadmin" ? "Company Settings" : "",
       list:
-        user.role === "Superadmin"
+        user?.role === "Superadmin"
           ? [
               {
                 title: "Enrolled Organizations",
