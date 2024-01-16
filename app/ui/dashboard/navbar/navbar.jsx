@@ -22,7 +22,7 @@ const Navbar = () => {
   const formattedLastSegment = formatPathSegment(lastSegment);
 
   return (
-    <div className="p-[20px] rounded-[10px] flex items-center justify-between bg-[#5e5f69]">
+    <div className="p-[20px] rounded-[10px] flex items-center justify-between bg-[#094b6a]">
       <div className="capitalize text-white font-bold">
         {formattedLastSegment}
       </div>

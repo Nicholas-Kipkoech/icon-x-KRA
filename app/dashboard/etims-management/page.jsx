@@ -788,7 +788,7 @@ const AddTransactionsPage = () => {
             <CustomButton
               name={itemList.length > 0 ? "Add another item" : "Add item"}
               className={
-                "bg-[#6969df] p-3 mt-3 h-[50px] text-white font-bold rounded-md w-[200px] mb-5"
+                "bg-[#08415c] p-3 mt-3 h-[50px] text-white font-bold rounded-md w-[200px] mb-5"
               }
               onClick={handleAddItem}
             />
@@ -798,12 +798,13 @@ const AddTransactionsPage = () => {
       <div className="flex justify-center gap-10">
         <CustomButton
           name={"Cancel"}
-          className={"bg-[#ff1414] text-white p-3 w-[200px] rounded-md"}
+          className={"bg-[#094b6a] text-white p-3 w-[200px] rounded-md"}
         />
         <CustomButton
-          name={loading ? "Saving Sale Info" : "Add Sale Info"}
+          name={loading ? "Submitting to ETIMS" : "Submit to ETIMS"}
           onClick={handleSubmit}
-          className={"bg-[#bea54c] text-white p-3 w-[200px] rounded-md"}
+          disabled={loading}
+          className={"bg-[#cb7529] text-white p-3 w-[200px] rounded-md"}
         />
       </div>
     </div>
