@@ -4,6 +4,10 @@ export const updateUser = async (data) => {
   const res = await PrivateAxiosUtility.patch(`/user/update`, data);
   return res?.data;
 };
+export const fetchUsers = async () => {
+  const res = await PrivateAxiosUtility.get(`/user/users`);
+  return res?.data;
+};
 
 export const fetchTransactions = async () => {
   const res = await PrivateAxiosUtility.get(`/etims/fetch-transactions`);
