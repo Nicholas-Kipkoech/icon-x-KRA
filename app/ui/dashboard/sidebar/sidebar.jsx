@@ -9,6 +9,7 @@ import {
   MdBusiness,
   MdDashboard,
   MdHelpCenter,
+  MdList,
   MdLogout,
   MdOutlineSettings,
   MdSupervisedUserCircle,
@@ -36,13 +37,24 @@ const Sidebar = () => {
           path: "/dashboard",
           icon: <MdDashboard />,
         },
+        {
+          title: "Users",
+          path: "/dashboard/users",
+          icon: <MdList />,
+        },
       ],
     },
+
     {
       title: "ETIMS Management",
       list:
         user?.role === "Superadmin"
           ? [
+              {
+                title: "API Testing",
+                path: "/dashboard/testing",
+                icon: <MdArchitecture />,
+              },
               {
                 title: "Admin Crud Ops",
                 path: "/dashboard/admin-etims-ops",
