@@ -90,7 +90,7 @@ const Login = ({ toggleView }) => {
           <CustomButton
             name={loading ? `Logging in..` : `Login`}
             type={`button`}
-            className={`h-[60px] w-[600px] rounded-md bg-[#092332] font-[600] text-[white] text-[20px]`}
+            className={`h-[60px] w-[600px] rounded-md bg-[#cb7529] font-[600] text-[white] text-[20px]`}
             onClick={handleLogin}
             disabled={loading}
           />

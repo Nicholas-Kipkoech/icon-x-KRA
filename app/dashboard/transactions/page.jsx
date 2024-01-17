@@ -27,9 +27,6 @@ const Transactions = () => {
       title: "Transaction ID",
       dataIndex: "transactionID",
       key: "transactionID",
-      render: (_, item) => (
-        <Link href={`transactions/${item?._id}`}>{item.transactionID}</Link>
-      ),
     },
     {
       title: "Trader No",
@@ -59,6 +56,9 @@ const Transactions = () => {
       title: "Transaction ID",
       dataIndex: "transactionID",
       key: "transactionID",
+      render: (_, item) => (
+        <Link href={`transactions/${item?._id}`}>{item.transactionID}</Link>
+      ),
     },
     {
       title: "Internal Data",

@@ -209,7 +209,7 @@ const Signup = ({ toggleView }) => {
             name={submitting ? `Creating...` : `Create`}
             type={`button`}
             onClick={handleCreateOrg}
-            className={`h-[50px] w-[350px] rounded-md bg-[#cb7529] font-[600] text-[#1c2536] text-[20px]`}
+            className={`h-[50px] w-[350px] rounded-md bg-[#cb7529] font-[600] text-[white] text-[20px]`}
           />
         </div>
       </form>

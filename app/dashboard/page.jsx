@@ -8,6 +8,8 @@ import {
 } from "../services/adminServices";
 import { Spin } from "antd";
 import { jwtDecode } from "jwt-decode";
+import Link from "next/link";
+
 const Dashboard = () => {
   const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
@@ -53,12 +55,14 @@ const Dashboard = () => {
     getUsers();
   }, []);
 
-  const AdminCard = ({ name, count }) => {
+  const AdminCard = ({ name, count, to }) => {
     return (
-      <div className="h-[10rem] border w-[300px] rounded-md border-cyan-800 items-center text-white flex flex-col justify-center bg-[#c47129]">
-        <p className="text-[75px] text-[#092332]">{count}</p>
-        <p className="font-[sans-serif] text-[20px]">{name}</p>
-      </div>
+      <Link href={`/dashboard/${to}`}>
+        <div className="h-[10rem] border w-[300px] rounded-md border-cyan-800 items-center text-white flex flex-col justify-center bg-[#c47129]">
+          <p className="text-[75px] text-[#092332]">{count}</p>
+          <p className="font-[sans-serif] text-[20px]">{name}</p>
+        </div>
+      </Link>
     );
   };
 
@@ -69,16 +73,19 @@ const Dashboard = () => {
           <AdminCard
             count={userLoading ? <Spin spinning={userLoading} /> : users.length}
             name={"Enrolled Users"}
+            to={"users"}
           />
           <AdminCard
             count={orgsLoading ? <Spin spinning={orgsLoading} /> : orgs.length}
             name={"Registered Organizations"}
+            to={"organizations"}
           />
         </>
       )}
       <AdminCard
         count={txLoading ? <Spin spinning={txLoading} /> : transactions.length}
         name={"Sales Transactions Done"}
+        to={"transactions"}
       />
     </div>
   );
