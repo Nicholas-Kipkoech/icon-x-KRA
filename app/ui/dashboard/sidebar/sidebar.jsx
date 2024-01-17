@@ -12,7 +12,6 @@ import {
   MdList,
   MdLogout,
   MdOutlineSettings,
-  MdSupervisedUserCircle,
 } from "react-icons/md";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
