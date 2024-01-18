@@ -9,9 +9,9 @@ import {
   MdBusiness,
   MdDashboard,
   MdHelpCenter,
-  MdList,
   MdLogout,
   MdOutlineSettings,
+  MdPerson,
 } from "react-icons/md";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -39,7 +39,7 @@ const Sidebar = () => {
         {
           title: "Users",
           path: "/dashboard/users",
-          icon: <MdList />,
+          icon: <MdPerson />,
         },
       ],
     },
