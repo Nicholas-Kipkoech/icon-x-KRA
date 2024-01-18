@@ -41,17 +41,15 @@ const CustomSubmitBtn = ({ onClick, submitting }) => {
   );
 };
 
-const CustomResponse = ({ response, submitting }) => {
+const CustomResponse = ({ response }) => {
   return (
     <div className="flex justify-center items-center p-5">
-      {response ? (
+      {response && (
         <div className="text-red">
           <p>Result Code: {response.resultCd}</p>
           <p>Result Message: {response.resultMsg}</p>
           <p>Result Date: {response.resultDt}</p>
         </div>
-      ) : (
-        <Spin spinning={submitting} />
       )}
     </div>
   );
@@ -90,6 +88,16 @@ const ApiTesting = () => {
   const [hide7, setHide7] = useState(false);
   const [hide8, setHide8] = useState(false);
   const [hide9, setHide9] = useState(false);
+  const [hide10, setHide10] = useState(false);
+  const [hide11, setHide11] = useState(false);
+  const [hide12, setHide12] = useState(false);
+  const [hide13, setHide13] = useState(false);
+  const [hide14, setHide14] = useState(false);
+  const [hide15, setHide15] = useState(false);
+  const [hide16, setHide16] = useState(false);
+  const [hide17, setHide17] = useState(false);
+  const [hide18, setHide18] = useState(false);
+  const [hide19, setHide19] = useState(false);
 
   const initDevice = async () => {
     try {
@@ -227,9 +235,7 @@ const ApiTesting = () => {
             </>
           )}
         </div>
-        {hide1 && (
-          <CustomResponse response={response} submitting={submitting} />
-        )}
+        {hide1 && <CustomResponse response={response} />}
       </div>
       <div className="flex">
         <div className="w-[50%] mt-2">
@@ -257,9 +263,7 @@ const ApiTesting = () => {
             </>
           )}
         </div>
-        {hide2 && (
-          <CustomResponse response={response} submitting={submitting} />
-        )}
+        {hide2 && <CustomResponse response={response} />}
       </div>
       <div className="flex">
         <div className="w-[50%] mt-2">
@@ -287,9 +291,7 @@ const ApiTesting = () => {
             </>
           )}
         </div>
-        {hide3 && (
-          <CustomResponse response={response} submitting={submitting} />
-        )}
+        {hide3 && <CustomResponse response={response} />}
       </div>
       <div className="flex">
         <div className="w-[50%] mt-2">
@@ -316,9 +318,7 @@ const ApiTesting = () => {
             </>
           )}
         </div>
-        {hide4 && (
-          <CustomResponse response={response} submitting={submitting} />
-        )}
+        {hide4 && <CustomResponse response={response} />}
       </div>
       <div className="flex">
         <div className="w-[50%] mt-2">
@@ -346,9 +346,7 @@ const ApiTesting = () => {
             </>
           )}
         </div>
-        {hide5 && (
-          <CustomResponse response={response} submitting={submitting} />
-        )}
+        {hide5 && <CustomResponse response={response} />}
       </div>
       <div className="flex">
         <div className="w-[50%] mt-2">
@@ -371,11 +369,7 @@ const ApiTesting = () => {
             </>
           )}
         </div>
-        {hide6 && (
-          <div className="flex justify-center items-center">
-            Response Here....
-          </div>
-        )}
+        {hide6 && <CustomResponse response={response} />}
       </div>
       <div className="flex">
         <div className="w-[50%] mt-2">
@@ -403,6 +397,925 @@ const ApiTesting = () => {
             Response Here....
           </div>
         )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={8}
+            name={"SAVE BRANCH USER ACCOUNT"}
+            onClick={() => setHide8((prev) => !prev)}
+          />
+          {hide8 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"User ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"User Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Password"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Address"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Contact"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Authority Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Remark"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Used / UnUsed"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide8 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={9}
+            name={"SAVE BRANCH INSURANCES"}
+            onClick={() => setHide9((prev) => !prev)}
+          />
+          {hide9 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Insurance Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Insurance Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Premium Rate"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Used / UnUsed"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Registration ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Registration Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide9 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={10}
+            name={"SAVE ITEM"}
+            onClick={() => setHide10((prev) => !prev)}
+          />
+          {hide10 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Item Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Classification Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"item Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"item Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Standard Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Origin Place Code (Nation)"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Packaging Unit"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Quantity Unit Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Taxation Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Batch Number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Barcode"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Default Unit Price"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Group1 Unit Price"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Group2 Unit Price"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Group3 Unit Price"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Group4 Unit Price"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Group5 Unit Price"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Additional Information"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Safty Quantity"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Used / UnUsed"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Modifier ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Modifier Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide10 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={11}
+            name={"SAVE ITEM COMPOSITION"}
+            onClick={() => setHide11((prev) => !prev)}
+          />
+          {hide11 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Item Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"cpst Item Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"cpst Quantity"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Registration ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Registration Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide11 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={12}
+            name={"LOOK UP IMPORTED ITEM LIST"}
+            onClick={() => setHide12((prev) => !prev)}
+          />
+          {hide12 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Last Request Date"}
+                  required
+                  type={"date"}
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide12 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={13}
+            name={"UPDATE IMPORTED ITEMS"}
+            onClick={() => setHide13((prev) => !prev)}
+          />
+          {hide13 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Task Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Declaration Date"}
+                  required
+                  type={"date"}
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Sequence"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"HS Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Classification Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Import Item Status Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide13 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={14}
+            name={"LOOK UP PURCHASES-SALES LIST"}
+            onClick={() => setHide14((prev) => !prev)}
+          />
+          {hide14 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Last Request Date"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide14 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={15}
+            name={"SAVE PURCHASES INFORMATION"}
+            onClick={() => setHide15((prev) => !prev)}
+          />
+          {hide15 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Supplier PIN"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Invoice Number"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Original Invoice Number"}
+                  required
+                  type={"number"}
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Supplier Branch ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Supplier Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Supplier Invoice Number"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Purchase Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Receipt Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Payment Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Validated Date"}
+                  required
+                  type={"date"}
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Purchase Date"}
+                  type={"date"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Warehousing Date"}
+                  type={"date"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Cancel Requested Date"}
+                  required
+                  type={"date"}
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Credit Note Date"}
+                  type={"date"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Total Item Count"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Modifier ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Modifier Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Sequence Number"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Classification Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Item Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Package"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Quantity Unit Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Quantity"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Unit Price"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Supply Price"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Discount Rate"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Discount Amount"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Taxable Amount"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Taxation Type Code"}
+                  required
+                  type={"number"}
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Tax Amount"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Total Amount"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide15 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={16}
+            name={"SAVE STOCK-MASTER INFORMATION"}
+            onClick={() => setHide16((prev) => !prev)}
+          />
+          {hide16 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Item Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Remain Quantity"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Registration ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Registration Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide16 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={17}
+            name={"LOOK UP STOCK MOVEMENT"}
+            onClick={() => setHide17((prev) => !prev)}
+          />
+          {hide17 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Last Request Date"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide17 && (
+          <div className="flex justify-center items-center">
+            Response Here....
+          </div>
+        )}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={18}
+            name={"SAVE STOCK IN/OUT"}
+            onClick={() => setHide16((prev) => !prev)}
+          />
+          {hide18 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Stored and Release Number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Original Stored Number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Registration Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Stored and Released Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Occured Date Time"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Total Item Count"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Total Supply Price"}
+                  required
+                  type={"number"}
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Total VAT"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Total Amount"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Registration Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Modifier ID"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Modifier Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Sequence"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Class Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Item Name"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Barcode"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Package unit code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Package Quantity"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Unit Quantity Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Unit Quantity"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Unit Price"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Supply Amount"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Discount Amount"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Taxable Amount"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Taxation Type Code"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />{" "}
+                <CustomInput
+                  name={"Tax Amount"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+                <CustomInput
+                  name={"Total Amount"}
+                  type={"number"}
+                  required
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide18 && <CustomResponse response={response} />}
+      </div>
+      <div className="flex">
+        <div className="w-[50%] mt-2">
+          <CustomTestButton
+            number={19}
+            name={"Look Up Product List"}
+            onClick={() => setHide19((prev) => !prev)}
+          />
+          {hide19 && (
+            <>
+              <div className="">
+                <CustomInput
+                  name={"Last Request Date"}
+                  required
+                  type={"date"}
+                  className={"h-[50px] w-auto border p-2"}
+                />
+              </div>
+              <CustomSubmitBtn submitting={submitting} />
+            </>
+          )}
+        </div>
+        {hide19 && <CustomResponse response={response} />}
       </div>
     </div>
   );
