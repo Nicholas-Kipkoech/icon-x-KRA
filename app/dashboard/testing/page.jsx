@@ -1,7 +1,7 @@
 "use client";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import CustomInput from "@/app/ui/reusableComponents/CustomInput";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { corsMiddleware } from "@/app/lib/middleware";
 import {
@@ -66,11 +66,15 @@ const CustomResponse = ({ response }) => {
   );
 };
 
-const cmcKey = "DCB937400D344917A7E194BA8FA8CFEE61CD3DE0648D433CBFDC";
-const tin = "P000597676Q";
-const bhfId = "00";
+// const cmcKey = "DCB937400D344917A7E194BA8FA8CFEE61CD3DE0648D433CBFDC";
+// const tin = "P000597676Q";
+// const bhfId = "00";
 
 const ApiTesting = () => {
+  const [cmcKey, setCmcKey] = useState("");
+  const [tin, setTin] = useState("");
+  const [bhfId, setBhfId] = useState("");
+
   //payload states here
   const [response, setResponse] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -161,7 +165,6 @@ const ApiTesting = () => {
   const [sModrNm, setSModrNm] = useState("");
   //17: LOOK UP STOCK MOVEMENT
   const [lastReqDt7, setLastReqDt7] = useState("");
-
   //18: SAVE STOCK IN/OUT
   const [sarNo, setSarNo] = useState("");
   const [orgSarNo, setOrgSarNo] = useState("");
@@ -174,10 +177,8 @@ const ApiTesting = () => {
   const [IOitemNm, setIOitemNm] = useState("");
   const [IOqty, setIOqty] = useState("");
   const [IOprc, setIOprc] = useState("");
-
   //19 : Look Up Product List
   const [lastReqDt8, setLastReqDt8] = useState("");
-
   const [hide1, setHide1] = useState(false);
   const [hide2, setHide2] = useState(false);
   const [hide3, setHide3] = useState(false);
@@ -202,18 +203,40 @@ const ApiTesting = () => {
   const initDevice = async () => {
     try {
       setSubmitting(true);
-      let formData = new FormData();
-      formData.append("tin", pin);
-      formData.append("bhfId", branchId);
-      formData.append("dvcSrlNo", devNo);
-      const data = await initializeDevice(formData);
-      setResponse(data);
+      const apiResponse = await initializeDevice({
+        tin: pin,
+        bhfId: branchId,
+        dvcSrlNo: devNo,
+      });
+      localStorage.setItem("cmcKey", apiResponse.data.info.cmcKey);
+      localStorage.setItem("bhfId", apiResponse.data.info.bhfId);
+      localStorage.setItem("tin", apiResponse.data.info.tin);
+      setResponse(apiResponse);
       setSubmitting(false);
     } catch (error) {
       setResponse(error);
       setSubmitting(false);
     }
   };
+
+  const getApiCred = () => {
+    const cmcKey = localStorage.getItem("cmcKey");
+    const tin = localStorage.getItem("tin");
+    const bhfId = localStorage.getItem("bhfId");
+    setCmcKey(cmcKey);
+    setTin(tin);
+    setBhfId(bhfId);
+  };
+  console.log({
+    cmcKey,
+    tin,
+    bhfId,
+  });
+
+  useEffect(() => {
+    getApiCred();
+  }, []);
+
   //2
   const lookupListCode = async () => {
     setSubmitting(true);
