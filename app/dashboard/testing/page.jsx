@@ -71,10 +71,6 @@ const CustomResponse = ({ response }) => {
 // const bhfId = "00";
 
 const ApiTesting = () => {
-  const [cmcKey, setCmcKey] = useState("");
-  const [tin, setTin] = useState("");
-  const [bhfId, setBhfId] = useState("");
-
   //payload states here
   const [response, setResponse] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -219,25 +215,10 @@ const ApiTesting = () => {
     }
   };
 
-  const getApiCred = () => {
-    const cmcKey = localStorage.getItem("cmcKey");
-    const tin = localStorage.getItem("tin");
-    const bhfId = localStorage.getItem("bhfId");
-    setCmcKey(cmcKey);
-    setTin(tin);
-    setBhfId(bhfId);
-  };
-  console.log({
-    cmcKey,
-    tin,
-    bhfId,
-  });
+  const cmcKey = localStorage.getItem("cmcKey");
+  const tin = localStorage.getItem("tin");
+  const bhfId = localStorage.getItem("bhfId");
 
-  useEffect(() => {
-    getApiCred();
-  }, []);
-
-  //2
   const lookupListCode = async () => {
     setSubmitting(true);
     try {
