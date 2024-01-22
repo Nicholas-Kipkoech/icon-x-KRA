@@ -219,7 +219,7 @@ const ApiTesting = () => {
   let cmcKey;
   let tin;
   let bhfId;
-  if (window !== "undefined") {
+  if (typeof window !== "undefined") {
     cmcKey = localStorage.getItem("cmcKey");
     tin = localStorage.getItem("tin");
     bhfId = localStorage.getItem("bhfId");
