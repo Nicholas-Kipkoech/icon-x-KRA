@@ -1,3 +1,9 @@
+import {
+  fetchClass,
+  fetchFamily,
+  fetchSegment,
+} from "@/app/services/adminServices";
+
 export const formatDateToCustomFormat = (selectedDate) => {
   if (selectedDate) {
     const date = new Date(selectedDate);
@@ -22,4 +28,17 @@ export const formatDate = (serverTime) => {
 
   const formattedDate = `${day}/${month}/${year}`;
   return formattedDate;
+};
+
+export const getFamily = async (code) => {
+  const { family } = await fetchFamily(code);
+  return family;
+};
+export const getClass = async (code) => {
+  const { _class } = await fetchClass(code);
+  return _class;
+};
+export const getSegment = async (code) => {
+  const { segment } = await fetchSegment(code);
+  return segment;
 };

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { fetchOrganizations } from "@/app/services/adminServices";
 import { formatDate } from "@/app/ui/reusableFunctions/Utils";
+import { Class, Family, Segment } from "../users/CrudOps";
 const OrganizationPage = () => {
   const [organizations, setOrganizations] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -38,16 +39,19 @@ const OrganizationPage = () => {
       title: "Business Segment Code",
       dataIndex: "business_segment",
       key: "business_segment",
+      render: (_, item) => <Segment segment_code={item.business_segment} />,
     },
     {
       title: "Business Family Code",
       dataIndex: "business_family",
       key: "business_family",
+      render: (_, item) => <Family family_code={item.business_family} />,
     },
     {
       title: "Business Class Code",
       dataIndex: "business_class",
       key: "business_class",
+      render: (_, item) => <Class class_code={item.business_class} />,
     },
     {
       title: "Created At",

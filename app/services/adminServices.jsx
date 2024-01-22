@@ -28,6 +28,13 @@ export const AddSegmentRequest = async (data) => {
   return res.data;
 };
 
+export const fetchSegment = async (code) => {
+  const res = await PrivateAxiosUtility.get(
+    `/organization/fetch/segment/${code}`
+  );
+  return res.data;
+};
+
 export const fetchSegments = async () => {
   const res = await PrivateAxiosUtility.get(`/organization/fetch/segment`);
   return res.data;
@@ -35,6 +42,12 @@ export const fetchSegments = async () => {
 
 export const AddClassRequest = async (data) => {
   const res = await PrivateAxiosUtility.post(`/organization/add/class`, data);
+  return res.data;
+};
+export const fetchClass = async (code) => {
+  const res = await PrivateAxiosUtility.get(
+    `/organization/fetch/class/${code}`
+  );
   return res.data;
 };
 export const fetchClasses = async (code) => {
@@ -49,9 +62,16 @@ export const AddFamilyRequest = async (data) => {
   return res.data;
 };
 
-export const fetchFamilies = async (code) => {
+export const fetchFamily = async (code) => {
   const res = await PrivateAxiosUtility.get(
     `/organization/fetch/family/${code}`
+  );
+  return res.data;
+};
+
+export const fetchFamilies = async (code) => {
+  const res = await PrivateAxiosUtility.get(
+    `/organization/fetch/families/${code}`
   );
   return res.data;
 };
