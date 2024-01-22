@@ -44,6 +44,7 @@ const CustomSubmitBtn = ({ onClick, submitting }) => {
   return (
     <CustomButton
       name={submitting ? "Submitting Info.." : "Submit to ETIMS"}
+      disabled={submitting}
       onClick={onClick}
       className={
         "mt-5 border h-[50px] w-[100%] bg-[#7b7b95] rounded-md text-white"
