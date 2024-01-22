@@ -216,9 +216,14 @@ const ApiTesting = () => {
     }
   };
 
-  const cmcKey = localStorage.getItem("cmcKey");
-  const tin = localStorage.getItem("tin");
-  const bhfId = localStorage.getItem("bhfId");
+  let cmcKey;
+  let tin;
+  let bhfId;
+  if (window !== "undefined") {
+    cmcKey = localStorage.getItem("cmcKey");
+    tin = localStorage.getItem("tin");
+    bhfId = localStorage.getItem("bhfId");
+  }
 
   const lookupListCode = async () => {
     setSubmitting(true);
