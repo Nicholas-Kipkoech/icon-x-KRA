@@ -5,6 +5,7 @@ import {
   fetchSegment,
 } from "@/app/services/adminServices";
 import React, { useEffect, useState } from "react";
+import { Spin } from "antd";
 
 export const Family = ({ family_code }) => {
   const [family, setFamily] = useState([]);
@@ -16,7 +17,11 @@ export const Family = ({ family_code }) => {
     getFamily(family_code);
   }, [family_code]);
 
-  return <div>{family?.family_name}</div>;
+  return (
+    <div>
+      {family?.family_name ? family?.family_name : <Spin delay={500} />}
+    </div>
+  );
 };
 
 export const Class = ({ class_code }) => {
@@ -29,7 +34,9 @@ export const Class = ({ class_code }) => {
     getClass(class_code);
   }, [class_code]);
 
-  return <div>{_class?.class_name}</div>;
+  return (
+    <div>{_class?.class_name ? _class?.class_name : <Spin delay={500} />}</div>
+  );
 };
 export const Segment = ({ segment_code }) => {
   const [segment, setSegment] = useState([]);
@@ -42,5 +49,9 @@ export const Segment = ({ segment_code }) => {
     getSegment(segment_code);
   }, [segment_code]);
 
-  return <div>{segment?.segment_name}</div>;
+  return (
+    <div>
+      {segment?.segment_name ? segment?.segment_name : <Spin delay={500} />}
+    </div>
+  );
 };
