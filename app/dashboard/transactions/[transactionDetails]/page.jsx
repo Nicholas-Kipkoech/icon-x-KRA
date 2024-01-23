@@ -4,6 +4,7 @@ import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { MdDataUsage } from "react-icons/md";
+import { Spin } from "antd";
 
 const TransactionDetails = ({ params: { transactionDetails } }) => {
   const router = useRouter();

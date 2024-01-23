@@ -111,16 +111,16 @@ const Transactions = () => {
           type={"button"}
           onClick={() => setToggle("requests")} // Set the toggle state to "requests" when the button is clicked
           className={`h-[40px] ${
-            toggle === "requests" ? "bg-[#91bdb3]" : "bg-[#d6a727]"
-          } p-2 justify-center items-center flex text-black font-bold border rounded-md w-[100%] `}
+            toggle === "requests" ? "bg-[#094b6a]" : "bg-[#cb7529]"
+          } p-2 justify-center items-center flex text-white font-bold border rounded-md w-[100%] `}
         />
         <CustomButton
           name={"Transactions Responses"}
           type={"button"}
           onClick={() => setToggle("responses")}
           className={`h-[40px] ${
-            toggle === "responses" ? "bg-[#91bdb3]" : "bg-[#d6a727]"
-          } p-2 justify-center items-center flex text-black font-bold border rounded-md w-[100%] `}
+            toggle === "responses" ? "bg-[#094b6a]" : "bg-[#cb7529]"
+          } p-2 justify-center items-center flex text-white font-bold border rounded-md w-[100%] `}
         />
       </div>
       <div className="mt-3">{renderTable()}</div>
