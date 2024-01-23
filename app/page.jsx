@@ -14,7 +14,7 @@ export default function Home() {
   };
   return (
     <main className="flex min-h-screen flex-row items-center justify-between p-24 bg-slate-100">
-      <Image src={EtimsPng} alt="" className="h-[600px] w-[auto]" />
+      <Image src={EtimsPng} alt="" className="h-[600px] w-[auto]" priority />
       {isLogin ? (
         <Login toggleView={toggleView} />
       ) : (

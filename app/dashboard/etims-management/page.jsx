@@ -786,6 +786,7 @@ const AddTransactionsPage = () => {
           </div>
           <div className="flex justify-end gap-2">
             <CustomButton
+              disabled={itemNm === ""}
               name={itemList.length > 0 ? "Add another item" : "Add item"}
               className={
                 "bg-[#08415c] p-3 mt-3 h-[50px] text-white font-bold rounded-md w-[200px] mb-5"
