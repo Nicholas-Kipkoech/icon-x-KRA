@@ -108,10 +108,6 @@ const Sidebar = () => {
     },
   ];
 
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    router.push("/");
-  };
   return (
     <div className="sticky top-0 h-[100vh] max-h-[1200px]  bg-[#092332] p-[20px] ">
       <div className="flex items-center gap-[20px] mb-[20px] bg-[#cb7529] h-[100px] p-[20px] rounded-md">
@@ -148,13 +144,6 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <div
-        className="flex gap-[10px] cursor-pointer p-[20px] items-center text-center justify-center border-none rounded-[10px] m-[2px]  w-[100%] text-white bg-[#a01d1d] mt-[15px]"
-        onClick={handleLogout}
-      >
-        <MdLogout size={30} />
-        Logout
-      </div>
     </div>
   );
 };

@@ -29,7 +29,7 @@ import { formatDateToCustomFormat } from "@/app/ui/reusableFunctions/Utils";
 const CustomTestButton = ({ number, name, onClick }) => {
   return (
     <div
-      className="h-[50px] bg-[#cb852a] gap-8 text-white flex justify-center items-center text-[20px] rounded-md cursor-pointer"
+      className="h-[50px] bg-[#cb852a] gap-8 text-white pl-[3rem] flex  items-center text-[20px] rounded-md cursor-pointer"
       onClick={onClick}
     >
       <p className="bg-[black] text-white rounded-[50%] h-[30px] w-[30px] flex justify-center items-center">
@@ -719,7 +719,7 @@ const ApiTesting = () => {
     }
   };
   return (
-    <div className="mt-5">
+    <div className="mt-5 pl-[2rem]">
       <div className="flex">
         <div className="w-[50%]">
           <CustomTestButton
