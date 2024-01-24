@@ -35,7 +35,9 @@ export const Class = ({ class_code }) => {
   }, [class_code]);
 
   return (
-    <div>{_class?.class_name ? _class?.class_name : <Spin delay={500} />}</div>
+    <div className="text-ellipsis overflow-hidden">
+      {_class?.class_name ? _class?.class_name : <Spin delay={500} />}
+    </div>
   );
 };
 export const Segment = ({ segment_code }) => {

@@ -2,7 +2,7 @@
 import { fetchUsers } from "@/app/services/adminServices";
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
-import { getFamily } from "@/app/ui/reusableFunctions/Utils";
+import { formatDate, getFamily } from "@/app/ui/reusableFunctions/Utils";
 import { Class, Family, Segment } from "./CrudOps";
 
 const Users = () => {
@@ -52,6 +52,14 @@ const Users = () => {
       dataIndex: "business_class",
       key: "business_class",
       render: (_, item) => <Class class_code={item.business_class} />,
+    },
+    {
+      title: "Created At",
+      dataIndex: "created_at",
+      key: "created_at",
+      render: (_, item) => (
+        <div>{formatDate(item.created_at ? item.created_at : Date.now())}</div>
+      ),
     },
   ];
 
