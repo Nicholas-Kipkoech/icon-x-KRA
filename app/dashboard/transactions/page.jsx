@@ -23,8 +23,8 @@ const Transactions = () => {
 
   const getTransactions = async () => {
     setLoading(true);
-    const { transactions, response } = await fetchTransactions();
-    setResponses(response);
+    const { transactions, etimsResponse } = await fetchTransactions();
+    setResponses(etimsResponse);
     setRequests(transactions);
     setLoading(false);
   };
@@ -89,8 +89,8 @@ const Transactions = () => {
   const Responses = [
     {
       title: "Invoice Number",
-      dataIndex: "transactionID",
-      key: "transactionID",
+      dataIndex: "invoiceNumber",
+      key: "invoiceNumber",
     },
 
     {
