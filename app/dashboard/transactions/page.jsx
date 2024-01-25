@@ -23,8 +23,8 @@ const Transactions = () => {
 
   const getTransactions = async () => {
     setLoading(true);
-    const { transactions, txResponse } = await fetchTransactions();
-    setResponses(txResponse);
+    const { transactions, response } = await fetchTransactions();
+    setResponses(response);
     setRequests(transactions);
     setLoading(false);
   };
