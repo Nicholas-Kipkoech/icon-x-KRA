@@ -160,13 +160,7 @@ const AddTransactionsPage = () => {
     };
     setItemList((prevItemList) => [...prevItemList, newItem]);
   };
-  const handleRemoveLastItem = () => {
-    setItemList((prevItemList) => {
-      const newList = [...prevItemList];
-      newList.pop(); // Remove the last item
-      return newList;
-    });
-  };
+
   // Function to handle form submission
   const handleSubmit = async () => {
     try {

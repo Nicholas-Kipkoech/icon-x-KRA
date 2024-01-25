@@ -5,6 +5,16 @@ import { Table } from "antd";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { fetchTransactions } from "@/app/services/adminServices";
 import Link from "next/link";
+import { MdGridView, MdViewArray } from "react-icons/md";
+
+const formatdate = (currentDate) => {
+  const formattedDate = currentDate.replace(
+    /^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/,
+    "$1/$2/$3 $4:$5:$6"
+  );
+  return formattedDate;
+};
+
 const Transactions = () => {
   const [toggle, setToggle] = useState("requests");
   const [requests, setRequests] = useState([]);
@@ -32,11 +42,6 @@ const Transactions = () => {
       ),
     },
     {
-      title: "Trader No",
-      dataIndex: "trdInvcNo",
-      key: "trdInvcNo",
-    },
-    {
       title: "Invoice No",
       dataIndex: "invcNo",
       key: "invcNo",
@@ -47,45 +52,83 @@ const Transactions = () => {
       key: "orgInvcNo",
     },
     {
-      title: "Reciept Type Code",
+      title: "Client Name",
+      dataIndex: "custNm",
+      key: "custNm",
+      render: (_, item) => <p>{item?.custNm ? item.custNm : "Null"}</p>,
+    },
+    {
+      title: "Invoice Amount (KES)",
+      dataIndex: "intrlData",
+      key: "intrlData",
+      render: (_, item) => <p>{item.totAmt}</p>,
+    },
+    {
+      title: " Invoice Tax Amount (KES)",
+      dataIndex: "intrlData",
+      key: "intrlData",
+      render: (_, item) => <p>{item.totTaxAmt}</p>,
+    },
+    {
+      title: "Invoice Type",
       dataIndex: "rcptTyCd",
       key: "rcptTyCd",
+      render: (_, item) => (
+        <p>{item.rcptTyCd === "R" ? "Credit Note" : "Debit Note"}</p>
+      ),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (_, item) => <p className="text-[green]">Success</p>,
     },
   ];
   const url =
     "https://etims-sbx.kra.go.ke/common/link/etims/receipt/indexEtimsReceiptData?Data=P000597676Q00";
   const Responses = [
     {
-      title: "Transaction ID",
+      title: "Invoice Number",
       dataIndex: "transactionID",
       key: "transactionID",
     },
+
     {
-      title: "Internal Data",
+      title: "Client Name",
       dataIndex: "intrlData",
       key: "intrlData",
+      render: (_, item) => <p>{item?.clientName ? item.clientName : "Null"}</p>,
     },
     {
-      title: "Reciept Signature",
+      title: "Invoice Amount (KES)",
+      dataIndex: "invoiceAmt",
+      key: "invoiceAmt",
+      render: (_, item) => <p>{item.invoiceAmt}</p>,
+    },
+    {
+      title: " Invoice Tax Amount (KES)",
+      dataIndex: "taxAmt",
+      key: "taxAmt",
+      render: (_, item) => <p>{item.taxAmt}</p>,
+    },
+    {
+      title: "Receipt Signature",
       dataIndex: "rcptSign",
       key: "rcptSign",
     },
     {
-      title: "Control Unit Date",
+      title: "Date Received",
       dataIndex: "sdcDateTime",
       key: "company_code",
+      render: (_, item) => <p>{formatdate(item.sdcDateTime)}</p>,
     },
     {
-      title: "Reciepts",
+      title: "View Receipt",
       dataIndex: "resultMsg",
       key: "resultMsg",
       render: (_, item) => (
-        <a
-          target="_blank"
-          className="h-[20px] bg-[#8c8cbe] border rounded-md p-[5px] text-white"
-          href={`${url}${item?.rcptSign}`}
-        >
-          View Receipt
+        <a target="_blank" href={`${url}${item?.rcptSign}`}>
+          <MdGridView size={15} />
         </a>
       ),
     },
@@ -107,19 +150,19 @@ const Transactions = () => {
     <div className="mt-5 ">
       <div className="flex justify-center">
         <CustomButton
-          name={"Transactions Requests"}
+          name={"ETIMS submitted invoices"}
           type={"button"}
           onClick={() => setToggle("requests")} // Set the toggle state to "requests" when the button is clicked
           className={`h-[40px] ${
-            toggle === "requests" ? "bg-[#094b6a]" : "bg-[#cb7529]"
+            toggle === "requests" ? "bg-[#cb7529]" : "bg-[#094b6a]"
           } p-2 justify-center items-center flex text-white font-bold border rounded-md w-[100%] `}
         />
         <CustomButton
-          name={"Transactions Responses"}
+          name={"ETIMS compliant receipts"}
           type={"button"}
           onClick={() => setToggle("responses")}
           className={`h-[40px] ${
-            toggle === "responses" ? "bg-[#094b6a]" : "bg-[#cb7529]"
+            toggle === "responses" ? "bg-[#cb7529]" : "bg-[#094b6a]"
           } p-2 justify-center items-center flex text-white font-bold border rounded-md w-[100%] `}
         />
       </div>

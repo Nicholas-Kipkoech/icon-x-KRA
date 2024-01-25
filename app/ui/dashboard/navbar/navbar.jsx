@@ -2,8 +2,9 @@
 import { usePathname } from "next/navigation";
 import React from "react";
 import { MdLogout, MdNotifications } from "react-icons/md";
-
+import { useRouter } from "next/navigation";
 const Navbar = () => {
+  const router = useRouter();
   const pathname = usePathname();
 
   // Function to format the last path segment with specific handling for IDs
@@ -37,7 +38,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-3 ">
           <p
-            className="text-white bg-[#a01d1d] p-[5px] w-[100px] justify-center flex cursor-pointer rounded-md"
+            className="text-white bg-[#cb7529] p-[5px] w-[100px] justify-center flex cursor-pointer rounded-md"
             onClick={handleLogout}
           >
             Logout
