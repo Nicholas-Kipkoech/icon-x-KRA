@@ -6,7 +6,7 @@ export const ENDPOINT = "https://etims-icon.onrender.com/api";
 export const LOCAL_URL = "http://localhost:5000/api";
 
 export const PrivateAxiosUtility = axios.create({
-  baseURL: `${ENDPOINT}`,
+  baseURL: `${LOCAL_URL}`,
   timeout: 600000,
   headers: {
     "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const PrivateAxiosUtility = axios.create({
 });
 
 export const AxiosUtility = axios.create({
-  baseURL: `${ENDPOINT}`,
+  baseURL: `${LOCAL_URL}`,
   timeout: 600000,
   headers: {
     "Content-Type": "application/json",

@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import iconLogo from "../../../assets/iconLogo.png";
 
 const Sidebar = () => {
   const [user, setUser] = useState({});
@@ -109,22 +110,18 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="sticky top-0 h-[100vh] max-h-[1200px]  bg-[#092332] p-[20px] ">
-      <div className="flex items-center gap-[20px] mb-[20px] bg-[#cb7529] h-[100px] p-[20px] rounded-md">
+    <div className="sticky top-0 h-[100vh] max-h-[1200px]  bg-[#092332] p-[5px] ">
+      <div className="flex justify-center items-center">
+        <Image src={iconLogo} height={"120"} width={"120"} alt="" />
+      </div>
+      <div className="flex items-center gap-[20px]  justify-center text-[#cb7529] h-[100px] p-[10px] rounded-md">
         {Object.keys(user).length > 1 ? (
           <>
-            <Image
-              src={
-                "https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-profile-line-black-icon-png-image_691065.jpg"
-              }
-              alt=""
-              width="50"
-              height="50"
-              className="rounded-[50%] object-cover"
-            />
-            <div className="flex flex-col">
-              <span className="font-[500] text-[20px]">{user.name}</span>
-              <span className="text-[14px] text-[#000000] font-[600]">
+            <div className="flex flex-col justify-center">
+              <span className="font-[500] flex justify-center text-[15px]">
+                {user.name.toUpperCase()}
+              </span>
+              <span className="font-[500] text-[12px] flex justify-center text-white">
                 {user.role}
               </span>
             </div>
