@@ -231,6 +231,13 @@ const AddTransactionsPage = () => {
   };
 
   useEffect(() => {
+    const totalTaxAmount = itemList.reduce((acc, item) => {
+      return acc + Number(item.taxAmt);
+    }, 0);
+    setTotTaxAmt(totalTaxAmount);
+  }, [itemList]);
+
+  useEffect(() => {
     const calculateTotalsAlgorithm = () => {
       const totalTaxAmountByTaxTyCd = itemList.reduce((totals, item) => {
         const { taxAmt, taxTyCd } = item;
@@ -335,7 +342,7 @@ const AddTransactionsPage = () => {
   }, [taxTyCd, qty, prc]);
 
   //className="flex flex-wrap justify-evenly border rounded p-4"
-
+  6, 660;
   return (
     <div className="h-[100vh]">
       <div>

@@ -17,6 +17,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import iconLogo from "../../../assets/iconLogo.png";
+import { GrOverview } from "react-icons/gr";
+import { FaUsers } from "react-icons/fa6";
+import { FaServer } from "react-icons/fa";
+import { LiaFileInvoiceSolid } from "react-icons/lia";
 
 const Sidebar = () => {
   const [user, setUser] = useState({});
@@ -35,12 +39,12 @@ const Sidebar = () => {
         {
           title: "Overview",
           path: "/dashboard",
-          icon: <MdDashboard />,
+          icon: <GrOverview />,
         },
         {
           title: "Users",
           path: "/dashboard/users",
-          icon: <MdPerson />,
+          icon: <FaUsers />,
         },
       ],
     },
@@ -52,7 +56,7 @@ const Sidebar = () => {
               {
                 title: "ETIMS intergration",
                 path: "/dashboard/testing",
-                icon: <MdArchitecture />,
+                icon: <FaServer />,
               },
               {
                 title: "Admin Crud Ops",
@@ -62,7 +66,7 @@ const Sidebar = () => {
               {
                 title: "View transactions",
                 path: "/dashboard/transactions",
-                icon: <MdAttachMoney />,
+                icon: <LiaFileInvoiceSolid />,
               },
             ]
           : [
