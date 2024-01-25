@@ -49,7 +49,7 @@ const Sidebar = () => {
         user?.role === "Superadmin"
           ? [
               {
-                title: "API Testing",
+                title: "ETIMS intergration",
                 path: "/dashboard/testing",
                 icon: <MdArchitecture />,
               },
