@@ -28,6 +28,7 @@ const QrCodeComponent = ({ open, handleClose, url, user }) => {
       title={`Generated QR Code ${user ? "for" : ""} ${user ? user : ""}`}
       centered
       footer
+      width={620}
     >
       <div
         style={{
