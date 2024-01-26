@@ -119,19 +119,17 @@ const Sidebar = () => {
         <Image src={iconLogo} height={"120"} width={"120"} alt="" />
       </div>
       <div className="flex items-center gap-[20px]  justify-center text-[#cb7529] h-[100px] p-[10px] rounded-md">
-        {Object.keys(user).length > 1 ? (
+        {Object.keys(user).length > 1 && (
           <>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col gap-1 justify-center">
               <span className="font-[500] flex justify-center text-[15px]">
                 {user.name.toUpperCase()}
               </span>
               <span className="font-[500] text-[12px] flex justify-center text-white">
-                {user.role}
+                {user.role.toUpperCase()}
               </span>
             </div>
           </>
-        ) : (
-          <p>Loading user....</p>
         )}
       </div>
 

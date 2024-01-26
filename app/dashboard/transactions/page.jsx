@@ -5,7 +5,9 @@ import { Table } from "antd";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { fetchTransactions } from "@/app/services/adminServices";
 import Link from "next/link";
-import { MdGridView, MdViewArray } from "react-icons/md";
+import { MdGridView } from "react-icons/md";
+import { FaReceipt } from "react-icons/fa6";
+import QrCodeComponent from "./QrCode";
 
 const formatdate = (currentDate) => {
   const formattedDate = currentDate.replace(
@@ -20,6 +22,8 @@ const Transactions = () => {
   const [requests, setRequests] = useState([]);
   const [responses, setResponses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [receiptUrl, setReceiptUrl] = useState("");
 
   const getTransactions = async () => {
     setLoading(true);
@@ -127,9 +131,15 @@ const Transactions = () => {
       dataIndex: "resultMsg",
       key: "resultMsg",
       render: (_, item) => (
-        <a target="_blank" href={`${url}${item?.rcptSign}`}>
-          <MdGridView size={15} />
-        </a>
+        <div
+          onClick={() => {
+            setShowForm(true);
+            setReceiptUrl(item.rcptSign);
+          }}
+          className="cursor-pointer"
+        >
+          <FaReceipt size={20} />
+        </div>
       ),
     },
   ];
@@ -167,6 +177,11 @@ const Transactions = () => {
         />
       </div>
       <div className="mt-3">{renderTable()}</div>
+      <QrCodeComponent
+        open={showForm}
+        handleClose={() => setShowForm(false)}
+        url={`${url}${receiptUrl}`}
+      />
     </div>
   );
 };
