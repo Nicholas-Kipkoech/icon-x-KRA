@@ -117,7 +117,9 @@ const Dashboard = () => {
           </>
         )}
         <AdminCard
-          count={txLoading ? <Spin spinning={txLoading} /> : 0}
+          count={
+            txLoading ? <Spin spinning={txLoading} /> : transactions.length
+          }
           name={"Invoices Submitted"}
           to={"transactions"}
           icon={<FaFileInvoice size={30} />}
