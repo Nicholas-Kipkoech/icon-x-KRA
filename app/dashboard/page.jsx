@@ -83,7 +83,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="mt-[10px] ">
+    <div className="mt-[10px]">
       <p className="text-[25px]">Data Overview</p>
       <div className="flex flex-wrap gap-10 mt-4">
         {user?.role === "Superadmin" && (
