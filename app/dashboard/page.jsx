@@ -26,6 +26,7 @@ const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
   const [txLoading, setTxLoading] = useState(false);
   const [userLoading, setUserLoading] = useState(false);
+  const [totalAmt, setTotalAmt] = useState(0);
   const getOrgs = async () => {
     setOrgsLoading(true);
     const { registered_organizations } = await fetchOrganizations();
@@ -39,6 +40,28 @@ const Dashboard = () => {
     setTransactions(transactions);
     setTxLoading(false);
   };
+
+  const calculateDigits = (value) => {
+    if (value.length >= 7) {
+      return `${(value / 1000000).toFixed(1)}M`;
+    } else if (value.length >= 6) {
+      return `${(value / 1000000).toFixed(1)}M`;
+    } else if (value.length >= 5) {
+      return `${(value / 100000).toFixed(1)}K`;
+    } else {
+      return value;
+    }
+  };
+
+  useEffect(() => {
+    if (transactions.length > 0) {
+      const total = transactions.reduce((acc, item) => {
+        return acc + Number(item.totAmt);
+      }, 0);
+      setTotalAmt(calculateDigits(total));
+    }
+  }, [transactions]);
+
   const getUsers = async () => {
     setUserLoading(true);
     const { _users } = await fetchUsers();
@@ -109,7 +132,7 @@ const Dashboard = () => {
               icon={<FaBuildingColumns size={30} />}
             />
             <AdminCard
-              count={(transactions.length * 2005).toLocaleString()}
+              count={totalAmt.toLocaleString()}
               name={"Total Amount (KES)"}
               to={""}
               icon={<MdOutlineAttachMoney size={30} />}
