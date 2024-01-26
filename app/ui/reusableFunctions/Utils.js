@@ -42,3 +42,29 @@ export const getSegment = async (code) => {
   const { segment } = await fetchSegment(code);
   return segment;
 };
+
+export const convertToShortScaleFormat = (number) => {
+  if (typeof number !== "number" || isNaN(number)) {
+    return "Invalid input";
+  }
+  if (number < 1000) {
+    return number.toString();
+  }
+  if (number < 1000000) {
+    const thousandValue = Math.floor(number / 1000);
+    const remainder = number % 1000;
+
+    if (remainder === 0) {
+      return thousandValue + " Thousand";
+    }
+
+    return thousandValue + "." + remainder.toString().slice(0, 1) + " Thousand";
+  }
+  const millionValue = Math.floor(number / 1000000);
+  const remainder = number % 1000000;
+
+  if (remainder === 0) {
+    return millionValue + " Million";
+  }
+  return millionValue + "." + remainder.toString().slice(0, 1) + " Million";
+};

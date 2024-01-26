@@ -17,6 +17,7 @@ import {
 } from "react-icons/md";
 import { FaBuildingColumns } from "react-icons/fa6";
 import { FaFileInvoice } from "react-icons/fa";
+import { convertToShortScaleFormat } from "../ui/reusableFunctions/Utils";
 
 const Dashboard = () => {
   const [user, setUser] = useState({});
@@ -40,25 +41,12 @@ const Dashboard = () => {
     setTransactions(transactions);
     setTxLoading(false);
   };
-
-  const calculateDigits = (value) => {
-    if (value.length >= 7) {
-      return `${(value / 1000000).toFixed(1)}M`;
-    } else if (value.length >= 6) {
-      return `${(value / 1000000).toFixed(1)}M`;
-    } else if (value.length >= 5) {
-      return `${(value / 100000).toFixed(1)}K`;
-    } else {
-      return value;
-    }
-  };
-
   useEffect(() => {
     if (transactions.length > 0) {
       const total = transactions.reduce((acc, item) => {
         return acc + Number(item.totAmt);
       }, 0);
-      setTotalAmt(calculateDigits(total));
+      setTotalAmt(convertToShortScaleFormat(total));
     }
   }, [transactions]);
 
@@ -132,7 +120,7 @@ const Dashboard = () => {
               icon={<FaBuildingColumns size={30} />}
             />
             <AdminCard
-              count={totalAmt.toLocaleString()}
+              count={totalAmt}
               name={"Total Amount (KES)"}
               to={""}
               icon={<MdOutlineAttachMoney size={30} />}
