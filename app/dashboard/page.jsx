@@ -109,7 +109,7 @@ const Dashboard = () => {
               icon={<FaBuildingColumns size={30} />}
             />
             <AdminCard
-              count={(2000000).toLocaleString()}
+              count={0}
               name={"Total Amount (KES)"}
               to={""}
               icon={<MdOutlineAttachMoney size={30} />}
@@ -117,9 +117,7 @@ const Dashboard = () => {
           </>
         )}
         <AdminCard
-          count={
-            txLoading ? <Spin spinning={txLoading} /> : transactions.length
-          }
+          count={txLoading ? <Spin spinning={txLoading} /> : 0}
           name={"Invoices Submitted"}
           to={"transactions"}
           icon={<FaFileInvoice size={30} />}

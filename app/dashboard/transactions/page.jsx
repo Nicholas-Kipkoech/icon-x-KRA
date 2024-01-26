@@ -90,7 +90,7 @@ const Transactions = () => {
     },
   ];
   const url =
-    "https://etims-sbx.kra.go.ke/common/link/etims/receipt/indexEtimsReceiptData?Data=P000597676Q00";
+    "https://etims-sbx.kra.go.ke/common/link/etims/receipt/indexEtimsReceiptData?Data=P051178573M00";
   const Responses = [
     {
       title: "Invoice Number",
