@@ -114,7 +114,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="sticky top-0 h-[calc(100vh_-_150px)] bg-[#092332] p-[5px] ">
+    <div className="sticky top-0 h-screen max-h-full  bg-[#092332] p-[5px] ">
       <div className="flex justify-center items-center">
         <Image src={iconLogo} height={"120"} width={"120"} alt="" />
       </div>
