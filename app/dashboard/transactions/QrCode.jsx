@@ -5,14 +5,14 @@ import QrCode from "react-qr-code";
 import { useScreenshot, createFileName } from "use-react-screenshot";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 
-const QrCodeComponent = ({ open, handleClose, url }) => {
+const QrCodeComponent = ({ open, handleClose, url, user }) => {
   const ref = createRef(null);
   const [image, takeScreenShot] = useScreenshot({
     type: "image/jpeg",
     quality: 1.0,
   });
 
-  const download = (image, { name = "img", extension = "jpg" } = {}) => {
+  const download = (image, { name = "QR Code", extension = "jpg" } = {}) => {
     const a = document.createElement("a");
     a.href = image;
     a.download = createFileName(extension, name);
@@ -25,7 +25,7 @@ const QrCodeComponent = ({ open, handleClose, url }) => {
     <Modal
       open={open}
       onCancel={handleClose}
-      title="Generated Qr Code"
+      title={`Generated QR Code ${user ? "for" : ""} ${user ? user : ""}`}
       centered
       footer
     >

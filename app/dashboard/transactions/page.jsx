@@ -24,6 +24,7 @@ const Transactions = () => {
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [receiptUrl, setReceiptUrl] = useState("");
+  const [user, setUser] = useState("");
 
   const getTransactions = async () => {
     setLoading(true);
@@ -135,6 +136,7 @@ const Transactions = () => {
           onClick={() => {
             setShowForm(true);
             setReceiptUrl(item.rcptSign);
+            setUser(item.clientName ? item.clientName : "null");
           }}
           className="cursor-pointer"
         >
@@ -181,6 +183,7 @@ const Transactions = () => {
         open={showForm}
         handleClose={() => setShowForm(false)}
         url={`${url}${receiptUrl}`}
+        user={user}
       />
     </div>
   );
