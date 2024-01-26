@@ -109,7 +109,7 @@ const Dashboard = () => {
               icon={<FaBuildingColumns size={30} />}
             />
             <AdminCard
-              count={0}
+              count={(transactions.length * 115).toLocaleString()}
               name={"Total Amount (KES)"}
               to={""}
               icon={<MdOutlineAttachMoney size={30} />}
