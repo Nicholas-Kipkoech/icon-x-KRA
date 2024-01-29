@@ -34,6 +34,9 @@ const Notifications = ({ open, handleClose, onread }) => {
         }
       }
     };
+    socket.on("notification", () => {
+      getNotifications();
+    });
     getNotifications();
   }, [user]);
 
@@ -41,9 +44,6 @@ const Notifications = ({ open, handleClose, onread }) => {
   socket.on("connect", () => {
     console.log("Connected to the Socket.io server");
     socket.emit("join", "Hello, server! I'm connected!");
-  });
-  socket.on("notification", () => {
-    getNotifications();
   });
 
   return (
