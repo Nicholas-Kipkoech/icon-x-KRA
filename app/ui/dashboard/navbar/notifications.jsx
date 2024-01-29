@@ -33,7 +33,7 @@ const Notifications = ({ open, handleClose, onread }) => {
       title="API Notifications"
       onCancel={handleClose}
     >
-      <div className="h-[auto] w-auto overflow-auto scroll-smooth">
+      <div className="h-[300px] w-[100%] overflow-auto scroll-smooth">
         {notifications.map((notification) => (
           <div
             key={notification._id}
