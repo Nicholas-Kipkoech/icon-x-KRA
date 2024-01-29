@@ -120,7 +120,7 @@ const Dashboard = () => {
           <div className="text-[#cb7529] bg-[#092332] rounded-[50px] p-[20px]">
             <MdOutlineAttachMoney size={50} />
           </div>
-          <p className="text-[38px] flex justify-center text-[#092332]">
+          <p className="text-[2rem] flex justify-center text-[#092332]">
             {totalAmt.toLocaleString()}
           </p>
         </div>
