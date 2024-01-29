@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import {
   fetchOrganizations,
   fetchTransactions,
+  fetchTransactionsById,
   fetchUsers,
 } from "../services/adminServices";
 import { Spin } from "antd";
@@ -38,16 +39,30 @@ const Dashboard = () => {
     setOrgsLoading(false);
   };
 
-  const getTransactions = async () => {
-    setTxLoading(true);
-    const { transactions } = await fetchTransactions();
-    setTransactions(transactions);
-    setTxLoading(false);
-  };
-
-  socket.on("notification", () => {
+  useEffect(() => {
+    const getTransactions = async () => {
+      setTxLoading(true);
+      if (user.role === "Superadmin") {
+        const { transactions } = await fetchTransactions();
+        setTransactions(transactions);
+        setTxLoading(false);
+      } else {
+        console.log(user);
+        if (user.organization_id) {
+          const { transaction } = await fetchTransactionsById(
+            user.organization_id
+          );
+          setTransactions(transaction);
+          setTxLoading(false);
+        }
+      }
+    };
+    socket.on("notification", () => {
+      getTransactions();
+    });
     getTransactions();
-  });
+  }, [user]);
+
   useEffect(() => {
     if (transactions.length > 0) {
       const total = transactions.reduce((acc, item) => {
@@ -70,9 +85,6 @@ const Dashboard = () => {
     setUser(decoded_user);
   }, []);
 
-  useEffect(() => {
-    getTransactions();
-  }, []);
   useEffect(() => {
     getOrgs();
   }, []);

@@ -3,11 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
-import { fetchTransactions } from "@/app/services/adminServices";
+import {
+  fetchTransactions,
+  fetchTransactionsById,
+} from "@/app/services/adminServices";
 import Link from "next/link";
 import { MdGridView } from "react-icons/md";
 import { FaReceipt } from "react-icons/fa6";
 import QrCodeComponent from "./QrCode";
+import { jwtDecode } from "jwt-decode";
 
 const formatdate = (currentDate) => {
   const formattedDate = currentDate.replace(
@@ -25,17 +29,34 @@ const Transactions = () => {
   const [showForm, setShowForm] = useState(false);
   const [receiptUrl, setReceiptUrl] = useState("");
   const [user, setUser] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState({});
 
-  const getTransactions = async () => {
-    setLoading(true);
-    const { transactions, response } = await fetchTransactions();
-    setResponses(response);
-    setRequests(transactions);
-    setLoading(false);
-  };
   useEffect(() => {
-    getTransactions();
+    const token = localStorage.getItem("access_token");
+    const decoded_user = jwtDecode(token);
+    setLoggedInUser(decoded_user);
   }, []);
+
+  useEffect(() => {
+    const getTransactions = async () => {
+      setLoading(true);
+      if (loggedInUser.role === "Superadmin") {
+        const { transactions, response } = await fetchTransactions();
+        setResponses(response);
+        setRequests(transactions);
+        setLoading(false);
+      } else {
+        if (loggedInUser.organization_id) {
+          const { transaction, transactionResponse } =
+            await fetchTransactionsById(loggedInUser.organization_id);
+          setRequests(transaction);
+          setResponses(transactionResponse);
+          setLoading(false);
+        }
+      }
+    };
+    getTransactions();
+  }, [loggedInUser]);
 
   const Requests = [
     {
