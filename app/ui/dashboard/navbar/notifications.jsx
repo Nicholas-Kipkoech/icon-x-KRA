@@ -54,16 +54,16 @@ const Notifications = ({ open, handleClose, onread }) => {
       width={800}
       onCancel={handleClose}
     >
-      <div className="h-[auto] max-h-[300px] w-[100%] overflow-auto scroll-smooth">
+      <div className="h-[auto] max-h-[300px]  w-[100%] overflow-auto scroll-smooth">
         {notifications.length > 0 ? (
           notifications.map((notification) => (
             <div
               key={notification._id}
-              className="flex items-center text-[14px] gap-2 bg-[whitesmoke] h-[50px] rounded-sm p-[5px] m-[3px]"
+              className="flex items-center text-[14px] gap-2 bg-[#ebe7e4] h-[60px] rounded-md p-[5px] m-[3px]"
             >
               <span className="font-bold ">{notification.from}:</span>
               <span className="text-[grey]">{notification.message}</span>
-              <span className="text-[#cf8743] ml-5">
+              <span className="text-[#367ed1] ml-5">
                 {formatDistanceToNow(notification.send_date)} ago
               </span>
             </div>

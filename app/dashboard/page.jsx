@@ -115,8 +115,8 @@ const Dashboard = () => {
 
   return (
     <div className="mt-[10px]">
-      <div className="h-[12rem] border w-[36rem] rounded-[30px] flex flex-col   items-center  justify-center bg-[white]">
-        <div className="flex justify-center items-center gap-4">
+      <div className="h-[12rem] border w-[auto] max-w-[36rem] rounded-[30px] flex flex-col   items-center  justify-center bg-[white]">
+        <div className="flex justify-center items-center gap-[1rem]">
           <div className="text-[#cb7529] bg-[#092332] rounded-[50px] p-[20px]">
             <MdOutlineAttachMoney size={50} />
           </div>
@@ -134,7 +134,7 @@ const Dashboard = () => {
           <>
             <AdminCard
               count={
-                userLoading ? <Spin spinning={userLoading} /> : users.length
+                userLoading ? <Spin spinning={userLoading} /> : users.length - 1
               }
               name={"Enrolled Users"}
               to={"users"}
