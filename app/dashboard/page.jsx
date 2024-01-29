@@ -112,7 +112,7 @@ const Dashboard = () => {
           </p>
         </div>
         <p className="flex justify-center text-[26px] mt-2">
-          Total amount transacted
+          Total amount transacted (KES)
         </p>
       </div>
       <p className="text-[25px] mt-4">Data Overview</p>

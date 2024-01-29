@@ -28,7 +28,7 @@ const Notifications = ({ open, handleClose, onread }) => {
   return (
     <Modal
       open={open}
-      width={650}
+      width={750}
       footer
       title="API Notifications"
       onCancel={handleClose}
