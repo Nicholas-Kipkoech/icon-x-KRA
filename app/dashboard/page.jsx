@@ -62,6 +62,7 @@ const Dashboard = () => {
     });
     getTransactions();
   }, [user]);
+  console.log(transactions.totAmt);
 
   useEffect(() => {
     if (transactions.length > 0) {

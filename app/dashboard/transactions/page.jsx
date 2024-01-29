@@ -58,6 +58,7 @@ const Transactions = () => {
     getTransactions();
   }, [loggedInUser]);
 
+  console.log(requests);
   const Requests = [
     {
       title: "Transaction ID",
