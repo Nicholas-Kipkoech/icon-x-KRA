@@ -69,7 +69,7 @@ const Dashboard = () => {
       const total = transactions.reduce((acc, item) => {
         return acc + Number(item.totAmt);
       }, 0);
-      setTotalAmt(convertToShortScaleFormat(total));
+      setTotalAmt(total);
     }
   }, [transactions]);
 
@@ -121,7 +121,7 @@ const Dashboard = () => {
             <MdOutlineAttachMoney size={50} />
           </div>
           <p className="text-[38px] flex justify-center text-[#092332]">
-            {totalAmt}
+            {totalAmt.toLocaleString()}
           </p>
         </div>
         <p className="flex justify-center text-[26px] mt-2">

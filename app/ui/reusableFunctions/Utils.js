@@ -47,7 +47,7 @@ export const convertToShortScaleFormat = (number) => {
   if (typeof number !== "number" || isNaN(number)) {
     return "Invalid input";
   }
-  if (number < 10000) {
+  if (number < 1000) {
     return number.toString();
   }
   if (number < 1000000) {
