@@ -37,9 +37,9 @@ const Notifications = ({ open, handleClose, onread }) => {
         {notifications.map((notification) => (
           <div
             key={notification._id}
-            className="flex items-center text-[16px] gap-2 bg-[whitesmoke] h-[50px] rounded-sm p-[5px] m-[3px]"
+            className="flex items-center text-[14px] gap-2 bg-[whitesmoke] h-[50px] rounded-sm p-[5px] m-[3px]"
           >
-            <span className="font-bold">{notification.from}:</span>
+            <span className="font-bold ">{notification.from}:</span>
             <span className="text-[grey]">{notification.message}</span>
             <span className="text-[#cf8743] ml-5">
               {formatDistanceToNow(notification.send_date)} ago
