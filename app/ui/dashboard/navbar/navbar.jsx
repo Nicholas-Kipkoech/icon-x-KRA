@@ -7,8 +7,12 @@ import { io } from "socket.io-client";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import Notifications from "./notifications";
-import { fetchNotifications } from "@/app/services/etimsServices";
-import { ENDPOINT } from "@/app/services/axiosUtility";
+import {
+  fetchNotifications,
+  fetchNotificationsByID,
+} from "@/app/services/etimsServices";
+
+import { jwtDecode } from "jwt-decode";
 
 export const socket = io("https://etims-icon.onrender.com"); // Replace with your server URL
 
@@ -16,16 +20,36 @@ const Navbar = () => {
   const [count, setCount] = useState(0);
   const [openNotication, setOpenNotification] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [user, setUser] = useState({});
   const router = useRouter();
   const pathname = usePathname();
 
-  const getNotifications = async () => {
-    const { notifications } = await fetchNotifications();
-    setNotifications(notifications);
-  };
   useEffect(() => {
-    getNotifications();
+    const token = localStorage.getItem("access_token");
+    const decoded_user = jwtDecode(token);
+    setUser(decoded_user);
   }, []);
+  console.log(user.organization_id);
+
+  useEffect(() => {
+    const getNotifications = async () => {
+      if (user.role === "Superadmin") {
+        const { notifications } = await fetchNotifications();
+        setNotifications(notifications);
+      } else {
+        if (user.organization_id) {
+          const { notifications } = await fetchNotificationsByID(
+            user.organization_id
+          );
+          setNotifications(notifications);
+        }
+      }
+    };
+    socket.on("notification", () => {
+      getNotifications();
+    });
+    getNotifications();
+  }, [user]);
 
   // Function to format the last path segment with specific handling for IDs
   const formatPathSegment = (segment) => {
@@ -50,9 +74,6 @@ const Navbar = () => {
   socket.on("connect", () => {
     console.log("Connected to the Socket.io server");
     socket.emit("join", "Hello, server! I'm connected!");
-  });
-  socket.on("notification", () => {
-    getNotifications();
   });
 
   socket.on("test", (data) => {

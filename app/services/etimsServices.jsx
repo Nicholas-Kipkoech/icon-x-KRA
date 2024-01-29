@@ -102,3 +102,8 @@ export const fetchNotifications = async () => {
   const res = await PrivateAxiosUtility.get(`/etims/notifications`);
   return res?.data;
 };
+
+export const fetchNotificationsByID = async (id) => {
+  const res = await PrivateAxiosUtility.get(`/etims/notifications/${id}`);
+  return res?.data;
+};
