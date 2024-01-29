@@ -10,7 +10,7 @@ import Notifications from "./notifications";
 import { fetchNotifications } from "@/app/services/etimsServices";
 import { ENDPOINT } from "@/app/services/axiosUtility";
 
-export const socket = io(ENDPOINT); // Replace with your server URL
+export const socket = io("https://etims-icon.onrender.com"); // Replace with your server URL
 
 const Navbar = () => {
   const [count, setCount] = useState(0);

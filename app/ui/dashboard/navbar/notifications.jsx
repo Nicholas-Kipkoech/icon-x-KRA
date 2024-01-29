@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import { fetchNotifications } from "@/app/services/etimsServices";
 import { socket } from "./navbar";
+import { formatDistanceToNow } from "date-fns";
 
 const Notifications = ({ open, handleClose, onread }) => {
   const [notifications, setNotifications] = useState([]);
@@ -24,12 +25,6 @@ const Notifications = ({ open, handleClose, onread }) => {
     getNotifications();
   });
 
-  const formatCustomDate = (serverTime) => {
-    const date = new Date(serverTime);
-    const formattedDate = date.toLocaleString("en-US");
-    return formattedDate;
-  };
-
   return (
     <Modal
       open={open}
@@ -38,21 +33,19 @@ const Notifications = ({ open, handleClose, onread }) => {
       title="API Notifications"
       onCancel={handleClose}
     >
-      <div className="h-[250px] overflow-auto scroll-smooth">
-        {notifications
-          .sort((a, b) => new Date(b.send_date) - new Date(a.send_date))
-          .map((notification) => (
-            <div
-              key={notification._id}
-              className="flex items-center text-[16px] gap-2 bg-[whitesmoke] h-[50px] rounded-sm p-[5px] m-[3px]"
-            >
-              <span className="font-bold">{notification.from}:</span>
-              <span className="text-[grey]">{notification.message}</span>
-              <span className="text-[#cf8743] ml-5">
-                {formatCustomDate(notification.send_date)}
-              </span>
-            </div>
-          ))}
+      <div className="h-[auto] w-auto overflow-auto scroll-smooth">
+        {notifications.map((notification) => (
+          <div
+            key={notification._id}
+            className="flex items-center text-[16px] gap-2 bg-[whitesmoke] h-[50px] rounded-sm p-[5px] m-[3px]"
+          >
+            <span className="font-bold">{notification.from}:</span>
+            <span className="text-[grey]">{notification.message}</span>
+            <span className="text-[#cf8743] ml-5">
+              {formatDistanceToNow(notification.send_date)} ago
+            </span>
+          </div>
+        ))}
       </div>
     </Modal>
   );

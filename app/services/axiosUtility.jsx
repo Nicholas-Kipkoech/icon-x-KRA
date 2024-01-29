@@ -22,16 +22,17 @@ export const AxiosUtility = axios.create({
 });
 
 PrivateAxiosUtility.interceptors.request.use(async (req) => {
-  const state = localStorage?.getItem("access_token");
-
-  let token;
-  // check if access-token exists
-  if (state) {
-    token = state;
+  if (typeof window !== "undefined") {
+    const state = localStorage?.getItem("access_token");
+    let token;
+    // check if access-token exists
+    if (state) {
+      token = state;
+      req.headers.Authorization = `Bearer ${token}`;
+    }
     req.headers.Authorization = `Bearer ${token}`;
+    return req;
   }
-  req.headers.Authorization = `Bearer ${token}`;
-  return req;
 });
 
 export default AxiosUtility;

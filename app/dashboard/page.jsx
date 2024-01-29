@@ -20,6 +20,7 @@ import { FaFileInvoice } from "react-icons/fa";
 import { convertToShortScaleFormat } from "../ui/reusableFunctions/Utils";
 
 import { useCustomToast } from "../hooks/useToast";
+import { socket } from "../ui/dashboard/navbar/navbar";
 
 const Dashboard = () => {
   const [user, setUser] = useState({});
@@ -43,6 +44,10 @@ const Dashboard = () => {
     setTransactions(transactions);
     setTxLoading(false);
   };
+
+  socket.on("notification", () => {
+    getTransactions();
+  });
   useEffect(() => {
     if (transactions.length > 0) {
       const total = transactions.reduce((acc, item) => {
