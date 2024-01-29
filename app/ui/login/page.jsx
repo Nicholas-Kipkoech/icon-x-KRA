@@ -8,6 +8,7 @@ import { useCustomToast } from "@/app/hooks/useToast";
 import { Spin } from "antd";
 
 const url = "https://etims-icon.onrender.com";
+const localUrl = "http://localhost:5000";
 
 const Login = ({ toggleView }) => {
   const showToast = useCustomToast();

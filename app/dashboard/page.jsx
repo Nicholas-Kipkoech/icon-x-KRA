@@ -19,6 +19,8 @@ import { FaBuildingColumns } from "react-icons/fa6";
 import { FaFileInvoice } from "react-icons/fa";
 import { convertToShortScaleFormat } from "../ui/reusableFunctions/Utils";
 
+import { useCustomToast } from "../hooks/useToast";
+
 const Dashboard = () => {
   const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
@@ -95,7 +97,20 @@ const Dashboard = () => {
 
   return (
     <div className="mt-[10px]">
-      <p className="text-[25px]">Data Overview</p>
+      <div className="h-[12rem] border w-[36rem] rounded-[30px] flex flex-col   items-center  justify-center bg-[white]">
+        <div className="flex justify-center items-center gap-4">
+          <div className="text-[#cb7529] bg-[#092332] rounded-[50px] p-[20px]">
+            <MdOutlineAttachMoney size={50} />
+          </div>
+          <p className="text-[38px] flex justify-center text-[#092332]">
+            {totalAmt}
+          </p>
+        </div>
+        <p className="flex justify-center text-[26px] mt-2">
+          Total amount transacted
+        </p>
+      </div>
+      <p className="text-[25px] mt-4">Data Overview</p>
       <div className="flex flex-wrap gap-10 mt-4">
         {user?.role === "Superadmin" && (
           <>
@@ -118,12 +133,6 @@ const Dashboard = () => {
               name={"Registered Organizations"}
               to={"organizations"}
               icon={<FaBuildingColumns size={30} />}
-            />
-            <AdminCard
-              count={totalAmt}
-              name={"Total Amount (KES)"}
-              to={""}
-              icon={<MdOutlineAttachMoney size={30} />}
             />
           </>
         )}

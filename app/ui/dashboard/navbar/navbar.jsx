@@ -1,11 +1,31 @@
 "use client";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdLogout, MdNotifications } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { io } from "socket.io-client";
+import NotificationBadge from "react-notification-badge";
+import { Effect } from "react-notification-badge";
+import Notifications from "./notifications";
+import { fetchNotifications } from "@/app/services/etimsServices";
+import { ENDPOINT } from "@/app/services/axiosUtility";
+
+export const socket = io(ENDPOINT); // Replace with your server URL
+
 const Navbar = () => {
+  const [count, setCount] = useState(0);
+  const [openNotication, setOpenNotification] = useState(false);
+  const [notifications, setNotifications] = useState([]);
   const router = useRouter();
   const pathname = usePathname();
+
+  const getNotifications = async () => {
+    const { notifications } = await fetchNotifications();
+    setNotifications(notifications);
+  };
+  useEffect(() => {
+    getNotifications();
+  }, []);
 
   // Function to format the last path segment with specific handling for IDs
   const formatPathSegment = (segment) => {
@@ -27,14 +47,33 @@ const Navbar = () => {
     router.push("/");
   };
 
+  socket.on("connect", () => {
+    console.log("Connected to the Socket.io server");
+    socket.emit("join", "Hello, server! I'm connected!");
+  });
+  socket.on("notification", () => {
+    getNotifications();
+  });
+
+  socket.on("test", (data) => {
+    setCount(count + 1);
+  });
+
   return (
     <div className="p-[20px] rounded-[10px] flex items-center justify-between bg-[#094b6a]">
       <div className="capitalize text-white font-bold">
         {formattedLastSegment}
       </div>
       <div className="flex items-center gap-[20px]">
-        <div className="flex gap-[20px] bg-white rounded-md">
-          <MdNotifications size={30} />
+        <div
+          className="gap-[2px] text-white cursor-pointer"
+          onClick={() => setOpenNotification(true)}
+        >
+          <NotificationBadge
+            count={notifications.length}
+            effect={Effect.SCALE}
+          />
+          <MdNotifications size={40} />
         </div>
         <div className="flex items-center gap-3 ">
           <p
@@ -45,6 +84,10 @@ const Navbar = () => {
           </p>
         </div>
       </div>
+      <Notifications
+        open={openNotication}
+        handleClose={() => setOpenNotification(false)}
+      />
     </div>
   );
 };

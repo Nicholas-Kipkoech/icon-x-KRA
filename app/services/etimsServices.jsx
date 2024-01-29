@@ -97,3 +97,8 @@ export const fetchItemList = async (data) => {
   const res = await PrivateAxiosUtility.post(`/etims/selectItemList`, data);
   return res?.data;
 };
+
+export const fetchNotifications = async () => {
+  const res = await PrivateAxiosUtility.get(`/etims/notifications`);
+  return res?.data;
+};
