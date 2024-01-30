@@ -14,7 +14,10 @@ import { FaBuildingColumns } from "react-icons/fa6";
 import { FaFileInvoice } from "react-icons/fa";
 
 import { socket } from "../ui/dashboard/navbar/navbar";
-import { calculateAmounts } from "../ui/reusableFunctions/Utils";
+import {
+  calculateTotalAmount,
+  checkDates,
+} from "../ui/reusableFunctions/Utils";
 
 const Dashboard = () => {
   const [user, setUser] = useState({});
@@ -27,6 +30,9 @@ const Dashboard = () => {
   const [today, setTodayAmt] = useState(0);
   const [month, setMonthAmt] = useState(0);
   const [year, setYearAmt] = useState(0);
+  const [todayInvoices, setTodayInvoices] = useState([]);
+  const [monthInvoices, setMonthInvoices] = useState([]);
+  const [yearInvoices, setYearInvoices] = useState([]);
 
   const getOrgs = async () => {
     setOrgsLoading(true);
@@ -50,10 +56,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (transactions.length > 0) {
-      const { today, monthToDate, yearToDate } = calculateAmounts(transactions);
-      setTodayAmt(today);
-      setMonthAmt(monthToDate);
-      setYearAmt(yearToDate);
+      const { todayTotalAmount, monthTotalAmount, yearTotalAmount } =
+        calculateTotalAmount(transactions);
+      setTodayAmt(todayTotalAmount);
+      setMonthAmt(monthTotalAmount);
+      setYearAmt(yearTotalAmount);
     }
   }, [transactions]);
 
@@ -77,6 +84,16 @@ const Dashboard = () => {
   useEffect(() => {
     getUsers();
   }, []);
+
+  useEffect(() => {
+    if (transactions) {
+      const { monthTransations, yearTransactions, todayTransactions } =
+        checkDates(transactions);
+      setTodayInvoices(todayTransactions);
+      setYearInvoices(yearTransactions);
+      setMonthInvoices(monthTransations);
+    }
+  }, [transactions]);
 
   const AdminCard = ({ name, count, to, icon, amounts, dates }) => {
     return (
@@ -107,7 +124,7 @@ const Dashboard = () => {
           amounts
           to={""}
           name={"Total Amount (KES)"}
-          count={today.toLocaleString()}
+          count={year.toLocaleString()}
           icon={<MdOutlineAttachMoney size={30} />}
         />
         <AdminCard
@@ -123,9 +140,42 @@ const Dashboard = () => {
           to={""}
           amounts
           name={"Total Amount (KES)"}
-          count={year.toLocaleString()}
+          count={today.toLocaleString()}
           icon={<MdOutlineAttachMoney size={30} />}
         />
+      </div>
+      <p className="text-[25px] mt-4">Invoices Summary</p>
+      <div className="flex flex-wrap gap-10 mt-4">
+        <AdminCard
+          dates={"Year To Date"}
+          amounts
+          count={
+            txLoading ? <Spin spinning={txLoading} /> : yearInvoices.length
+          }
+          name={"Invoices Submitted"}
+          to={"transactions"}
+          icon={<FaFileInvoice size={30} />}
+        />
+        <AdminCard
+          dates={"Month To Date"}
+          amounts
+          count={
+            txLoading ? <Spin spinning={txLoading} /> : monthInvoices.length
+          }
+          name={"Invoices Submitted"}
+          to={"transactions"}
+          icon={<FaFileInvoice size={30} />}
+        />
+        <AdminCard
+          dates={"Today"}
+          amounts
+          count={
+            txLoading ? <Spin spinning={txLoading} /> : todayInvoices.length
+          }
+          name={"Invoices Submitted"}
+          to={"transactions"}
+          icon={<FaFileInvoice size={30} />}
+        />{" "}
       </div>
       <p className="text-[25px] mt-4">Data Overview</p>
       <div className="flex flex-wrap gap-10 mt-4">
@@ -149,14 +199,6 @@ const Dashboard = () => {
             />
           </>
         )}
-        <AdminCard
-          count={
-            txLoading ? <Spin spinning={txLoading} /> : transactions.length
-          }
-          name={"Invoices Submitted"}
-          to={"transactions"}
-          icon={<FaFileInvoice size={30} />}
-        />
       </div>
       <p className="text-[25px] mt-5">Graphical Analysis</p>
     </div>
