@@ -85,12 +85,12 @@ const Dashboard = () => {
         className="h-[10rem] border w-[22rem] rounded-[30px] flex flex-col   items-center  justify-center bg-[white]"
       >
         {amounts && <p className="text-[20px] mb-2">{dates}</p>}
-        <div className="flex justify-center items-center gap-4">
+        <div className="flex justify-center items-center gap-2">
           <div className="text-[#cb7529] bg-[#092332] rounded-[50px] p-[20px]">
             {icon}
           </div>
-          <p className="text-[35px] flex justify-center text-[#092332]">
-            {count.toLocaleString()}
+          <p className="text-[20px] flex justify-center text-[#092332]">
+            {count}
           </p>
         </div>
         <p className="flex justify-center text-[15px] mt-2">{name}</p>
@@ -107,7 +107,7 @@ const Dashboard = () => {
           amounts
           to={""}
           name={"Total Amount (KES)"}
-          count={today}
+          count={today.toLocaleString()}
           icon={<MdOutlineAttachMoney size={30} />}
         />
         <AdminCard
@@ -115,7 +115,7 @@ const Dashboard = () => {
           amounts
           to={""}
           name={"Total Amount (KES)"}
-          count={month}
+          count={month.toLocaleString()}
           icon={<MdOutlineAttachMoney size={30} />}
         />
         <AdminCard
@@ -123,7 +123,7 @@ const Dashboard = () => {
           to={""}
           amounts
           name={"Total Amount (KES)"}
-          count={year}
+          count={year.toLocaleString()}
           icon={<MdOutlineAttachMoney size={30} />}
         />
       </div>
@@ -141,11 +141,7 @@ const Dashboard = () => {
             />
             <AdminCard
               count={
-                orgsLoading ? (
-                  <Spin spinning={orgsLoading} />
-                ) : (
-                  orgs.length.toLocaleString()
-                )
+                orgsLoading ? <Spin spinning={orgsLoading} /> : orgs.length
               }
               name={"Registered Organizations"}
               to={"organizations"}

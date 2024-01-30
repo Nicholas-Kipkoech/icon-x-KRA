@@ -25,7 +25,6 @@ const formatCustomdate = (currentDate) => {
 };
 
 const Transactions = () => {
-  const [requests, setRequests] = useState([]);
   const [responses, setResponses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -43,22 +42,12 @@ const Transactions = () => {
   useEffect(() => {
     const getTransactions = async () => {
       setLoading(true);
-      if (loggedInUser.role === "Superadmin") {
-        const { response } = await fetchTransactions();
-        setResponses(response);
-        setLoading(false);
-      } else {
-        if (loggedInUser.organization_id) {
-          const { transactionResponse } = await fetchTransactionsById(
-            loggedInUser.organization_id
-          );
-          setResponses(transactionResponse);
-          setLoading(false);
-        }
-      }
+      const { response } = await fetchTransactions();
+      setResponses(response);
+      setLoading(false);
     };
     getTransactions();
-  }, [loggedInUser]);
+  }, []);
 
   const url =
     "https://etims-sbx.kra.go.ke/common/link/etims/receipt/indexEtimsReceiptData?Data=P600000175A00";

@@ -22,17 +22,8 @@ const Notifications = ({ open, handleClose, onread }) => {
 
   useEffect(() => {
     const getNotifications = async () => {
-      if (user.role === "Superadmin") {
-        const { notifications } = await fetchNotifications();
-        setNotifications(notifications);
-      } else {
-        if (user.organization_id) {
-          const { notifications } = await fetchNotificationsByID(
-            user.organization_id
-          );
-          setNotifications(notifications);
-        }
-      }
+      const { notifications } = await fetchNotifications();
+      setNotifications(notifications);
     };
     socket.on("notification", () => {
       getNotifications();
