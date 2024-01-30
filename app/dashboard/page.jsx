@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import {
   fetchOrganizations,
   fetchTransactions,
-  fetchTransactionsById,
   fetchUsers,
 } from "../services/adminServices";
 import { Spin } from "antd";
@@ -28,6 +27,7 @@ const Dashboard = () => {
   const [today, setTodayAmt] = useState(0);
   const [month, setMonthAmt] = useState(0);
   const [year, setYearAmt] = useState(0);
+
   const getOrgs = async () => {
     setOrgsLoading(true);
     const { registered_organizations } = await fetchOrganizations();
@@ -38,20 +38,9 @@ const Dashboard = () => {
   useEffect(() => {
     const getTransactions = async () => {
       setTxLoading(true);
-      if (user.role === "Superadmin") {
-        const { transactions } = await fetchTransactions();
-        setTransactions(transactions);
-        setTxLoading(false);
-      } else {
-        console.log(user);
-        if (user.organization_id) {
-          const { transaction } = await fetchTransactionsById(
-            user.organization_id
-          );
-          setTransactions(transaction);
-          setTxLoading(false);
-        }
-      }
+      const { transactions } = await fetchTransactions();
+      setTransactions(transactions);
+      setTxLoading(false);
     };
     socket.on("notification", () => {
       getTransactions();
@@ -70,8 +59,8 @@ const Dashboard = () => {
 
   const getUsers = async () => {
     setUserLoading(true);
-    const { _users } = await fetchUsers();
-    setUsers(_users);
+    const { users } = await fetchUsers();
+    setUsers(users);
     setUserLoading(false);
   };
 
@@ -144,7 +133,7 @@ const Dashboard = () => {
           <>
             <AdminCard
               count={
-                userLoading ? <Spin spinning={userLoading} /> : users.length - 1
+                userLoading ? <Spin spinning={userLoading} /> : users.length
               }
               name={"Enrolled Users"}
               to={"users"}

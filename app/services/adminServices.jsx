@@ -5,7 +5,7 @@ export const updateUser = async (data) => {
   return res?.data;
 };
 export const fetchUsers = async () => {
-  const res = await PrivateAxiosUtility.get(`/user/users`);
+  const res = await PrivateAxiosUtility.get(`/user/fetch`);
   return res?.data;
 };
 

@@ -21,13 +21,8 @@ const Users = () => {
     const getUsers = async () => {
       try {
         setLoading(true);
-        if (loggedInUser.role === "Superadmin") {
-          const { _users } = await fetchUsers();
-          setUsers(_users.filter((user) => user.role !== "Superadmin"));
-        } else {
-          const { _users } = await fetchUsers();
-          setUsers(_users.filter((user) => user.email === loggedInUser.email));
-        }
+        const { users } = await fetchUsers();
+        setUsers(users);
         setLoading(false);
       } catch (error) {
         setLoading(false);
