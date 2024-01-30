@@ -10,18 +10,12 @@ import {
 import { Spin } from "antd";
 import { jwtDecode } from "jwt-decode";
 import Link from "next/link";
-import {
-  MdLocalPostOffice,
-  MdOutlineAttachMoney,
-  MdOutlineMoney,
-  MdPeople,
-} from "react-icons/md";
+import { MdOutlineAttachMoney, MdPeople } from "react-icons/md";
 import { FaBuildingColumns } from "react-icons/fa6";
 import { FaFileInvoice } from "react-icons/fa";
-import { convertToShortScaleFormat } from "../ui/reusableFunctions/Utils";
 
-import { useCustomToast } from "../hooks/useToast";
 import { socket } from "../ui/dashboard/navbar/navbar";
+import { calculateAmounts } from "../ui/reusableFunctions/Utils";
 
 const Dashboard = () => {
   const [user, setUser] = useState({});
@@ -31,7 +25,9 @@ const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
   const [txLoading, setTxLoading] = useState(false);
   const [userLoading, setUserLoading] = useState(false);
-  const [totalAmt, setTotalAmt] = useState(0);
+  const [today, setTodayAmt] = useState(0);
+  const [month, setMonthAmt] = useState(0);
+  const [year, setYearAmt] = useState(0);
   const getOrgs = async () => {
     setOrgsLoading(true);
     const { registered_organizations } = await fetchOrganizations();
@@ -62,14 +58,13 @@ const Dashboard = () => {
     });
     getTransactions();
   }, [user]);
-  console.log(transactions.totAmt);
 
   useEffect(() => {
     if (transactions.length > 0) {
-      const total = transactions.reduce((acc, item) => {
-        return acc + Number(item.totAmt);
-      }, 0);
-      setTotalAmt(total);
+      const { today, monthToDate, yearToDate } = calculateAmounts(transactions);
+      setTodayAmt(today);
+      setMonthAmt(monthToDate);
+      setYearAmt(yearToDate);
     }
   }, [transactions]);
 
@@ -94,18 +89,19 @@ const Dashboard = () => {
     getUsers();
   }, []);
 
-  const AdminCard = ({ name, count, to, icon }) => {
+  const AdminCard = ({ name, count, to, icon, amounts, dates }) => {
     return (
       <Link
         href={`/dashboard/${to}`}
         className="h-[10rem] border w-[22rem] rounded-[30px] flex flex-col   items-center  justify-center bg-[white]"
       >
+        {amounts && <p className="text-[20px] mb-2">{dates}</p>}
         <div className="flex justify-center items-center gap-4">
           <div className="text-[#cb7529] bg-[#092332] rounded-[50px] p-[20px]">
             {icon}
           </div>
           <p className="text-[35px] flex justify-center text-[#092332]">
-            {count}
+            {count.toLocaleString()}
           </p>
         </div>
         <p className="flex justify-center text-[15px] mt-2">{name}</p>
@@ -115,18 +111,32 @@ const Dashboard = () => {
 
   return (
     <div className="mt-[10px]">
-      <div className="h-[12rem] border w-[auto] max-w-[36rem] rounded-[30px] flex flex-col   items-center  justify-center bg-[white]">
-        <div className="flex justify-center items-center gap-[1rem]">
-          <div className="text-[#cb7529] bg-[#092332] rounded-[50px] p-[20px]">
-            <MdOutlineAttachMoney size={50} />
-          </div>
-          <p className="text-[2rem] flex justify-center text-[#092332]">
-            {totalAmt.toLocaleString()}
-          </p>
-        </div>
-        <p className="flex justify-center text-[26px] mt-2">
-          Total amount transacted (KES)
-        </p>
+      <p className="text-[25px] mt-4">Transactions Summary</p>
+      <div className="flex flex-wrap gap-10 mt-4">
+        <AdminCard
+          dates={"Year To Date"}
+          amounts
+          to={""}
+          name={"Total Amount (KES)"}
+          count={today}
+          icon={<MdOutlineAttachMoney size={30} />}
+        />
+        <AdminCard
+          dates={"Month To Date"}
+          amounts
+          to={""}
+          name={"Total Amount (KES)"}
+          count={month}
+          icon={<MdOutlineAttachMoney size={30} />}
+        />
+        <AdminCard
+          dates={"Today"}
+          to={""}
+          amounts
+          name={"Total Amount (KES)"}
+          count={year}
+          icon={<MdOutlineAttachMoney size={30} />}
+        />
       </div>
       <p className="text-[25px] mt-4">Data Overview</p>
       <div className="flex flex-wrap gap-10 mt-4">

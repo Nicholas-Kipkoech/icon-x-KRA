@@ -25,8 +25,10 @@ export const formatDate = (serverTime) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours());
+  const minutes = String(date.getMinutes());
 
-  const formattedDate = `${day}/${month}/${year}`;
+  const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
   return formattedDate;
 };
 
@@ -43,28 +45,57 @@ export const getSegment = async (code) => {
   return segment;
 };
 
-export const convertToShortScaleFormat = (number) => {
-  if (typeof number !== "number" || isNaN(number)) {
-    return "Invalid input";
-  }
-  if (number < 1000) {
-    return number.toString();
-  }
-  if (number < 1000000) {
-    const thousandValue = Math.floor(number / 1000);
-    const remainder = number % 1000;
+import { format, startOfMonth, startOfYear, isSameDay } from "date-fns";
 
-    if (remainder === 0) {
-      return thousandValue + " Thousand";
-    }
+// Function to filter transactions based on date range
+function filterTransactionsByDate(transactions, startDate, endDate) {
+  return transactions.filter((transaction) => {
+    const transactionDate = new Date(transaction.createdAt);
+    return (
+      isSameDay(transactionDate, startDate) ||
+      (transactionDate > startDate && transactionDate < endDate)
+    );
+  });
+}
 
-    return thousandValue + "." + remainder.toString().slice(0, 1) + " Thousand";
-  }
-  const millionValue = Math.floor(number / 1000000);
-  const remainder = number % 1000000;
+// Function to calculate amounts for Today, Monthly to Date, and Year to Date
+export function calculateAmounts(transactions) {
+  const today = new Date();
+  const startOfMonthDate = startOfMonth(today);
+  const startOfYearDate = startOfYear(today);
 
-  if (remainder === 0) {
-    return millionValue + " Million";
-  }
-  return millionValue + "." + remainder.toString().slice(0, 1) + " Million";
-};
+  const todayTransactions = filterTransactionsByDate(
+    transactions,
+    today,
+    new Date(today.getTime() + 24 * 60 * 60 * 1000)
+  );
+  const monthToDateTransactions = filterTransactionsByDate(
+    transactions,
+    startOfMonthDate,
+    today
+  );
+  const yearToDateTransactions = filterTransactionsByDate(
+    transactions,
+    startOfYearDate,
+    today
+  );
+
+  const todayAmount = todayTransactions.reduce(
+    (sum, transaction) => sum + Number(transaction.totAmt),
+    0
+  );
+  const monthToDateAmount = monthToDateTransactions.reduce(
+    (sum, transaction) => sum + Number(transaction.totAmt),
+    0
+  );
+  const yearToDateAmount = yearToDateTransactions.reduce(
+    (sum, transaction) => sum + Number(transaction.totAmt),
+    0
+  );
+
+  return {
+    today: todayAmount,
+    monthToDate: monthToDateAmount,
+    yearToDate: yearToDateAmount,
+  };
+}

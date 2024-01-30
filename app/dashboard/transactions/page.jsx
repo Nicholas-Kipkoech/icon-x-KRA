@@ -12,8 +12,11 @@ import { MdGridView } from "react-icons/md";
 import { FaReceipt } from "react-icons/fa6";
 import QrCodeComponent from "./QrCode";
 import { jwtDecode } from "jwt-decode";
+import CustomInput from "@/app/ui/reusableComponents/CustomInput";
+import CustomSelect from "@/app/ui/reusableComponents/CustomSelect";
+import { formatDate } from "@/app/ui/reusableFunctions/Utils";
 
-const formatdate = (currentDate) => {
+const formatCustomdate = (currentDate) => {
   const formattedDate = currentDate.replace(
     /^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/,
     "$1/$2/$3 $4:$5:$6"
@@ -22,7 +25,6 @@ const formatdate = (currentDate) => {
 };
 
 const Transactions = () => {
-  const [toggle, setToggle] = useState("requests");
   const [requests, setRequests] = useState([]);
   const [responses, setResponses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,6 +32,7 @@ const Transactions = () => {
   const [receiptUrl, setReceiptUrl] = useState("");
   const [user, setUser] = useState("");
   const [loggedInUser, setLoggedInUser] = useState({});
+  const [pin, setPin] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -41,15 +44,14 @@ const Transactions = () => {
     const getTransactions = async () => {
       setLoading(true);
       if (loggedInUser.role === "Superadmin") {
-        const { transactions, response } = await fetchTransactions();
+        const { response } = await fetchTransactions();
         setResponses(response);
-        setRequests(transactions);
         setLoading(false);
       } else {
         if (loggedInUser.organization_id) {
-          const { transaction, transactionResponse } =
-            await fetchTransactionsById(loggedInUser.organization_id);
-          setRequests(transaction);
+          const { transactionResponse } = await fetchTransactionsById(
+            loggedInUser.organization_id
+          );
           setResponses(transactionResponse);
           setLoading(false);
         }
@@ -58,61 +60,8 @@ const Transactions = () => {
     getTransactions();
   }, [loggedInUser]);
 
-  console.log(requests);
-  const Requests = [
-    {
-      title: "Transaction ID",
-      dataIndex: "transactionID",
-      key: "transactionID",
-      render: (_, item) => (
-        <Link href={`transactions/${item?._id}`}>{item.transactionID}</Link>
-      ),
-    },
-    {
-      title: "Invoice No",
-      dataIndex: "invcNo",
-      key: "invcNo",
-    },
-    {
-      title: "Original Invoice No",
-      dataIndex: "orgInvcNo",
-      key: "orgInvcNo",
-    },
-    {
-      title: "Client Name",
-      dataIndex: "custNm",
-      key: "custNm",
-      render: (_, item) => <p>{item?.custNm ? item.custNm : "Null"}</p>,
-    },
-    {
-      title: "Invoice Amount (KES)",
-      dataIndex: "intrlData",
-      key: "intrlData",
-      render: (_, item) => <p>{item.totAmt}</p>,
-    },
-    {
-      title: " Invoice Tax Amount (KES)",
-      dataIndex: "intrlData",
-      key: "intrlData",
-      render: (_, item) => <p>{item.totTaxAmt}</p>,
-    },
-    {
-      title: "Invoice Type",
-      dataIndex: "rcptTyCd",
-      key: "rcptTyCd",
-      render: (_, item) => (
-        <p>{item.rcptTyCd === "R" ? "Credit Note" : "Debit Note"}</p>
-      ),
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (_, item) => <p className="text-[green]">Success</p>,
-    },
-  ];
   const url =
-    "https://etims-sbx.kra.go.ke/common/link/etims/receipt/indexEtimsReceiptData?Data=P051178573M00";
+    "https://etims-sbx.kra.go.ke/common/link/etims/receipt/indexEtimsReceiptData?Data=P600000175A00";
   const Responses = [
     {
       title: "Invoice Number",
@@ -124,19 +73,40 @@ const Transactions = () => {
       title: "Client Name",
       dataIndex: "intrlData",
       key: "intrlData",
-      render: (_, item) => <p>{item?.clientName ? item.clientName : "Null"}</p>,
+      render: (_, item) => (
+        <p className="text-[15px]">
+          {item?.clientName ? item.clientName : "Null"}
+        </p>
+      ),
     },
     {
       title: "Invoice Amount (KES)",
       dataIndex: "invoiceAmt",
       key: "invoiceAmt",
-      render: (_, item) => <p>{item.invoiceAmt}</p>,
+      render: (_, item) => (
+        <p className="flex justify-end">{item.invoiceAmt.toLocaleString()}</p>
+      ),
     },
     {
       title: " Invoice Tax Amount (KES)",
       dataIndex: "taxAmt",
       key: "taxAmt",
-      render: (_, item) => <p>{item.taxAmt}</p>,
+      render: (_, item) => (
+        <p className="flex justify-end">{item.taxAmt.toLocaleString()}</p>
+      ),
+    },
+    {
+      title: "Date Sent",
+      dataIndex: "dateSent",
+      key: "dateSent",
+      render: (_, item) => <p>{formatDate(item.dateSent)}</p>,
+    },
+
+    {
+      title: "Date Received",
+      dataIndex: "sdcDateTime",
+      key: "company_code",
+      render: (_, item) => <p>{formatCustomdate(item.sdcDateTime)}</p>,
     },
     {
       title: "Receipt Signature",
@@ -144,10 +114,12 @@ const Transactions = () => {
       key: "rcptSign",
     },
     {
-      title: "Date Received",
-      dataIndex: "sdcDateTime",
-      key: "company_code",
-      render: (_, item) => <p>{formatdate(item.sdcDateTime)}</p>,
+      title: "Status",
+      dataIndex: "rcptSign",
+      key: "rcptSign",
+      render: (_, item) => (
+        <span className="text-green-500">{item.status}</span>
+      ),
     },
     {
       title: "View Receipt",
@@ -167,40 +139,47 @@ const Transactions = () => {
       ),
     },
   ];
-  const renderTable = () => {
-    switch (toggle) {
-      case "requests":
-        return (
-          <Table columns={Requests} dataSource={requests} loading={loading} />
-        );
-      case "responses":
-        return (
-          <Table columns={Responses} dataSource={responses} loading={loading} />
-        );
-    }
-  };
-
   return (
     <div className="mt-5 ">
-      <div className="flex justify-center">
-        <CustomButton
-          name={"ETIMS submitted invoices"}
-          type={"button"}
-          onClick={() => setToggle("requests")} // Set the toggle state to "requests" when the button is clicked
-          className={`h-[40px] ${
-            toggle === "requests" ? "bg-[#cb7529]" : "bg-[#094b6a]"
-          } p-2 justify-center items-center flex text-white font-bold border rounded-md w-[100%] `}
+      <div className="flex justify-center"></div>
+      <div className="flex justify-start items-center gap-4">
+        <CustomInput
+          name={"Invoice Number"}
+          required
+          className={"h-[35px] border rounded-md p-[5px] "}
         />
-        <CustomButton
-          name={"ETIMS compliant receipts"}
-          type={"button"}
-          onClick={() => setToggle("responses")}
-          className={`h-[40px] ${
-            toggle === "responses" ? "bg-[#cb7529]" : "bg-[#094b6a]"
-          } p-2 justify-center items-center flex text-white font-bold border rounded-md w-[100%] `}
+        <CustomSelect
+          name={"Status"}
+          placeholder={"Select by status"}
+          options={[
+            {
+              label: "Success",
+              value: "success",
+            },
+            {
+              label: "Failed",
+              value: "failed",
+            },
+          ]}
+          required
+          className={
+            "h-[45px] w-[250px] mt-2 flex items-center  rounded-md p-[5px] "
+          }
+        />
+        <CustomInput
+          required
+          name={"Invoice Amount"}
+          className={"h-[35px] border rounded-md p-[5px] "}
         />
       </div>
-      <div className="mt-3">{renderTable()}</div>
+      <div className="mt-3">
+        <Table
+          columns={Responses}
+          dataSource={responses}
+          loading={loading}
+          scroll={{ x: 1500 }}
+        />
+      </div>
       <QrCodeComponent
         open={showForm}
         handleClose={() => setShowForm(false)}

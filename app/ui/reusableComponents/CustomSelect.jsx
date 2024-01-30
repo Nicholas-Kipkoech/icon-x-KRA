@@ -11,8 +11,8 @@ const CustomSelect = ({
   placeholder,
 }) => {
   return (
-    <div className="flex flex-col mt-2">
-      <label className="flex gap-x-0.5">
+    <div className="flex flex-col mt-1">
+      <label className="flex gap-5 mt-2">
         {name}{" "}
         {required ? (
           <p className="text-[red]">*</p>

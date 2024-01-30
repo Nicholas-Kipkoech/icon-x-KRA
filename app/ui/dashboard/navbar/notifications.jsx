@@ -61,7 +61,9 @@ const Notifications = ({ open, handleClose, onread }) => {
               key={notification._id}
               className="flex items-center text-[14px] gap-2 bg-[#ebe7e4] h-[60px] rounded-md p-[5px] m-[3px]"
             >
-              <span className="font-bold ">{notification.from}:</span>
+              <span className="font-bold ">
+                {user.role === "Superadmin" && notification.from}
+              </span>
               <span className="text-[grey]">{notification.message}</span>
               <span className="text-[#367ed1] ml-5">
                 {formatDistanceToNow(notification.send_date)} ago

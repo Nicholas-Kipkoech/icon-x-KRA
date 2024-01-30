@@ -4,25 +4,38 @@ import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { formatDate, getFamily } from "@/app/ui/reusableFunctions/Utils";
 import { Class, Family, Segment } from "./CrudOps";
+import { jwtDecode } from "jwt-decode";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const getUsers = async () => {
-    try {
-      setLoading(true);
-      const { _users } = await fetchUsers();
-      const filteredUsers = _users.filter((user) => user.role !== "Superadmin");
-      setUsers(filteredUsers);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.error(error);
-    }
-  };
+  const [loggedInUser, setLoggedInUser] = useState({});
+
   useEffect(() => {
-    getUsers();
+    const token = localStorage.getItem("access_token");
+    const decoded_user = jwtDecode(token);
+    setLoggedInUser(decoded_user);
   }, []);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        setLoading(true);
+        if (loggedInUser.role === "Superadmin") {
+          const { _users } = await fetchUsers();
+          setUsers(_users.filter((user) => user.role !== "Superadmin"));
+        } else {
+          const { _users } = await fetchUsers();
+          setUsers(_users.filter((user) => user.email === loggedInUser.email));
+        }
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.error(error);
+      }
+    };
+    getUsers();
+  }, [loggedInUser]);
 
   const columns = [
     {
