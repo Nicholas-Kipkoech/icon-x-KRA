@@ -14,7 +14,9 @@ import {
 
 import { jwtDecode } from "jwt-decode";
 
-export const socket = io("https://etims-icon.onrender.com"); // Replace with your server URL
+const ENDPOINT = "https://etims-icon.onrender.com";
+const LOCAL_URL = "http://localhost:5000";
+export const socket = io(ENDPOINT); // Replace with your server URL
 
 const Navbar = () => {
   const [count, setCount] = useState(0);
