@@ -99,7 +99,7 @@ const Dashboard = () => {
     return (
       <Link
         href={`/dashboard/${to}`}
-        className="sm:w-[30rem] lg:w-[22rem] xl:w-[27rem] 2xl:w-[22rem] 2xl:h-[10rem] border w-[22rem] rounded-[20px] flex flex-col   items-center  justify-center bg-[white]"
+        className="sm:w-[30rem] lg:w-[15rem] lg:h-[9rem] xl:w-[18rem] 2xl:w-[22rem] 2xl:h-[10rem] border  rounded-[20px] flex flex-col   items-center  justify-center bg-[white]"
       >
         {amounts && (
           <p className="text-[20px] mb-2 sm:text-[16px] 2xl:text-[16px] pt-3">
