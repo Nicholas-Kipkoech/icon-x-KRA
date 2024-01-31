@@ -13,6 +13,7 @@ import {
 } from "@/app/services/etimsServices";
 
 import { jwtDecode } from "jwt-decode";
+import CustomButton from "../../reusableComponents/CustomButton";
 
 const ENDPOINT = "https://etims-icon.onrender.com";
 const LOCAL_URL = "http://localhost:5000";
@@ -89,12 +90,11 @@ const Navbar = () => {
           <MdNotifications size={40} />
         </div>
         <div className="flex items-center gap-3 ">
-          <p
-            className="text-white bg-[#cb7529] p-[5px] md:w-[100px]  w-[100px] justify-center flex cursor-pointer rounded-md"
+          <CustomButton
+            className="text-white bg-[#cb7529] p-[5px] md:w-[100px]  w-[100px] 2xl:w-[200px] 2xl:h-[50px] items-center justify-center flex cursor-pointer rounded-md"
             onClick={handleLogout}
-          >
-            Logout
-          </p>
+            name={"Logout"}
+          />
         </div>
       </div>
       <Notifications
