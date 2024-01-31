@@ -79,7 +79,7 @@ const Navbar = () => {
       </div>
       <div className="flex items-center gap-[20px]">
         <div
-          className="gap-[2px] text-white cursor-pointer"
+          className="gap-[2px]  text-white cursor-pointer"
           onClick={() => setOpenNotification(true)}
         >
           <NotificationBadge
@@ -90,7 +90,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-3 ">
           <p
-            className="text-white bg-[#cb7529] p-[5px] w-[100px] justify-center flex cursor-pointer rounded-md"
+            className="text-white bg-[#cb7529] p-[5px] md:w-[100px]  w-[100px] justify-center flex cursor-pointer rounded-md"
             onClick={handleLogout}
           >
             Logout

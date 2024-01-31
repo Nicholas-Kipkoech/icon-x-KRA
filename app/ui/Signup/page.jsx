@@ -139,14 +139,14 @@ const Signup = ({ toggleView }) => {
   };
 
   return (
-    <div className="h-[600px] border-2 rounded-md w-[1000px] bg-white">
+    <div className="h-[600px] border-2 rounded-md w-[1000px] sm:w-[500px] sm:h-auto lg:w-[800px] bg-white">
       <div className="flex flex-col justify-center items-center pt-8">
         <p className="text-[28px] font-bold">Create your account</p>
         <div className="flex flex-col items-center justify-center text-[grey]">
           <p>Enter your details below to create your account and get started</p>
         </div>
       </div>
-      <form className="h-[500px] mt-2 p-5 flex flex-col items-center justify-center">
+      <form className="h-[500px] sm:h-[auto] mt-2 p-5 flex flex-col items-center justify-center">
         <div className="flex gap-2  flex-wrap items-center justify-center">
           <CustomInput
             name={`Organization Name`}
@@ -202,14 +202,14 @@ const Signup = ({ toggleView }) => {
           <CustomButton
             name={"Cancel"}
             type={`button`}
-            className={`h-[50px] w-[350px] rounded-[30px] bg-[#094b6a] font-[600] text-white text-[20px]`}
+            className={`h-[50px] w-[350px] sm:w-[200px] lg:w-[300px] rounded-[30px] bg-[#094b6a] font-[600] text-white text-[20px]`}
             onClick={toggleView}
           />
           <CustomButton
             name={submitting ? `Creating...` : `Create`}
             type={`button`}
             onClick={handleCreateOrg}
-            className={`h-[50px] w-[350px] rounded-[30px] bg-[#cb7529] font-[600] text-[white] text-[20px]`}
+            className={`h-[50px] w-[350px] sm:w-[200px] lg:w-[300px] rounded-[30px] bg-[#cb7529] font-[600] text-[white] text-[20px]`}
           />
         </div>
       </form>

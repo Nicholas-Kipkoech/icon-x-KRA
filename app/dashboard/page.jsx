@@ -99,26 +99,32 @@ const Dashboard = () => {
     return (
       <Link
         href={`/dashboard/${to}`}
-        className="h-[10rem] border w-[22rem] rounded-[30px] flex flex-col   items-center  justify-center bg-[white]"
+        className="sm:w-[30rem] lg:w-[22rem] xl:w-[27rem] 2xl:w-[22rem] 2xl:h-[10rem] border w-[22rem] rounded-[20px] flex flex-col   items-center  justify-center bg-[white]"
       >
-        {amounts && <p className="text-[20px] mb-2">{dates}</p>}
-        <div className="flex justify-center items-center gap-2">
+        {amounts && (
+          <p className="text-[20px] mb-2 sm:text-[16px] 2xl:text-[16px] pt-3">
+            {dates}
+          </p>
+        )}
+        <div className="flex justify-center items-center gap-2 sm:gap-3 lg:gap-4 2xl:gap-6">
           <div className="text-[#cb7529] bg-[#092332] rounded-[50px] p-[20px]">
             {icon}
           </div>
-          <p className="text-[20px] flex justify-center text-[#092332]">
+          <p className="text-[20px] sm:text-[18px] md:text-[20px] xl:text-[24px] 2xl:text-[20px] flex justify-center text-[#092332]">
             {count}
           </p>
         </div>
-        <p className="flex justify-center text-[15px] mt-2">{name}</p>
+        <p className="flex justify-center text-[15px]">{name}</p>
       </Link>
     );
   };
 
   return (
     <div className="mt-[10px]">
-      <p className="text-[25px] mt-4">Transactions Summary</p>
-      <div className="flex flex-wrap gap-10 mt-4">
+      <p className="text-[25px] mt-4 md:text-[20px] sm:text-[16px]  flex justify-center">
+        Transactions Summary
+      </p>
+      <div className="flex flex-wrap gap-10 mt-4 sm:flex sm:justify-center">
         <AdminCard
           dates={"Year To Date"}
           amounts
@@ -144,8 +150,10 @@ const Dashboard = () => {
           icon={<MdOutlineAttachMoney size={30} />}
         />
       </div>
-      <p className="text-[25px] mt-4">Invoices Summary</p>
-      <div className="flex flex-wrap gap-10 mt-4">
+      <p className="text-[25px] mt-4 md:text-[20px] sm:text-[16px] flex justify-center">
+        Invoices Summary
+      </p>
+      <div className="flex flex-wrap gap-10 mt-4 sm:flex sm:justify-center">
         <AdminCard
           dates={"Year To Date"}
           amounts
@@ -177,8 +185,10 @@ const Dashboard = () => {
           icon={<FaFileInvoice size={30} />}
         />{" "}
       </div>
-      <p className="text-[25px] mt-4">Data Overview</p>
-      <div className="flex flex-wrap gap-10 mt-4">
+      <p className="text-[25px] mt-4 md:text-[20px] sm:text-[16px] flex justify-center">
+        Data Overview
+      </p>
+      <div className="flex flex-wrap gap-10 mt-4 sm:flex sm:justify-center">
         {user?.role === "Superadmin" && (
           <>
             <AdminCard
@@ -200,7 +210,9 @@ const Dashboard = () => {
           </>
         )}
       </div>
-      <p className="text-[25px] mt-5">Graphical Analysis</p>
+      <p className="text-[25px] mt-5 md:text-[20px] sm:text-[10px] flex justify-center">
+        Graphical Analysis
+      </p>
     </div>
   );
 };
