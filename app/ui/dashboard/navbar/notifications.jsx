@@ -52,7 +52,7 @@ const Notifications = ({ open, handleClose, onread }) => {
               key={notification._id}
               className="flex items-center text-[14px] gap-2 bg-[#ebe7e4] h-[60px] rounded-md p-[5px] m-[3px]"
             >
-              <span className="font-bold ">
+              <span className="font-bold text-[13px] ">
                 {user.role === "Superadmin" && notification.from}
               </span>
               <span className="text-[grey]">{notification.message}</span>
