@@ -22,7 +22,7 @@ import { FaUsers } from "react-icons/fa6";
 import { FaServer } from "react-icons/fa";
 import { LiaFileInvoiceSolid } from "react-icons/lia";
 
-const Sidebar = () => {
+const Sidebar = ({ clicked }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -137,7 +137,7 @@ const Sidebar = () => {
           <li key={cat.title} className="text-white">
             <span>{cat.title}</span>
             {cat.list.map((item) => (
-              <MenuLink item={item} key={item.title} />
+              <MenuLink item={item} key={item.title} onClick={clicked} />
             ))}
           </li>
         ))}

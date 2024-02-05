@@ -21,7 +21,7 @@ const ENDPOINT = "https://etims-icon.onrender.com";
 const LOCAL_URL = "http://localhost:5000";
 export const socket = io(ENDPOINT); // Replace with your server URL
 
-const Navbar = ({ hide }) => {
+const Navbar = ({ showDrawer }) => {
   const [count, setCount] = useState(0);
   const [openNotication, setOpenNotification] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -80,7 +80,7 @@ const Navbar = ({ hide }) => {
     <div className="p-[20px]  flex items-center justify-between bg-[#094b6a]">
       <div className="capitalize flex gap-3 items-center text-white font-bold">
         <div className="flex items-center gap-2">
-          <IoMenu size={30} onClick={hide} className="cursor-pointer" />
+          <IoMenu size={30} onClick={showDrawer} className="cursor-pointer" />
           <HiOutlineSwitchHorizontal size={25} className="cursor-pointer" />
         </div>
         {formattedLastSegment}
