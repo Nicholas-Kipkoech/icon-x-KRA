@@ -21,7 +21,7 @@ const CustomInput = ({
       </label>
       <input
         type={type}
-        className={className}
+        className={`outline-[#cb7529] ${className}`}
         value={value}
         onChange={onchange}
         placeholder={name}

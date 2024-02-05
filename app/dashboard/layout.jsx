@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 540); // Adjust the width based on your mobile breakpoint
+      setIsMobile(window.innerWidth <= 768); // Adjust the width based on your mobile breakpoint
     };
     checkMobile(); // Initial check
     // Listen for window resize events
@@ -50,7 +50,7 @@ const Layout = ({ children }) => {
         </Drawer>
       ) : (
         <div
-          className={`top-0 sticky  transition-opacity  duration-75 ${
+          className={`top-0 sticky  transition-opacity duration-75 ${
             showDrawer ? "hidden" : "block"
           } `}
         >
