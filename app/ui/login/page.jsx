@@ -48,7 +48,7 @@ const Login = ({ toggleView }) => {
   };
 
   return (
-    <div className="h-[600px] border-2 rounded-md w-[auto] sm:w-[600px] xl:h-[750px]  bg-white">
+    <div className="h-[600px] border-2 rounded-md w-[auto] sm:w-[500px] xl:h-[600px] 2xl:h-[600px]  bg-white">
       <div className="flex flex-col justify-center items-center pt-8">
         <p className="text-[28px] font-bold">Welcome back!!!</p>
         <div className="flex flex-col items-center justify-center text-[grey]">
@@ -64,7 +64,7 @@ const Login = ({ toggleView }) => {
             required
             onchange={(e) => setEmail(e.target.value)}
             type={`email`}
-            className={`h-[60px] sm:w-[500px] border p-5 rounded-md`}
+            className={`h-[60px] sm:w-[400px] border p-5 rounded-md`}
             placeholder={`Enter email...`}
           />
 
@@ -75,7 +75,7 @@ const Login = ({ toggleView }) => {
             onchange={(e) => setPassword(e.target.value)}
             type={showPassword ? `text` : `password`}
             placeholder={`Enter password...`}
-            className={`h-[60px] sm:w-[500px] border p-5 rounded-md`}
+            className={`h-[60px] sm:w-[400px] border p-5 rounded-md`}
           />
         </Spin>
 
@@ -91,7 +91,7 @@ const Login = ({ toggleView }) => {
           <CustomButton
             name={loading ? `Logging in..` : `Login`}
             type={`button`}
-            className={`h-[60px] sm:w-[500px] rounded-[30px] bg-[#cb7529] font-[600] text-[white] text-[20px]`}
+            className={`h-[60px] sm:w-[400px] rounded-[30px] bg-[#cb7529] font-[600] text-[white] text-[20px]`}
             onClick={handleLogin}
             disabled={loading}
           />

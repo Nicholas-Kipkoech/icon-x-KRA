@@ -17,7 +17,7 @@ export default function Home() {
       <Image
         src={EtimsPng}
         alt=""
-        className="h-[600px] sm:hidden md:hidden md:w-[200px] lg:hidden xl:block xl:w-[600px] xl:h-[750px]  w-[auto] "
+        className="h-[600px] sm:hidden md:hidden md:w-[200px] lg:hidden xl:block xl:w-[600px] xl:h-[600px] 2xl:h-[600px]  w-[auto] "
         priority
       />
 

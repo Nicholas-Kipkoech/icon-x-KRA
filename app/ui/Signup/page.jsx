@@ -139,40 +139,40 @@ const Signup = ({ toggleView }) => {
   };
 
   return (
-    <div className="h-[600px] border-2 rounded-md w-[1000px] sm:w-[500px] sm:h-auto lg:w-[800px] bg-white">
+    <div className="h-[600px] border-2 rounded-md w-[1000px] sm:w-[500px] sm:h-auto lg:w-[800px] xl:h-[600px] 2xl:h-[600px] bg-white">
       <div className="flex flex-col justify-center items-center pt-8">
         <p className="text-[28px] font-bold">Create your account</p>
         <div className="flex flex-col items-center justify-center text-[grey]">
           <p>Enter your details below to create your account and get started</p>
         </div>
       </div>
-      <form className="h-[500px] sm:h-[auto] mt-2 p-5 flex flex-col items-center justify-center">
+      <form className="h-[500px] 2xl:h-[auto] sm:h-[auto] mt-2 p-5 flex flex-col items-center justify-center">
         <div className="flex gap-2  flex-wrap items-center justify-center">
           <CustomInput
             name={`Organization Name`}
             required
             onchange={(e) => setOrganizationName(e.target.value)}
             type={`text`}
-            className={`h-[50px] w-[350px] border p-5 rounded-md`}
+            className={`h-[50px] w-[350px] xl:w-[300px] 2xl:w-[300px] border p-5 rounded-md`}
           />
           <CustomInput
             required
             name={`Organization Email`}
             type={`text`}
             onchange={(e) => setOrganizationEmail(e.target.value)}
-            className={`h-[50px] w-[350px] border p-5 rounded-md`}
+            className={`h-[50px] w-[350px] xl:w-[300px] 2xl:w-[300px] border p-5 rounded-md`}
           />{" "}
           <CustomInput
             required
             name={`Organization Phone`}
             onchange={(e) => setOrganizationPhone(e.target.value)}
             type={`text`}
-            className={`h-[50px] w-[350px] border p-5 rounded-md`}
+            className={`h-[50px] w-[350px] xl:w-[300px] 2xl:w-[300px] border p-5 rounded-md`}
           />{" "}
           <div className="flex flex-col">
             <label>Segment</label>
             <Select
-              className="h-[50px] w-[350px]  rounded-md"
+              className="h-[50px] w-[350px] xl:w-[300px] 2xl:w-[300px]  rounded-md"
               options={segmentOptions}
               placeholder={loading ? "Loading segments" : "Select segment..."}
               defaultValue={segmentOptions[0]?.value}
@@ -182,7 +182,7 @@ const Signup = ({ toggleView }) => {
           <div className="flex flex-col">
             <label>Family of Business</label>
             <Select
-              className="h-[50px] w-[350px]  rounded-md"
+              className="h-[50px] w-[350px] xl:w-[300px] 2xl:w-[300px] rounded-md"
               placeholder={loading ? "Loading families" : "Select families..."}
               options={familyOptions}
               onChange={(value) => setSelectedFamily(value)}
@@ -191,7 +191,7 @@ const Signup = ({ toggleView }) => {
           <div className="flex flex-col">
             <label>Class of Business</label>
             <Select
-              className="h-[50px] w-[350px]  rounded-md"
+              className="h-[50px] w-[350px] xl:w-[300px] 2xl:w-[300px] rounded-md"
               options={classesOptions}
               placeholder={loading ? "Loading classes" : "Select classes..."}
               onChange={(value) => setSelectedClass(value)}
