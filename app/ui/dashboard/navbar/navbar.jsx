@@ -12,6 +12,7 @@ import {
   fetchNotificationsByID,
 } from "@/app/services/etimsServices";
 import { IoMenu } from "react-icons/io5";
+import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 
 import { jwtDecode } from "jwt-decode";
 import CustomButton from "../../reusableComponents/CustomButton";
@@ -78,8 +79,9 @@ const Navbar = ({ hide }) => {
   return (
     <div className="p-[20px]  flex items-center justify-between bg-[#094b6a]">
       <div className="capitalize flex gap-3 items-center text-white font-bold">
-        <div className="cursor-pointer">
-          <IoMenu size={30} onClick={hide} />
+        <div className="flex items-center gap-2">
+          <IoMenu size={30} onClick={hide} className="cursor-pointer" />
+          <HiOutlineSwitchHorizontal size={25} className="cursor-pointer" />
         </div>
         {formattedLastSegment}
       </div>

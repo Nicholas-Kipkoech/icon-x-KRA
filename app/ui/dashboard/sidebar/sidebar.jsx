@@ -24,7 +24,6 @@ import { LiaFileInvoiceSolid } from "react-icons/lia";
 
 const Sidebar = () => {
   const [user, setUser] = useState({});
-  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -114,7 +113,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="sticky top-0 h-[100vh] w-[280px]  bg-[#092332] p-[5px] ">
+    <div className="sticky top-0 h-[100vh] w-[300px]  bg-[#092332] p-[5px] ">
       <div className="flex justify-center items-center">
         <Image src={iconLogo} height={"120"} width={"120"} alt="" />
       </div>
