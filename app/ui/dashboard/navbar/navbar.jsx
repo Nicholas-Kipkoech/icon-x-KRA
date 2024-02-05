@@ -11,6 +11,7 @@ import {
   fetchNotifications,
   fetchNotificationsByID,
 } from "@/app/services/etimsServices";
+import { IoMenu } from "react-icons/io5";
 
 import { jwtDecode } from "jwt-decode";
 import CustomButton from "../../reusableComponents/CustomButton";
@@ -19,10 +20,11 @@ const ENDPOINT = "https://etims-icon.onrender.com";
 const LOCAL_URL = "http://localhost:5000";
 export const socket = io(ENDPOINT); // Replace with your server URL
 
-const Navbar = () => {
+const Navbar = ({ hide }) => {
   const [count, setCount] = useState(0);
   const [openNotication, setOpenNotification] = useState(false);
   const [notifications, setNotifications] = useState([]);
+
   const [user, setUser] = useState({});
   const router = useRouter();
   const pathname = usePathname();
@@ -74,8 +76,11 @@ const Navbar = () => {
   });
 
   return (
-    <div className="p-[20px] rounded-[10px] flex items-center justify-between bg-[#094b6a]">
-      <div className="capitalize text-white font-bold">
+    <div className="p-[20px]  flex items-center justify-between bg-[#094b6a]">
+      <div className="capitalize flex gap-3 items-center text-white font-bold">
+        <div className="cursor-pointer">
+          <IoMenu size={30} onClick={hide} />
+        </div>
         {formattedLastSegment}
       </div>
       <div className="flex items-center gap-[20px]">
