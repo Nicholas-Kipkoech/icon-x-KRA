@@ -1,4 +1,3 @@
-import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import CustomInput from "@/app/ui/reusableComponents/CustomInput";
 import React from "react";
 
@@ -6,15 +5,11 @@ const Profile = () => {
   return (
     <>
       <CustomInput
-        name={"First Name"}
+        name={"Full Name"}
         required
         className={"h-[50px]   border rounded-md p-[5px]"}
       />
-      <CustomInput
-        name={"Last Name"}
-        required
-        className={"h-[50px] border rounded-md p-[5px]"}
-      />
+
       <div className="flex flex-wrap gap-2">
         <CustomInput
           name={"Title"}
