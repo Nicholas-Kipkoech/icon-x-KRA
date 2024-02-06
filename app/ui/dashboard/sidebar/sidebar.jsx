@@ -89,11 +89,11 @@ const Sidebar = ({ clicked }) => {
           path: "/dashboard/settings",
           icon: <MdOutlineSettings />,
         },
-        {
-          title: "Help",
-          path: "/dashboard/help",
-          icon: <MdHelpCenter />,
-        },
+        // {
+        //   title: "Help",
+        //   path: "/dashboard/help",
+        //   icon: <MdHelpCenter />,
+        // },
       ],
     },
     {

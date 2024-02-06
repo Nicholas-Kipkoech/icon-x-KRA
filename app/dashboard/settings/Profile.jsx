@@ -4,7 +4,7 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <div>
+    <>
       <CustomInput
         name={"First Name"}
         required
@@ -19,21 +19,25 @@ const Profile = () => {
         <CustomInput
           name={"Title"}
           required
-          className={"h-[50px] w-[373px] border rounded-md p-[5px]"}
+          className={
+            "h-[50px] w-[373px] md:w-[500px] 2xl:w-[373px] lg:w-[373px]  border rounded-md p-[5px]"
+          }
         />
         <CustomInput
           name={"Company"}
           required
-          className={"h-[50px] w-[373px] border rounded-md p-[5px]"}
+          className={
+            "h-[50px] w-[373px] md:w-[500px] 2xl:w-[373px] lg:w-[373px] border rounded-md p-[5px]"
+          }
         />
       </div>
       <div className="mt-2 flex flex-col">
         <label id="about">About</label>
         <textarea
           id="about"
-          className="resize-none outline-[#cb7529] p-[5px] border h-[200px] rounded-md"
+          className="resize-none outline-[#cb7529] sm:h-[120px] p-[5px] border h-[200px] rounded-md"
         ></textarea>
-        <p className="text-slate-400 mt-2">
+        <p className="text-gray-500 mt-2">
           Brief description for your profile.
         </p>
       </div>
@@ -42,15 +46,19 @@ const Profile = () => {
         <CustomInput
           name={"Email"}
           required
-          className={"h-[50px] w-[383px] border rounded-md p-[5px]"}
+          className={
+            "h-[50px] w-[383px] md:w-[500px] 2xl:w-[383px] border rounded-md p-[5px]"
+          }
         />
         <CustomInput
           name={"Phone"}
           required
-          className={"h-[50px] w-[383px] border rounded-md p-[5px]"}
+          className={
+            "h-[50px] w-[383px] md:w-[500px] 2xl:w-[383px] border rounded-md p-[5px]"
+          }
         />
       </div>
-    </div>
+    </>
   );
 };
 

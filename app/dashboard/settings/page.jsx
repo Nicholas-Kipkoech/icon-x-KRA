@@ -12,7 +12,6 @@ import Security from "./Security";
 const Settings = () => {
   const [component, setComponent] = useState("profile");
   const [title, setTitle] = useState("Profile");
-  const [showMenu, setShowMenu] = useState(false);
 
   const renderComponent = () => {
     switch (component) {
@@ -21,20 +20,22 @@ const Settings = () => {
       case "security":
         return <Security />;
       default:
-        break;
+        throw Error("page null");
     }
   };
 
   const CustomNav = ({ name, about, icon, onClick }) => {
     return (
       <div
-        className="border p-6 border-slate-200 cursor-pointer flex hover:text-white hover:bg-[#cb7529] "
+        className={`border sm:w-[180px] md:w-full  p-6 border-slate-200 cursor-pointer flex hover:text-white hover:bg-[#cb7529] `}
         onClick={onClick}
       >
         <div className="">{icon}</div>
         <div className="pl-1">
           <p className="font-bold">{name}</p>
-          <p className="text-slate-600 hover:text-white">{about}</p>
+          <p className="text-gray-700 sm:text-[10px] md:text-[15px] hover:text-white">
+            {about}
+          </p>
         </div>
       </div>
     );
@@ -75,20 +76,23 @@ const Settings = () => {
       <div className="w-1/3 h-[100vh]  gap-2 flex flex-col">
         <ProfileMenu />
       </div>
-      <div className="w-2/3 p-2 overflow-auto">
+      <div className="w-2/3  p-2 overflow-hidden">
         <div className="flex items-center gap-2">
-          <IoMenu size={30} className="hidden" />
-          <p className="text-[28px]">{title}</p>
+          <p className="text-[28px] sm:text-[20px]">{title}</p>
         </div>
-        <p>{renderComponent()}</p>
+        <>{renderComponent()}</>
         <div className="mt-[12px] flex gap-[10px] justify-end mb-[20px]">
           <CustomButton
             name={"Cancel"}
-            className={"h-[40px] w-[200px] rounded bg-[#094b6a] text-white"}
+            className={
+              "h-[40px] w-[200px] md:w-[250px] lg:w-[400px] rounded bg-[#094b6a] text-white"
+            }
           />
           <CustomButton
             name={"Update"}
-            className={"h-[40px] w-[200px] rounded bg-[#cb7529] text-white"}
+            className={
+              "h-[40px] w-[200px] md:w-[250px] lg:w-[400px] rounded bg-[#cb7529] text-white"
+            }
           />
         </div>
       </div>
