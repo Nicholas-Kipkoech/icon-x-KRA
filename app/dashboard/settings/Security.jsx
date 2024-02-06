@@ -5,6 +5,7 @@ const Security = () => {
   return (
     <div className="mt-5">
       <p className="text-[18px]">Change your password</p>
+
       <p className="mt-2 text-[13px] text-[#8e8686]">
         You can only change your password twice within 24 hours!
       </p>
