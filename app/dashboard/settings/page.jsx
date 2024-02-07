@@ -1,6 +1,5 @@
 "use client";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
 import { RiTeamLine } from "react-icons/ri";
@@ -8,6 +7,7 @@ import Profile from "./Profile";
 import { IoMenu } from "react-icons/io5";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import Security from "./Security";
+import { jwtDecode } from "jwt-decode";
 
 const Settings = () => {
   const [component, setComponent] = useState("profile");
@@ -23,6 +23,13 @@ const Settings = () => {
         throw Error("page null");
     }
   };
+
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    const access_token = localStorage.getItem("access_token");
+    const userObj = jwtDecode(access_token);
+    setUser(userObj);
+  }, []);
 
   const CustomNav = ({ name, about, icon, onClick }) => {
     return (
@@ -43,15 +50,17 @@ const Settings = () => {
   const ProfileMenu = () => {
     return (
       <>
-        <CustomNav
-          icon={<FaRegUserCircle size={30} />}
-          name={"Profile"}
-          onClick={() => {
-            setComponent("profile");
-            setTitle("Profile");
-          }}
-          about={"Manage your personal information"}
-        />
+        {user.role === "Superadmin" && (
+          <CustomNav
+            icon={<FaRegUserCircle size={30} />}
+            name={"Profile"}
+            onClick={() => {
+              setComponent("profile");
+              setTitle("Profile");
+            }}
+            about={"Manage your personal information"}
+          />
+        )}
         <CustomNav
           icon={<CiLock size={30} />}
           name={"Security"}

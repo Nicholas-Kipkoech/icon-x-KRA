@@ -92,3 +92,7 @@ export const fetchOrganizations = async () => {
   const res = await PrivateAxiosUtility.get(`/organization/fetch`);
   return res.data;
 };
+export const fetchSuperAdmin = async (email) => {
+  const res = await PrivateAxiosUtility.get(`/user/superadmin/fetch/${email}`);
+  return res.data;
+};
