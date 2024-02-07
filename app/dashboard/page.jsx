@@ -99,7 +99,7 @@ const Dashboard = () => {
     return (
       <Link
         href={`/dashboard/${to}`}
-        className="sm:w-[30rem] lg:w-[14rem] lg:h-[9rem] xl:w-[18rem] 2xl:w-[22rem] 2xl:h-[10rem] border  rounded-[20px] flex flex-col   items-center  justify-center bg-[white]"
+        className="sm:w-[30rem] lg:w-[14rem] lg:h-[9rem] xl:w-[18rem] 2xl:w-[22rem] 2xl:h-[10rem] border hover:border-[#092332]  rounded-[20px] flex flex-col   items-center  justify-center bg-[white]"
       >
         {amounts && (
           <p className="text-[20px] mb-2 sm:text-[16px] 2xl:text-[16px] pt-3">
@@ -124,7 +124,7 @@ const Dashboard = () => {
       <p className="text-[25px] mt-4 md:text-[20px] sm:text-[16px]  flex justify-center">
         Transactions Summary
       </p>
-      <div className="flex flex-wrap gap-10 mt-4 sm:flex sm:justify-center">
+      <div className="flex flex-wrap gap-[12px] mt-4 sm:flex sm:justify-center">
         <AdminCard
           dates={"Year To Date"}
           amounts
@@ -153,7 +153,7 @@ const Dashboard = () => {
       <p className="text-[25px] mt-4 md:text-[20px] sm:text-[16px] flex justify-center">
         Invoices Summary
       </p>
-      <div className="flex flex-wrap gap-10 mt-4 sm:flex sm:justify-center">
+      <div className="flex flex-wrap gap-[12px] mt-4 sm:flex sm:justify-center">
         <AdminCard
           dates={"Year To Date"}
           amounts
@@ -188,7 +188,7 @@ const Dashboard = () => {
       <p className="text-[25px] mt-4 md:text-[20px] sm:text-[16px] flex justify-center">
         Data Overview
       </p>
-      <div className="flex flex-wrap gap-10 mt-4 sm:flex sm:justify-center">
+      <div className="flex flex-wrap gap-[12px] mt-4 sm:flex sm:justify-center">
         {user?.role === "Superadmin" && (
           <>
             <AdminCard
