@@ -98,7 +98,7 @@ const Navbar = ({ showDrawer }) => {
         </div>
         <div className="flex items-center gap-3 ">
           <CustomButton
-            className="text-white bg-[#cb7529] p-[5px] md:w-[100px]  w-[100px] 2xl:w-[200px] 2xl:h-[50px] items-center justify-center flex cursor-pointer rounded-md"
+            className="text-white bg-[#cb7529] 2xl:text-[18px] p-[5px] md:w-[100px]  w-[100px] 2xl:w-[170px] 2xl:h-[50px] items-center justify-center flex cursor-pointer rounded-md"
             onClick={handleLogout}
             name={"Logout"}
           />
