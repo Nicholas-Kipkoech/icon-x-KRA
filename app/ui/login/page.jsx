@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useCustomToast } from "@/app/hooks/useToast";
 import { Spin } from "antd";
-
-const url = "https://etims-icon.onrender.com";
-const localUrl = "http://localhost:5000";
+import { ENDPOINT } from "@/app/services/axiosUtility";
 
 const Login = ({ toggleView }) => {
   const showToast = useCustomToast();
@@ -26,7 +24,7 @@ const Login = ({ toggleView }) => {
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const response = await axios.post(`${url}/api/user/login`, {
+      const response = await axios.post(`${ENDPOINT}/user/login`, {
         email,
         password,
       });

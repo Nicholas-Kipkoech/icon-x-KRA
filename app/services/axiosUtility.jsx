@@ -2,8 +2,7 @@
 
 import axios from "axios";
 
-export const ENDPOINT = "https://etims-icon.onrender.com/api";
-export const LOCAL_URL = "http://localhost:5000/api";
+export const ENDPOINT = "http://137.184.188.101/api";
 
 export const PrivateAxiosUtility = axios.create({
   baseURL: `${ENDPOINT}`,

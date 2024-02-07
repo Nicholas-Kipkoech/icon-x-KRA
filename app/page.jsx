@@ -6,6 +6,8 @@ import { useState } from "react";
 import Signup from "./ui/Signup/page";
 import Image from "next/image";
 import EtimsPng from "./assets/etims.png";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Home() {
   const [isLogin, setIsLogin] = useState(true);
