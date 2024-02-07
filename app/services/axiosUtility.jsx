@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-export const ENDPOINT = "http://137.184.188.101/api";
+export const ENDPOINT = process.env.PROD_URL;
 
 export const PrivateAxiosUtility = axios.create({
   baseURL: `${ENDPOINT}`,
