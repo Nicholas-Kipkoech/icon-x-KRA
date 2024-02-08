@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-export const ENDPOINT = "http://64.23.158.86/api";
+export const ENDPOINT = process.env.PROD_URL;
 
 export const PrivateAxiosUtility = axios.create({
   baseURL: `${ENDPOINT}`,
