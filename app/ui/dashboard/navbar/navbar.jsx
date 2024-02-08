@@ -17,8 +17,8 @@ import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 import { jwtDecode } from "jwt-decode";
 import CustomButton from "../../reusableComponents/CustomButton";
 
-const ENDPOINT = "https://etims-icon.onrender.com";
-const LOCAL_URL = "http://localhost:5000";
+const ENDPOINT = "https://api.iconsoft.co";
+
 export const socket = io(ENDPOINT); // Replace with your server URL
 
 const Navbar = ({ showDrawer }) => {
