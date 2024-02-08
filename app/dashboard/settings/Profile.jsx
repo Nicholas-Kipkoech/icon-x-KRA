@@ -41,45 +41,62 @@ const Profile = () => {
 
   return (
     <>
-      <CustomInput
-        name={"Full Name"}
-        required
-        value={name}
-        disabled={loading}
-        className={"h-[50px]   border rounded-md p-[5px]"}
-      />
-      <div className="flex flex-wrap gap-2">
-        <CustomInput
-          name={"Title"}
-          disabled={loading}
-          value={title}
-          required
-          className={
-            "h-[50px] w-[373px] md:w-[500px] 2xl:w-[373px] lg:w-[373px]  border rounded-md p-[5px]"
-          }
-        />
-        <CustomInput
-          name={"Company"}
-          disabled={loading}
-          value={company}
-          required
-          className={
-            "h-[50px] w-[373px] md:w-[500px] 2xl:w-[373px] lg:w-[373px] border rounded-md p-[5px]"
-          }
-        />
-      </div>
-      <div className="mt-2 flex flex-col">
-        <label id="about">About</label>
-        <textarea
-          value={about}
-          disabled={loading}
-          id="about"
-          className="resize-none outline-[#cb7529] sm:h-[120px] p-[5px] border h-[200px] rounded-md"
-        ></textarea>
-        <p className="text-gray-500 mt-2">
-          Brief description for your profile.
-        </p>
-      </div>
+      {user.role === "Superadmin" ? (
+        <>
+          <CustomInput
+            name={"Full Name"}
+            required
+            value={name}
+            disabled={loading}
+            className={"h-[50px]   border rounded-md p-[5px]"}
+          />
+          <div className="flex flex-wrap gap-2">
+            <CustomInput
+              name={"Title"}
+              disabled={loading}
+              value={title}
+              required
+              className={
+                "h-[50px] w-[373px] md:w-[500px] 2xl:w-[373px] lg:w-[373px]  border rounded-md p-[5px]"
+              }
+            />
+            <CustomInput
+              name={"Company"}
+              disabled={loading}
+              value={company}
+              required
+              className={
+                "h-[50px] w-[373px] md:w-[500px] 2xl:w-[373px] lg:w-[373px] border rounded-md p-[5px]"
+              }
+            />
+          </div>
+          <div className="mt-2 flex flex-col">
+            <label id="about">About</label>
+            <textarea
+              value={about}
+              disabled={loading}
+              id="about"
+              className="resize-none outline-[#cb7529] sm:h-[120px] p-[5px] border h-[200px] rounded-md"
+            ></textarea>
+            <p className="text-gray-500 mt-2">
+              Brief description for your profile.
+            </p>
+          </div>
+        </>
+      ) : (
+        <>
+          <CustomInput
+            name={"Full Name"}
+            required
+            className={"h-[50px]   border rounded-md p-[5px]"}
+          />
+          <CustomInput
+            name={"Phone Number"}
+            required
+            className={"h-[50px]   border rounded-md p-[5px]"}
+          />
+        </>
+      )}
     </>
   );
 };

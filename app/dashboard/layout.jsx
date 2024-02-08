@@ -60,9 +60,9 @@ const Layout = ({ children }) => {
 
       <div className={`w-full`}>
         <Navbar showDrawer={() => setShowDrawer(!showDrawer)} />
-        <div className="overflow-y-auto">
+        <div className="overflow-hidden">
           {/* Set a max height if needed */}
-          <div className="max-h-[calc(100vh-60px)] p-2 overflow-y-auto">
+          <div className="max-h-[calc(100vh-60px)] p-2 overflow-hidden">
             {children}
           </div>
         </div>
