@@ -799,16 +799,16 @@ const AddTransactionsPage = () => {
           </div>
         </>
       </div>
-      <div className="flex justify-center gap-10">
+      <div className="flex justify-center gap-10 pb-10 items-center">
         <CustomButton
           name={"Cancel"}
-          className={"bg-[#094b6a] text-white p-3 w-[200px] rounded-md"}
+          className={"bg-[#094b6a]  text-white p-3 w-[30%] rounded-md"}
         />
         <CustomButton
           name={loading ? "Submitting to ETIMS" : "Submit to ETIMS"}
           onClick={handleSubmit}
           disabled={loading}
-          className={"bg-[#cb7529] text-white p-3 w-[200px] rounded-md"}
+          className={"bg-[#cb7529] text-white p-3 w-[30%] rounded-md"}
         />
       </div>
     </div>
