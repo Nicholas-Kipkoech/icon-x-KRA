@@ -177,6 +177,7 @@ const AddTransactionsPage = () => {
       const formData = {
         organizationId: organization,
         trdInvcNo,
+        invcNo: orgInvcNo,
         orgInvcNo,
         custTin,
         custNm,
