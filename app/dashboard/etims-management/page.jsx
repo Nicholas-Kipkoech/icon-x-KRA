@@ -22,10 +22,12 @@ import { formatDateToCustomFormat } from "@/app/ui/reusableFunctions/Utils";
 const AddTransactionsPage = () => {
   const [classCode, setClassCode] = useState("");
   const [_comodities, setComodities] = useState([]);
+  const [organization, setOrganization] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-    const { business_class } = jwtDecode(token);
+    const { business_class, organization_id } = jwtDecode(token);
+    setOrganization(organization_id);
     setClassCode(business_class);
   }, []);
 
@@ -173,6 +175,7 @@ const AddTransactionsPage = () => {
       setLoading(true);
       // Logic for form submission
       const formData = {
+        organizationId: organization,
         trdInvcNo,
         orgInvcNo,
         custTin,
