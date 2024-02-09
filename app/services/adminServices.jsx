@@ -1,7 +1,7 @@
 import { PrivateAxiosUtility } from "./axiosUtility";
 
 export const updateUser = async (data) => {
-  const res = await PrivateAxiosUtility.patch(`/user/update`, data);
+  const res = await PrivateAxiosUtility.patch(`/user/password/update`, data);
   return res?.data;
 };
 export const fetchUsers = async () => {
@@ -102,5 +102,12 @@ export const fetchOrganizations = async () => {
 };
 export const fetchSuperAdmin = async (email) => {
   const res = await PrivateAxiosUtility.get(`/user/superadmin/fetch/${email}`);
+  return res.data;
+};
+export const updateSuperAdmin = async (email, data) => {
+  const res = await PrivateAxiosUtility.patch(
+    `/user/superadmin/update/${email}`,
+    data
+  );
   return res.data;
 };

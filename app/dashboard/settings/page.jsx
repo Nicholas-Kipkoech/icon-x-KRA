@@ -89,20 +89,6 @@ const Settings = () => {
           <p className="text-[28px] sm:text-[20px]">{title}</p>
         </div>
         <>{renderComponent()}</>
-        <div className="mt-[12px] flex gap-[10px] justify-end mb-[20px]">
-          <CustomButton
-            name={"Cancel"}
-            className={
-              "h-[40px] w-[200px] md:w-[250px] lg:w-[400px] rounded bg-[#094b6a] text-white"
-            }
-          />
-          <CustomButton
-            name={"Update"}
-            className={
-              "h-[40px] w-[200px] md:w-[250px] lg:w-[400px] rounded bg-[#cb7529] text-white"
-            }
-          />
-        </div>
       </div>
     </div>
   );
