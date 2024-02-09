@@ -17,7 +17,7 @@ import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 import { jwtDecode } from "jwt-decode";
 import CustomButton from "../../reusableComponents/CustomButton";
 
-const ENDPOINT = "https://api.iconsoft.co";
+const ENDPOINT = "https://api-1jg9.onrender.com";
 
 export const socket = io(ENDPOINT); // Replace with your server URL
 
