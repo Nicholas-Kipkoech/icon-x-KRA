@@ -6,6 +6,7 @@ import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import { useCustomToast } from "@/app/hooks/useToast";
 import {
   AddClassRequest,
+  AddComodityRequest,
   fetchClasses,
   fetchFamilies,
   fetchSegments,
@@ -97,10 +98,10 @@ const AddComodity = ({ showForm, handleCancel }) => {
     try {
       setSubmission(true);
       let formData = new FormData();
-      formData.append("class", selectedClass);
+      formData.append("classId", selectedClass);
       formData.append("comodity_name", comodityName);
       formData.append("comodity_code", comodityCode);
-      await AddClassRequest(formData);
+      await AddComodityRequest(formData);
       setSubmission(false);
       handleCancel();
     } catch (error) {

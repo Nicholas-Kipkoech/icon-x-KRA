@@ -62,6 +62,14 @@ export const AddFamilyRequest = async (data) => {
   return res.data;
 };
 
+export const AddComodityRequest = async (data) => {
+  const res = await PrivateAxiosUtility.post(
+    `/organization/add/comodity`,
+    data
+  );
+  return res.data;
+};
+
 export const fetchFamily = async (code) => {
   const res = await PrivateAxiosUtility.get(
     `/organization/fetch/family/${code}`

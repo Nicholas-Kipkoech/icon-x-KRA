@@ -51,8 +51,8 @@ const AddFamily = ({ showForm, handleCancel }) => {
       handleCancel();
     } catch (error) {
       setLoading(false);
-      console.log(error?.response.data?.message);
-      showToast(error?.response.data?.message, "error");
+      showToast(error?.response.data?.error, "error");
+      handleCancel();
     }
   };
 
