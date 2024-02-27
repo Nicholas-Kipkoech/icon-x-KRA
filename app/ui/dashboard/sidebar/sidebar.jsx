@@ -31,8 +31,6 @@ const Sidebar = ({ clicked }) => {
     setUser(decoded_user);
   }, []);
 
-  console.log(user);
-
   const menuItems = [
     {
       title: "Pages",
