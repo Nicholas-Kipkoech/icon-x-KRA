@@ -6,7 +6,7 @@ import ToastProvider from "./hooks/ToastProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "ICON x ETIMS",
+  title: "ICON Tax",
   description: "ETIMS fully intergrated software",
 };
 
