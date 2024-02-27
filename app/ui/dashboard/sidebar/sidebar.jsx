@@ -31,6 +31,8 @@ const Sidebar = ({ clicked }) => {
     setUser(decoded_user);
   }, []);
 
+  console.log(user);
+
   const menuItems = [
     {
       title: "Pages",
@@ -40,46 +42,22 @@ const Sidebar = ({ clicked }) => {
           path: "/dashboard",
           icon: <GrOverview />,
         },
-        {
-          title: "Users",
-          path: "/dashboard/users",
-          icon: <FaUsers />,
-        },
       ],
     },
     {
       title: "ETIMS Management",
-      list:
-        user?.role === "Superadmin"
-          ? [
-              {
-                title: "ETIMS intergration",
-                path: "/dashboard/testing",
-                icon: <FaServer />,
-              },
-              {
-                title: "Admin Crud Ops",
-                path: "/dashboard/admin-etims-ops",
-                icon: <MdAdminPanelSettings />,
-              },
-              {
-                title: "View transactions",
-                path: "/dashboard/transactions",
-                icon: <LiaFileInvoiceSolid />,
-              },
-            ]
-          : [
-              {
-                title: "Sales information",
-                path: "/dashboard/etims-management",
-                icon: <Md60FpsSelect />,
-              },
-              {
-                title: "View transactions",
-                path: "/dashboard/transactions",
-                icon: <MdAttachMoney />,
-              },
-            ],
+      list: [
+        {
+          title: "Admin Crud Ops",
+          path: "/dashboard/organizations",
+          icon: <MdAdminPanelSettings />,
+        },
+        {
+          title: "View transactions",
+          path: "/dashboard/transactions",
+          icon: <LiaFileInvoiceSolid />,
+        },
+      ],
     },
     {
       title: "User",
@@ -89,11 +67,6 @@ const Sidebar = ({ clicked }) => {
           path: "/dashboard/settings",
           icon: <MdOutlineSettings />,
         },
-        // {
-        //   title: "Help",
-        //   path: "/dashboard/help",
-        //   icon: <MdHelpCenter />,
-        // },
       ],
     },
     {
@@ -122,7 +95,7 @@ const Sidebar = ({ clicked }) => {
           <>
             <div className="flex flex-col gap-1 justify-center">
               <span className="font-[500] flex justify-center text-[15px]">
-                {user.name.toUpperCase()}
+                {user.firstName.toUpperCase()} {user.lastName.toUpperCase()}
               </span>
               <span className="font-[500] text-[12px] flex justify-center text-white">
                 {user.role.toUpperCase()}

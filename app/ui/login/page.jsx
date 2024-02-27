@@ -28,13 +28,11 @@ const Login = ({ toggleView }) => {
         email,
         password,
       });
+      console.log(response.data);
       if (response.status === 200) {
         const userData = response.data;
         localStorage.setItem("access_token", userData.access_token);
-
-        if (userData?.user.name === null || userData?.user.name === "") {
-          toggleView();
-        } else {
+        if (userData.success === true) {
           router.push("/dashboard");
         }
       }

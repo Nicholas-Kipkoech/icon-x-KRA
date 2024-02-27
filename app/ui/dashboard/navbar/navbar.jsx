@@ -17,10 +17,6 @@ import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 import { jwtDecode } from "jwt-decode";
 import CustomButton from "../../reusableComponents/CustomButton";
 
-const ENDPOINT = "https://api-1jg9.onrender.com";
-
-export const socket = io(ENDPOINT); // Replace with your server URL
-
 const Navbar = ({ showDrawer }) => {
   const [count, setCount] = useState(0);
   const [openNotication, setOpenNotification] = useState(false);
@@ -41,9 +37,6 @@ const Navbar = ({ showDrawer }) => {
       const { notifications } = await fetchNotifications();
       setNotifications(notifications);
     };
-    socket.on("notification", () => {
-      getNotifications();
-    });
     getNotifications();
   }, [user]);
 
@@ -66,15 +59,6 @@ const Navbar = ({ showDrawer }) => {
     localStorage.removeItem("access_token");
     router.push("/");
   };
-
-  socket.on("connect", () => {
-    console.log("Connected to the Socket.io server");
-    socket.emit("join", "Hello, server! I'm connected!");
-  });
-
-  socket.on("test", (data) => {
-    setCount(count + 1);
-  });
 
   return (
     <div className="p-[20px]  flex items-center justify-between bg-[#094b6a]">

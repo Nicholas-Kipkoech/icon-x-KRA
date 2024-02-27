@@ -5,7 +5,7 @@ import {
   fetchNotifications,
   fetchNotificationsByID,
 } from "@/app/services/etimsServices";
-import { socket } from "./navbar";
+
 import { formatDistanceToNow } from "date-fns";
 import { TbMoodEmptyFilled } from "react-icons/tb";
 import { jwtDecode } from "jwt-decode";
@@ -25,17 +25,11 @@ const Notifications = ({ open, handleClose, onread }) => {
       const { notifications } = await fetchNotifications();
       setNotifications(notifications);
     };
-    socket.on("notification", () => {
-      getNotifications();
-    });
+
     getNotifications();
   }, [user]);
 
   // Replace with your server URL
-  socket.on("connect", () => {
-    console.log("Connected to the Socket.io server");
-    socket.emit("join", "Hello, server! I'm connected!");
-  });
 
   return (
     <Modal

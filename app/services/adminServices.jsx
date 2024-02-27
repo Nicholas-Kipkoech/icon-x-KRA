@@ -23,71 +23,8 @@ export const fetchTransactionsById = async (id) => {
   return res.data;
 };
 
-export const AddSegmentRequest = async (data) => {
-  const res = await PrivateAxiosUtility.post(`/organization/add/segment`, data);
-  return res.data;
-};
-
-export const fetchSegment = async (code) => {
-  const res = await PrivateAxiosUtility.get(
-    `/organization/fetch/segment/${code}`
-  );
-  return res.data;
-};
-
-export const fetchSegments = async () => {
-  const res = await PrivateAxiosUtility.get(`/organization/fetch/segment`);
-  return res.data;
-};
-
-export const AddClassRequest = async (data) => {
-  const res = await PrivateAxiosUtility.post(`/organization/add/class`, data);
-  return res.data;
-};
-export const fetchClass = async (code) => {
-  const res = await PrivateAxiosUtility.get(
-    `/organization/fetch/class/${code}`
-  );
-  return res.data;
-};
-export const fetchClasses = async (code) => {
-  const res = await PrivateAxiosUtility.get(
-    `/organization/fetch/classes/${code}`
-  );
-  return res.data;
-};
-
 export const AddFamilyRequest = async (data) => {
   const res = await PrivateAxiosUtility.post(`/organization/add/family`, data);
-  return res.data;
-};
-
-export const AddComodityRequest = async (data) => {
-  const res = await PrivateAxiosUtility.post(
-    `/organization/add/comodity`,
-    data
-  );
-  return res.data;
-};
-
-export const fetchFamily = async (code) => {
-  const res = await PrivateAxiosUtility.get(
-    `/organization/fetch/family/${code}`
-  );
-  return res.data;
-};
-
-export const fetchFamilies = async (code) => {
-  const res = await PrivateAxiosUtility.get(
-    `/organization/fetch/families/${code}`
-  );
-  return res.data;
-};
-
-export const fetchComodities = async (code) => {
-  const res = await PrivateAxiosUtility.get(
-    `/organization/fetch/comodities/${code}`
-  );
   return res.data;
 };
 
@@ -100,6 +37,7 @@ export const fetchOrganizations = async () => {
   const res = await PrivateAxiosUtility.get(`/organization/fetch`);
   return res.data;
 };
+
 export const fetchSuperAdmin = async (email) => {
   const res = await PrivateAxiosUtility.get(`/user/superadmin/fetch/${email}`);
   return res.data;

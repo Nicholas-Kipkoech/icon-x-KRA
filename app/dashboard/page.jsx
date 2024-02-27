@@ -48,9 +48,7 @@ const Dashboard = () => {
       setTransactions(transactions);
       setTxLoading(false);
     };
-    socket.on("notification", () => {
-      getTransactions();
-    });
+
     getTransactions();
   }, [user]);
 
