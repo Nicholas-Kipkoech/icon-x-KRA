@@ -1,30 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { fetchOrganizations } from "@/app/services/adminServices";
-import { month } from "@/app/ui/reusableFunctions/Utils";
+
+import { formatDateUtil, formatTime } from "@/app/ui/reusableFunctions/Utils";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import Link from "next/link";
 import { useContextApi } from "@/app/context/contexts";
 
 const OrganizationPage = () => {
-  const formatDate = (serverTime) => {
-    const serverDate = new Date(serverTime);
-    const date = serverDate.getDate();
-    const months = month[serverDate.getMonth()];
-    const year = serverDate.getFullYear();
-    const formattedTime = `${date} ${months},${year}`;
-    return formattedTime;
-  };
-  const formatTime = (serverTime) => {
-    const serverDate = new Date(serverTime);
-    const hours = serverDate.getHours();
-    const minutes = serverDate.getMinutes();
-    const seconds = serverDate.getSeconds();
-    const ampm = hours >= 12 ? "PM" : "AM";
-    const formattedTime = `${hours}:${minutes}:${seconds} ${ampm}`;
-    return formattedTime;
-  };
-
   const { organizations } = useContextApi();
 
   return (
@@ -50,7 +32,7 @@ const OrganizationPage = () => {
                 <div>
                   <p>Date created</p>
                   <p className="font-[800]">
-                    {formatDate(organization.created_at)}
+                    {formatDateUtil(organization.created_at)}
                   </p>
                 </div>
                 <div>

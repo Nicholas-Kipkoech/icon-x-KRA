@@ -70,7 +70,7 @@ export const calculateTotalAmount = (transactions) => {
   };
 };
 
-export const month = [
+export const months = [
   "Jan",
   "Feb",
   "Mar",
@@ -84,3 +84,21 @@ export const month = [
   "Nov",
   "Dec",
 ];
+
+export const formatDateUtil = (serverTime) => {
+  const serverDate = new Date(serverTime);
+  const date = serverDate.getDate();
+  const month = months[serverDate.getMonth()];
+  const year = serverDate.getFullYear();
+  const formattedTime = `${date} ${month},${year}`;
+  return formattedTime;
+};
+export const formatTime = (serverTime) => {
+  const serverDate = new Date(serverTime);
+  const hours = serverDate.getHours();
+  const minutes = serverDate.getMinutes();
+  const seconds = serverDate.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const formattedTime = `${hours}:${minutes}:${seconds} ${ampm}`;
+  return formattedTime;
+};

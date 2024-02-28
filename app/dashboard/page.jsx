@@ -71,10 +71,6 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    getUsers();
-  }, []);
-
-  useEffect(() => {
     if (transactions) {
       const { monthTransations, yearTransactions, todayTransactions } =
         checkDates(transactions);
