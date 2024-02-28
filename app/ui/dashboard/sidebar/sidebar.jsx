@@ -46,7 +46,7 @@ const Sidebar = ({ clicked }) => {
       title: "ETIMS Management",
       list: [
         {
-          title: "Admin Crud Ops",
+          title: "Organizations",
           path: "/dashboard/organizations",
           icon: <MdAdminPanelSettings />,
         },

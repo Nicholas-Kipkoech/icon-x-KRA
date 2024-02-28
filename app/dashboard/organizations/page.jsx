@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { fetchOrganizations } from "@/app/services/adminServices";
 import { month } from "@/app/ui/reusableFunctions/Utils";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
+import Link from "next/link";
 
 const OrganizationPage = () => {
   const [organizations, setOrganizations] = useState([]);
@@ -44,7 +45,8 @@ const OrganizationPage = () => {
       <div className="flex gap-2 flex-wrap">
         {organizations.length > 0 &&
           organizations.map((organization) => (
-            <div
+            <Link
+              href={`organizations/${organization._id}`}
               key={organization.id}
               className="border w-[320px] bg-[white] cursor-pointer rounded-md flex flex-col justify-center p-[25px]  h-[230px]"
             >
@@ -75,7 +77,7 @@ const OrganizationPage = () => {
                   <p className="font-[800]">2</p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         <div className="border w-[320px] bg-white cursor-pointer rounded-md flex flex-col items-center justify-center h-[230px]">
           <p>+</p>
