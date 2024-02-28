@@ -12,7 +12,6 @@ import { MdOutlineAttachMoney, MdPeople } from "react-icons/md";
 import { FaBuildingColumns } from "react-icons/fa6";
 import { FaFileInvoice } from "react-icons/fa";
 
-import { socket } from "../ui/dashboard/navbar/navbar";
 import {
   calculateTotalAmount,
   checkDates,
