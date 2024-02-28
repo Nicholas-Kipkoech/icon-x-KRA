@@ -5,14 +5,17 @@ import { formatDateUtil, formatTime } from "@/app/ui/reusableFunctions/Utils";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import Link from "next/link";
 import { useContextApi } from "@/app/context/contexts";
+import AddOrganization from "./AddOrganization";
 
 const OrganizationPage = () => {
   const { organizations } = useContextApi();
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className="mt-[20px]">
       <CustomButton
         name={"Add Organization"}
+        onClick={() => setOpenModal(true)}
         className={
           "bg-[#995224] text-white mb-2 p-[5px] rounded-md w-[250px] h-[40px]"
         }
@@ -26,7 +29,9 @@ const OrganizationPage = () => {
               className="border w-[320px] bg-[white] cursor-pointer rounded-md flex flex-col justify-center p-[25px]  h-[230px]"
             >
               <p>Organization</p>
-              <p className="font-[800]">{organization.organization_name}</p>
+              <p className="font-[800] text-[18px]">
+                {organization.organization_name.toLocaleUpperCase()}
+              </p>
 
               <div className="flex justify-between mt-2">
                 <div>
@@ -59,6 +64,10 @@ const OrganizationPage = () => {
           <p>Add Organization</p>
         </div>
       </div>
+      <AddOrganization
+        open={openModal}
+        handleClose={() => setOpenModal(false)}
+      />
     </div>
   );
 };

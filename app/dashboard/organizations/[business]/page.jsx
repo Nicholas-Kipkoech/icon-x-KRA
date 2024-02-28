@@ -37,8 +37,10 @@ const BusinessPage = ({ params: { business: organizationID } }) => {
               key={business._id}
               className="border w-[320px] bg-[white] cursor-pointer rounded-md flex flex-col justify-center p-[25px]  h-[230px]"
             >
-              <p>Business</p>
-              <p className="font-[800]">{business.businessName}</p>
+              <p className="font-[800] text-[14px]">PIN: {business.pin}</p>
+              <p className="font-[800] text-[18px]">
+                {business.businessName.toLocaleUpperCase()}
+              </p>
 
               <div className="flex justify-between mt-2">
                 <div>
