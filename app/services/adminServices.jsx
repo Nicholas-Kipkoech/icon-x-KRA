@@ -4,10 +4,6 @@ export const updateUser = async (data) => {
   const res = await PrivateAxiosUtility.patch(`/user/password/update`, data);
   return res?.data;
 };
-export const fetchUsers = async () => {
-  const res = await PrivateAxiosUtility.get(`/user/fetch`);
-  return res?.data;
-};
 
 export const fetchTransactions = async () => {
   const res = await PrivateAxiosUtility.get(`/etims/fetch-transactions`);
@@ -38,10 +34,6 @@ export const fetchOrganizations = async () => {
   return res.data;
 };
 
-export const fetchSuperAdmin = async (email) => {
-  const res = await PrivateAxiosUtility.get(`/user/superadmin/fetch/${email}`);
-  return res.data;
-};
 export const updateSuperAdmin = async (email, data) => {
   const res = await PrivateAxiosUtility.patch(
     `/user/superadmin/update/${email}`,

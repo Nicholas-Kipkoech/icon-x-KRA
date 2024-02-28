@@ -4,18 +4,9 @@ import { fetchOrganizations } from "@/app/services/adminServices";
 import { month } from "@/app/ui/reusableFunctions/Utils";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import Link from "next/link";
+import { useContextApi } from "@/app/context/contexts";
 
 const OrganizationPage = () => {
-  const [organizations, setOrganizations] = useState([]);
-
-  useEffect(() => {
-    const getOrganizations = async () => {
-      const { registered_organizations } = await fetchOrganizations();
-      setOrganizations(registered_organizations);
-    };
-    getOrganizations();
-  }, []);
-
   const formatDate = (serverTime) => {
     const serverDate = new Date(serverTime);
     const date = serverDate.getDate();
@@ -33,6 +24,8 @@ const OrganizationPage = () => {
     const formattedTime = `${hours}:${minutes}:${seconds} ${ampm}`;
     return formattedTime;
   };
+
+  const { organizations } = useContextApi();
 
   return (
     <div className="mt-[20px]">

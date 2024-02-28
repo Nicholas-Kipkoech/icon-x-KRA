@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import {
   fetchOrganizations,
   fetchTransactions,
-  fetchUsers,
 } from "../services/adminServices";
 import { Spin } from "antd";
 import { jwtDecode } from "jwt-decode";
@@ -21,7 +20,6 @@ import {
 
 const Dashboard = () => {
   const [user, setUser] = useState({});
-  const [users, setUsers] = useState([]);
   const [orgs, setOrgs] = useState([]);
   const [orgsLoading, setOrgsLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
@@ -61,13 +59,6 @@ const Dashboard = () => {
       setYearAmt(yearTotalAmount);
     }
   }, [transactions]);
-
-  const getUsers = async () => {
-    setUserLoading(true);
-    const { users } = await fetchUsers();
-    setUsers(users);
-    setUserLoading(false);
-  };
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -190,9 +181,7 @@ const Dashboard = () => {
         {user?.role === "Superadmin" && (
           <>
             <AdminCard
-              count={
-                userLoading ? <Spin spinning={userLoading} /> : users.length
-              }
+              count={userLoading ? <Spin spinning={userLoading} /> : 0}
               name={"Enrolled Users"}
               to={"users"}
               icon={<MdPeople size={30} />}
