@@ -6,13 +6,21 @@ import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import Link from "next/link";
 import { useContextApi } from "@/app/context/contexts";
 import AddOrganization from "./AddOrganization";
+import { useRouter } from "next/navigation";
 
 const OrganizationPage = () => {
   const { organizations } = useContextApi();
   const [openModal, setOpenModal] = useState(false);
-
+  const router = useRouter();
   return (
     <div className="mt-[20px]">
+      <CustomButton
+        name={"Back"}
+        onClick={() => router.push("/dashboard")}
+        className={
+          "bg-[#132538] text-white mb-2 p-[5px] mr-3 rounded-md w-[250px] h-[40px]"
+        }
+      />
       <CustomButton
         name={"Add Organization"}
         onClick={() => setOpenModal(true)}

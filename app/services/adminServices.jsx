@@ -24,6 +24,11 @@ export const createOrganization = async (data) => {
   return res.data;
 };
 
+export const createBusiness = async (data) => {
+  const res = await PrivateAxiosUtility.post(`/business/create`, data);
+  return res.data;
+};
+
 export const fetchOrganizations = async () => {
   const res = await PrivateAxiosUtility.get(`/organization/fetch`);
   return res.data;
