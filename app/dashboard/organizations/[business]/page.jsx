@@ -61,7 +61,7 @@ const BusinessPage = ({ params: { business: organizationID } }) => {
             <Link
               href={`${organizationID}/${business._id}`}
               key={business._id}
-              className="border w-[320px] bg-[white] cursor-pointer rounded-md flex flex-col justify-center p-[25px]  h-[230px]"
+              className="border w-[320px] bg-[white]  cursor-pointer rounded-md flex flex-col justify-center p-[25px]  h-[230px]"
             >
               <p className="font-[800] text-[14px]">PIN: {business.pin}</p>
               <p className="font-[800] text-[18px]">
@@ -92,7 +92,10 @@ const BusinessPage = ({ params: { business: organizationID } }) => {
           ))
         )}
 
-        <div className="border w-[320px] bg-white cursor-pointer rounded-md flex flex-col items-center justify-center h-[230px]">
+        <div
+          className="border w-[320px] bg-white cursor-pointer rounded-md flex flex-col items-center justify-center h-[230px]"
+          onClick={() => setOpenModal(true)}
+        >
           <p>+</p>
           <p>Add Business</p>
         </div>

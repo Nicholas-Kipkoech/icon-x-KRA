@@ -1,16 +1,9 @@
 "use client";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { MdLogout, MdNotifications } from "react-icons/md";
+
 import { useRouter } from "next/navigation";
-import { io } from "socket.io-client";
-import NotificationBadge from "react-notification-badge";
-import { Effect } from "react-notification-badge";
-import Notifications from "./notifications";
-import {
-  fetchNotifications,
-  fetchNotificationsByID,
-} from "@/app/services/etimsServices";
+
 import { IoMenu } from "react-icons/io5";
 import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 
@@ -18,10 +11,6 @@ import { jwtDecode } from "jwt-decode";
 import CustomButton from "../../reusableComponents/CustomButton";
 
 const Navbar = ({ showDrawer }) => {
-  const [count, setCount] = useState(0);
-  const [openNotication, setOpenNotification] = useState(false);
-  const [notifications, setNotifications] = useState([]);
-
   const [user, setUser] = useState({});
   const router = useRouter();
   const pathname = usePathname();
@@ -32,21 +21,13 @@ const Navbar = ({ showDrawer }) => {
     setUser(decoded_user);
   }, []);
 
-  useEffect(() => {
-    const getNotifications = async () => {
-      const { notifications } = await fetchNotifications();
-      setNotifications(notifications);
-    };
-    getNotifications();
-  }, [user]);
-
   // Function to format the last path segment with specific handling for IDs
   const formatPathSegment = (segment) => {
     // Check if the segment is an ID (24 characters hexadecimal)
     const isId = /^[0-9a-fA-F]{24}$/.test(segment);
 
     if (isId) {
-      return "Item Details";
+      return "";
     }
 
     return segment;
@@ -70,28 +51,14 @@ const Navbar = ({ showDrawer }) => {
         {formattedLastSegment}
       </div>
       <div className="flex items-center gap-[20px]">
-        <div
-          className="gap-[2px]  text-white cursor-pointer"
-          onClick={() => setOpenNotification(true)}
-        >
-          <NotificationBadge
-            count={notifications.length}
-            effect={Effect.SCALE}
-          />
-          <MdNotifications size={40} />
-        </div>
         <div className="flex items-center gap-3 ">
           <CustomButton
-            className="text-white bg-[#cb7529] 2xl:text-[18px] p-[5px] md:w-[100px]  w-[100px] 2xl:w-[170px] 2xl:h-[50px] items-center justify-center flex cursor-pointer rounded-md"
+            className="text-white bg-[#cb7529] text-[16px]   w-[150px] h-[40px] items-center justify-center flex cursor-pointer rounded-md"
             onClick={handleLogout}
             name={"Logout"}
           />
         </div>
       </div>
-      <Notifications
-        open={openNotication}
-        handleClose={() => setOpenNotification(false)}
-      />
     </div>
   );
 };
