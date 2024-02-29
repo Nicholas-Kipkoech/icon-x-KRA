@@ -5,9 +5,11 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { formatDateUtil, formatTime } from "@/app/ui/reusableFunctions/Utils";
 import { useContextApi } from "@/app/context/contexts";
+import AddBusiness from "./AddBusiness";
 
 const BusinessPage = ({ params: { business: organizationID } }) => {
   const [businesses, setBusinesses] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
   const { getOrgById } = useContextApi();
 
@@ -25,6 +27,7 @@ const BusinessPage = ({ params: { business: organizationID } }) => {
     <div className="mt-[20px]">
       <CustomButton
         name={"Add Business"}
+        onClick={() => setOpenModal(true)}
         className={
           "bg-[#995224] text-white mb-2 p-[5px] rounded-md w-[250px] h-[40px]"
         }
@@ -69,6 +72,7 @@ const BusinessPage = ({ params: { business: organizationID } }) => {
           <p>Add Business</p>
         </div>
       </div>
+      <AddBusiness open={openModal} handleClose={() => setOpenModal(false)} />
     </div>
   );
 };

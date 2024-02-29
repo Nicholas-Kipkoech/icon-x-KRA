@@ -59,7 +59,10 @@ const OrganizationPage = () => {
               </div>
             </Link>
           ))}
-        <div className="border w-[320px] bg-white cursor-pointer rounded-md flex flex-col items-center justify-center h-[230px]">
+        <div
+          className="border w-[320px] bg-white cursor-pointer rounded-md flex flex-col items-center justify-center h-[230px]"
+          onClick={() => setOpenModal(true)}
+        >
           <p>+</p>
           <p>Add Organization</p>
         </div>
