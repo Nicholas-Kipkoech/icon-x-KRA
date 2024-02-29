@@ -26,12 +26,13 @@ const BusinessPage = ({ params: { business: organizationID } }) => {
     if (organizationID) {
       fetchOrganization(organizationID);
     }
-  }, [organizationID, getOrgById]);
+  }, [organizationID]);
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    fetchOrganization(organizationID);
+    fetchOrganization(organizationID, true);
   };
+
   const router = useRouter();
   return (
     <div className="mt-[20px]">

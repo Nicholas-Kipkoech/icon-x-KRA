@@ -12,8 +12,8 @@ export const ContextProvider = ({ children }) => {
   const [organizations, setOrganizations] = useState([]);
   const [cachedData, setCachedDate] = useState({});
 
-  const getOrgById = async (id) => {
-    if (cachedData[id]) {
+  const getOrgById = async (id, forceRefresh = false) => {
+    if (!forceRefresh && cachedData[id]) {
       return cachedData[id];
     } else {
       const { businesses } = await fetchBusinessByOrganization(id);
@@ -31,7 +31,7 @@ export const ContextProvider = ({ children }) => {
     getOrganizations();
   }, []);
   return (
-    <Context.Provider value={{ organizations, getOrgById }}>
+    <Context.Provider value={{ organizations, getOrganizations, getOrgById }}>
       {children}
     </Context.Provider>
   );

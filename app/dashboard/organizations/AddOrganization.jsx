@@ -2,12 +2,30 @@ import React, { useState } from "react";
 import { Modal } from "antd";
 import CustomInput from "@/app/ui/reusableComponents/CustomInput";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
+import { useCustomToast } from "@/app/hooks/useToast";
+import { createOrganization } from "@/app/services/adminServices";
 
 const AddOrganization = ({ open, handleClose }) => {
   const [checked, setChecked] = useState("personal");
+  const [organizationName, setOrganizationName] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    console.log(checked);
+  const showToast = useCustomToast();
+
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
+      let formData = new FormData();
+      formData.append("organization_name", organizationName);
+      formData.append("organization_type", checked);
+      await createOrganization(formData);
+      setLoading(false);
+      showToast("Organization added successfully");
+      handleClose();
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
   };
 
   const handleRadioChange = (e) => {
@@ -26,6 +44,7 @@ const AddOrganization = ({ open, handleClose }) => {
         <CustomInput
           name={"Organization Name"}
           required
+          onchange={(e) => setOrganizationName(e.target.value)}
           className={"h-[50px] p-[5px] rounded-md border border-[#995224]"}
         />
         <p className="mt-2">Type of Organization</p>
@@ -61,7 +80,8 @@ const AddOrganization = ({ open, handleClose }) => {
             className={"bg-[#092332] h-[40px] w-[200px] rounded-md"}
           />
           <CustomButton
-            name={"Add Organization"}
+            name={loading ? "Adding Organization..." : "Add Organization"}
+            disabled={loading}
             onClick={handleSubmit}
             className={"bg-[#995224]  w-[200px] rounded-md"}
           />

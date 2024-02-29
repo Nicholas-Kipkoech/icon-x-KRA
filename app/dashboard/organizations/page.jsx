@@ -9,9 +9,23 @@ import AddOrganization from "./AddOrganization";
 import { useRouter } from "next/navigation";
 
 const OrganizationPage = () => {
-  const { organizations } = useContextApi();
+  const { organizations, getOrganizations } = useContextApi();
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
+
+  const fetchOrganizations = async () => {
+    await getOrganizations();
+  };
+
+  useEffect(() => {
+    fetchOrganizations();
+  }, []);
+
+  const handleClose = async () => {
+    fetchOrganizations();
+    setOpenModal(false);
+  };
+
   return (
     <div className="mt-[20px]">
       <CustomButton
@@ -75,10 +89,7 @@ const OrganizationPage = () => {
           <p>Add Organization</p>
         </div>
       </div>
-      <AddOrganization
-        open={openModal}
-        handleClose={() => setOpenModal(false)}
-      />
+      <AddOrganization open={openModal} handleClose={handleClose} />
     </div>
   );
 };
