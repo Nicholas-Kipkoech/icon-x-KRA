@@ -16,15 +16,15 @@ const BusinessPage = ({ params: { business: organizationID } }) => {
 
   const { getOrgById } = useContextApi();
 
-  const fetchOrganization = async (id) => {
+  const fetchOrganization = async (id, cache = false) => {
     setLoading(true);
-    const data = await getOrgById(id);
+    const data = await getOrgById(id, cache);
     setBusinesses(data);
     setLoading(false);
   };
   useEffect(() => {
     if (organizationID) {
-      fetchOrganization(organizationID);
+      fetchOrganization(organizationID, false);
     }
   }, [organizationID]);
 
