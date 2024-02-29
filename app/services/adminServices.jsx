@@ -1,5 +1,10 @@
 import { PrivateAxiosUtility } from "./axiosUtility";
 
+export const createUser = async (data) => {
+  const res = await PrivateAxiosUtility.post(`/user/create`, data);
+  return res?.data;
+};
+
 export const updateUser = async (data) => {
   const res = await PrivateAxiosUtility.patch(`/user/password/update`, data);
   return res?.data;

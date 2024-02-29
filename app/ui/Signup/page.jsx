@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import CustomInput from "../reusableComponents/CustomInput";
 import CustomButton from "../reusableComponents/CustomButton";
+import { createUser } from "@/app/services/adminServices";
+import { useCustomToast } from "@/app/hooks/useToast";
 
 const Signup = ({ toggleView }) => {
   const [firstName, setFirstName] = useState("");
@@ -9,15 +11,27 @@ const Signup = ({ toggleView }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  const showToast = useCustomToast();
   const handleSubmit = async () => {
-    let formData = new FormData();
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
-    formData.append("email", email);
-    formData.append("role", "Admin");
-    formData.append("password", password);
-    formData.append("phoneNumber", phoneNumber);
+    try {
+      setLoading(true);
+      let formData = new FormData();
+      formData.append("firstName", firstName);
+      formData.append("lastName", lastName);
+      formData.append("email", email);
+      formData.append("role", "Admin");
+      formData.append("password", password);
+      formData.append("phoneNumber", phoneNumber);
+      await createUser(formData);
+      showToast("Account created successfully");
+      toggleView();
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
   };
 
   return (
@@ -32,6 +46,7 @@ const Signup = ({ toggleView }) => {
         <div className="flex gap-2 flex-wrap   items-center justify-center">
           <CustomInput
             name={`First Name`}
+            onchange={(e) => setFirstName(e.target.value)}
             required
             type={`text`}
             className={`h-[50px] w-[300px]  border p-5 rounded-md`}
@@ -39,24 +54,28 @@ const Signup = ({ toggleView }) => {
           <CustomInput
             required
             name={`Last Name`}
+            onchange={(e) => setLastName(e.target.value)}
             type={`text`}
             className={`h-[50px] w-[300px]  border p-5 rounded-md`}
           />{" "}
           <CustomInput
             required
             name={`Email Address`}
+            onchange={(e) => setEmail(e.target.value)}
             type={`email`}
             className={`h-[50px] w-[300px]  border p-5 rounded-md`}
           />{" "}
           <CustomInput
             required
             name={`Phone Number`}
+            onchange={(e) => setPhoneNumber(e.target.value)}
             type={`text`}
             className={`h-[50px] w-[300px]  border p-5 rounded-md`}
           />{" "}
           <CustomInput
             required
             name={`Password`}
+            onchange={(e) => setPassword(e.target.value)}
             type={`text`}
             className={`h-[50px] w-[300px]  border p-5 rounded-md`}
           />
@@ -64,8 +83,9 @@ const Signup = ({ toggleView }) => {
         </div>
         <div className="mt-10 flex gap-2">
           <CustomButton
-            name={"Create"}
+            name={loading ? "Creating account...." : "Create account"}
             type={`button`}
+            onClick={handleSubmit}
             className={`h-[45px] w-[500px]  rounded-md bg-[#cb7529] font-[600] text-[white] text-[20px]`}
           />
         </div>
