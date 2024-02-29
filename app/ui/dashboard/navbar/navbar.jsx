@@ -9,6 +9,7 @@ import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 
 import { jwtDecode } from "jwt-decode";
 import CustomButton from "../../reusableComponents/CustomButton";
+import { useCustomToast } from "@/app/hooks/useToast";
 
 const Navbar = ({ showDrawer }) => {
   const [user, setUser] = useState({});
@@ -36,9 +37,13 @@ const Navbar = ({ showDrawer }) => {
   const lastSegment = pathname.split("/").pop();
   const formattedLastSegment = formatPathSegment(lastSegment);
 
+  const showToast = useCustomToast();
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    router.push("/");
+    showToast("Logging out successfully...");
+    setTimeout(() => {
+      localStorage.removeItem("access_token");
+      router.push("/");
+    }, 2000);
   };
 
   return (
