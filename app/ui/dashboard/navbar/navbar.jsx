@@ -43,7 +43,7 @@ const Navbar = ({ showDrawer }) => {
     setTimeout(() => {
       localStorage.removeItem("access_token");
       router.push("/");
-    }, 2000);
+    }, 1000);
   };
 
   return (

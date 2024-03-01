@@ -33,7 +33,9 @@ const Login = ({ toggleView }) => {
         localStorage.setItem("access_token", userData.access_token);
         if (userData.success === true) {
           showToast("Logged in successfully!");
-          router.push("/dashboard");
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 2000);
         }
       }
     } catch (error) {
