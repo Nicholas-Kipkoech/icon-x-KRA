@@ -91,7 +91,7 @@ const AddBusiness = ({ open, handleClose, organizationID }) => {
           />
           <CustomButton
             name={loading ? "Adding Business" : "Add Business"}
-            disabled={loading}
+            disabled={loading || businessName === ""}
             onClick={handleSubmit}
             className={"bg-[#995224]  w-[200px] rounded-md"}
           />

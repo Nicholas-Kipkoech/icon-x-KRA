@@ -76,7 +76,7 @@ const OrganizationPage = () => {
                 </div>
                 <div>
                   <p>No of Business</p>
-                  <p className="font-[800]">2</p>
+                  <p className="font-[800]">0</p>
                 </div>
               </div>
             </Link>
