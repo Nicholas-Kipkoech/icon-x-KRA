@@ -24,45 +24,8 @@ const Profile = () => {
     const decoded_user = jwtDecode(access_token);
     setUser(decoded_user);
   }, []);
-  useEffect(() => {
-    if (user) {
-      const getSuperadmin = async () => {
-        setLoading(true);
-        const { superadmin } = await fetchSuperAdmin(user.email);
-        setSuperadmin(superadmin);
-        setLoading(false);
-      };
-      getSuperadmin();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (superadmin) {
-      setName(superadmin.name);
-      setTitle(superadmin.title);
-      setAbout(superadmin.about);
-      setCompany(superadmin.company);
-    }
-  }, [superadmin]);
 
   const showToast = useCustomToast();
-
-  const handleUpdateAdmin = async () => {
-    try {
-      setUpdating(true);
-      let formdata = new FormData();
-      formdata.append("name", name);
-      formdata.append("title", title);
-      formdata.append("about", about);
-      formdata.append("company", company);
-      await updateSuperAdmin(user.email, formdata);
-      setUpdating(false);
-      showToast("Profile details updated successfully");
-    } catch (error) {
-      setUpdating(false);
-      console.error(error);
-    }
-  };
 
   return (
     <>
@@ -135,7 +98,6 @@ const Profile = () => {
         />
         <CustomButton
           name={updating ? "Updating..." : "Update profile"}
-          onClick={handleUpdateAdmin}
           disabled={updating}
           className={
             "h-[40px] w-[200px] md:w-[250px] lg:w-[400px] rounded bg-[#cb7529] text-white"

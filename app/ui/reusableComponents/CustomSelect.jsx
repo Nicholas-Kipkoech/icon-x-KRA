@@ -22,7 +22,7 @@ const CustomSelect = ({
       <Select
         options={options}
         placeholder={placeholder}
-        className={className}
+        className={` outline-[#cb7529] ${className}`}
         onChange={onChange}
       />
     </div>

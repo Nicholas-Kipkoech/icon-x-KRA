@@ -343,7 +343,7 @@ const AddTransactionsPage = ({ businessId }) => {
               required
               placeholder="Select reciept type code"
               options={recieptTypeOptions}
-              onChange={(value) => setRcptTyCd(value)}
+              onChange={(value) => setRcptTyCd(value.value)}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
             <CustomSelect
@@ -351,7 +351,7 @@ const AddTransactionsPage = ({ businessId }) => {
               required
               placeholder="Select invoice status code"
               options={invoiceStatusOptions}
-              onChange={(value) => setSalesSttsCd(value)}
+              onChange={(value) => setSalesSttsCd(value.value)}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
             <CustomInput
@@ -383,7 +383,7 @@ const AddTransactionsPage = ({ businessId }) => {
               name={"Purchase Accept Y/N"}
               placeholder="Yes or No?"
               options={purchaseOptions}
-              onChange={(value) => setPrchrAcptcYn(value)}
+              onChange={(value) => setPrchrAcptcYn(value.value)}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
             <CustomInput
@@ -442,7 +442,7 @@ const AddTransactionsPage = ({ businessId }) => {
                   name={"Payment Type Code"}
                   placeholder="Select payment type code"
                   options={paymentTypeOptions}
-                  onChange={(value) => setPmtTyCd(value)}
+                  onChange={(value) => setPmtTyCd(value.value)}
                   className={"h-[60px] w-[30vw] rounded-md p-2"}
                 />
                 <CustomInput
@@ -505,7 +505,7 @@ const AddTransactionsPage = ({ businessId }) => {
               name={"Purchase Accept Y/N"}
               options={purchaseOptions}
               placeholder={"Select purchase accept"}
-              onChange={(value) => setReceiptPrchrAcptcYn(value)}
+              onChange={(value) => setReceiptPrchrAcptcYn(value.value)}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
             />
           </div>
@@ -573,7 +573,7 @@ const AddTransactionsPage = ({ businessId }) => {
               options={options}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
               placeholder={"Select item class code"}
-              onChange={(value) => console.log("value", value)}
+              onChange={(value) => setItemClsCd(value.value)}
             />
             <CustomInput
               name={"Item Name"}
@@ -588,7 +588,7 @@ const AddTransactionsPage = ({ businessId }) => {
               placeholder={"Select packaging unit"}
               options={packagingUnitOptions}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
-              onChange={(value) => setPkgUnitCd(value)}
+              onChange={(value) => setPkgUnitCd(value.value)}
             />
             <CustomSelect
               name={"Quantity Unit Code"}
@@ -596,7 +596,7 @@ const AddTransactionsPage = ({ businessId }) => {
               placeholder={"Select quantity code"}
               options={quantityUnitOptions}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
-              onChange={(value) => setQtyUnitCd(value)}
+              onChange={(value) => setQtyUnitCd(value.value)}
             />
             <CustomInput
               name={"Package"}
@@ -652,7 +652,7 @@ const AddTransactionsPage = ({ businessId }) => {
               placeholder={"Select taxation type"}
               options={taxTypeOptions}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
-              onChange={(value) => setTaxTyCd(value)}
+              onChange={(value) => setTaxTyCd(value.value)}
             />
             <CustomInput
               name={"Taxable Amount"}
