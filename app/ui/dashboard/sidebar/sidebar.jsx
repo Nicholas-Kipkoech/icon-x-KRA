@@ -1,25 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import MenuLink from "./menuLink/menuLink";
-import {
-  Md60FpsSelect,
-  MdAdminPanelSettings,
-  MdArchitecture,
-  MdAttachMoney,
-  MdBusiness,
-  MdDashboard,
-  MdHelpCenter,
-  MdLogout,
-  MdOutlineSettings,
-  MdPerson,
-} from "react-icons/md";
+import { MdBusiness, MdOutlineSettings } from "react-icons/md";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+
 import { jwtDecode } from "jwt-decode";
 import iconLogo from "../../../assets/iconLogo.png";
 import { GrOverview } from "react-icons/gr";
-import { FaUsers } from "react-icons/fa6";
-import { FaServer } from "react-icons/fa";
+
+import { VscOrganization } from "react-icons/vsc";
 import { LiaFileInvoiceSolid } from "react-icons/lia";
 
 const Sidebar = ({ clicked }) => {
@@ -48,7 +37,7 @@ const Sidebar = ({ clicked }) => {
         {
           title: "Organizations",
           path: "/dashboard/organizations",
-          icon: <MdAdminPanelSettings />,
+          icon: <VscOrganization />,
         },
         {
           title: "View transactions",
