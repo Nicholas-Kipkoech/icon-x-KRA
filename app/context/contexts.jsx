@@ -5,12 +5,14 @@ import {
   fetchBusinessByOrganization,
   fetchOrganizations,
 } from "../services/adminServices";
+import { fetchItems } from "../services/etimsServices";
 
 const Context = createContext({});
 
 export const ContextProvider = ({ children }) => {
   const [organizations, setOrganizations] = useState([]);
   const [cachedData, setCachedDate] = useState({});
+  const [items, setItems] = useState([]);
 
   const getOrgById = async (id, forceRefresh = false) => {
     if (!forceRefresh && cachedData[id]) {
@@ -30,8 +32,22 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     getOrganizations();
   }, []);
+  useEffect(() => {
+    const fetchItemsFunc = async () => {
+      const { items } = await fetchItems();
+      const transformedItems = items.map((item) => ({
+        label: item.itemClassName,
+        value: item.itemClassCode,
+      }));
+      setItems(transformedItems);
+    };
+    fetchItemsFunc();
+  }, []);
+
   return (
-    <Context.Provider value={{ organizations, getOrganizations, getOrgById }}>
+    <Context.Provider
+      value={{ organizations, getOrganizations, getOrgById, items }}
+    >
       {children}
     </Context.Provider>
   );

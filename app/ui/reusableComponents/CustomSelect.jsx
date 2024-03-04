@@ -1,10 +1,9 @@
 import React from "react";
-import { Select } from "antd";
+import Select from "react-select";
 
 const CustomSelect = ({
   options,
   className,
-  defaultValue,
   required,
   name,
   onChange,
@@ -24,9 +23,7 @@ const CustomSelect = ({
         options={options}
         placeholder={placeholder}
         className={className}
-        defaultValue={defaultValue}
         onChange={onChange}
-        showSearch={true}
       />
     </div>
   );

@@ -16,6 +16,8 @@ import {
 } from "../transactions/options";
 
 import { formatDateToCustomFormat } from "@/app/ui/reusableFunctions/Utils";
+import Select from "react-select";
+import { useContextApi } from "@/app/context/contexts";
 
 const AddTransactionsPage = ({ businessId }) => {
   const showToast = useCustomToast();
@@ -310,7 +312,7 @@ const AddTransactionsPage = ({ businessId }) => {
     setTaxblAmt(taxableAmount);
   }, [taxTyCd, qty, prc]);
 
-  //className="flex flex-wrap justify-evenly border rounded p-4"
+  const { items: options } = useContextApi();
 
   return (
     <div className="h-[100vh]">
@@ -566,12 +568,12 @@ const AddTransactionsPage = ({ businessId }) => {
 
           <div className="flex flex-wrap justify-evenly border rounded p-4">
             <CustomSelect
-              name={"Item Classification Code"}
+              name={"Item Class Code"}
               required
-              placeholder={"Select item class code"}
-              // options={comoditiesOptions}
+              options={options}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
-              onChange={(value) => setItemClsCd(value)}
+              placeholder={"Select item class code"}
+              onChange={(value) => console.log("value", value)}
             />
             <CustomInput
               name={"Item Name"}
