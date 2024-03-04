@@ -19,40 +19,7 @@ import {
 import { jwtDecode } from "jwt-decode";
 import { formatDateToCustomFormat } from "@/app/ui/reusableFunctions/Utils";
 
-const AddTransactionsPage = () => {
-  const [classCode, setClassCode] = useState("");
-  const [_comodities, setComodities] = useState([]);
-  const [organization, setOrganization] = useState("");
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    const { business_class, organization_id } = jwtDecode(token);
-    setOrganization(organization_id);
-    setClassCode(business_class);
-  }, []);
-
-  const getComidities = async (code) => {
-    try {
-      const { comodities } = await fetchComodities(code);
-      setComodities(comodities);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    if (classCode !== "") {
-      getComidities(classCode);
-    }
-  }, [classCode]);
-
-  const comoditiesOptions = _comodities.map((comodity) => {
-    return {
-      value: comodity?.comodity_code,
-      label: comodity?.comodity_name,
-    };
-  });
-
+const AddTransactionsPage = ({ businessId }) => {
   const showToast = useCustomToast();
   // State variables for main fields
   const [trdInvcNo, setTrdInvcNo] = useState(0);
@@ -175,7 +142,7 @@ const AddTransactionsPage = () => {
       setLoading(true);
       // Logic for form submission
       const formData = {
-        organizationId: organization,
+        business: businessId,
         trdInvcNo,
         invcNo: orgInvcNo,
         orgInvcNo,
@@ -228,6 +195,7 @@ const AddTransactionsPage = () => {
           prchrAcptcYn: receiptPrchrAcptcYn,
         },
         itemList,
+        businessId,
       };
       await addTransaction(formData);
       setLoading(false);
@@ -603,7 +571,7 @@ const AddTransactionsPage = () => {
               name={"Item Classification Code"}
               required
               placeholder={"Select item class code"}
-              options={comoditiesOptions}
+              // options={comoditiesOptions}
               className={"h-[60px] w-[30vw] rounded-md p-2"}
               onChange={(value) => setItemClsCd(value)}
             />
@@ -808,7 +776,7 @@ const AddTransactionsPage = () => {
         <CustomButton
           name={loading ? "Submitting to ETIMS" : "Submit to ETIMS"}
           onClick={handleSubmit}
-          disabled={loading}
+          disabled={loading || itemList.length < 1}
           className={"bg-[#cb7529] text-white p-3 w-[30%] rounded-md"}
         />
       </div>
