@@ -56,20 +56,20 @@ const Sidebar = ({ clicked }) => {
         },
       ],
     },
-    {
-      title: user?.role === "Superadmin" ? "Company Settings" : "",
-      list:
-        user?.role === "Superadmin"
-          ? [
-              {
-                title: "Enrolled Organizations",
-                path: "/dashboard/organizations",
-                icon: <MdBusiness />,
-              },
-              // Add more items as needed
-            ]
-          : [], // Empty array if not a superadmin
-    },
+    // {
+    //   title: user?.role === "Superadmin" ? "Company Settings" : "",
+    //   list:
+    //     user?.role === "Superadmin"
+    //       ? [
+    //           {
+    //             title: "Enrolled Organizations",
+    //             path: "/dashboard/organizations",
+    //             icon: <MdBusiness />,
+    //           },
+    //           // Add more items as needed
+    //         ]
+    //       : [], // Empty array if not a superadmin
+    // },
   ];
 
   return (
