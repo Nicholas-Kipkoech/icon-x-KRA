@@ -6,7 +6,7 @@ import { useCustomToast } from "@/app/hooks/useToast";
 import { createOrganization } from "@/app/services/adminServices";
 
 const AddOrganization = ({ open, handleClose }) => {
-  const [checked, setChecked] = useState("personal");
+  const [checked, setChecked] = useState("business");
   const [organizationName, setOrganizationName] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -52,24 +52,24 @@ const AddOrganization = ({ open, handleClose }) => {
           <div className="flex gap-2">
             <input
               type="radio"
-              id="personal"
-              name="organizationType"
-              value="personal"
-              checked={checked === "personal"}
-              onChange={handleRadioChange}
-            />
-            <label htmlFor="personal">Personal</label>
-          </div>
-          <div className="flex gap-2">
-            <input
-              type="radio"
               id="business"
               name="organizationType"
               value="business"
               checked={checked === "business"}
               onChange={handleRadioChange}
             />
-            <label htmlFor="business">Business</label>
+            <label htmlFor="personal">Business</label>
+          </div>
+          <div className="flex gap-2">
+            <input
+              type="radio"
+              id="group"
+              name="organizationType"
+              value="group"
+              checked={checked === "group"}
+              onChange={handleRadioChange}
+            />
+            <label htmlFor="business">Group</label>
           </div>
         </div>
 
