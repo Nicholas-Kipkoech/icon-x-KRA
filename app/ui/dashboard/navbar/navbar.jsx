@@ -51,7 +51,6 @@ const Navbar = ({ showDrawer }) => {
       <div className="capitalize flex gap-3 items-center text-white font-bold">
         <div className="flex items-center gap-2">
           <IoMenu size={30} onClick={showDrawer} className="cursor-pointer" />
-          <HiOutlineSwitchHorizontal size={25} className="cursor-pointer" />
         </div>
         {formattedLastSegment}
       </div>
