@@ -3,13 +3,10 @@ export const TabsData = [
     name: "Item",
   },
   {
-    name: "Sales",
+    name: "Sales/Credit Notes",
   },
   {
     name: "Purchases",
-  },
-  {
-    name: "Credit Notes",
   },
   {
     name: "Customers",
