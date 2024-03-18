@@ -4,6 +4,7 @@ import { Table, Modal } from "antd";
 import CustomButton from "@/app/ui/reusableComponents/CustomButton";
 import CustomInput from "@/app/ui/reusableComponents/CustomInput";
 import CustomSelect from "@/app/ui/reusableComponents/CustomSelect";
+import { itemTypeCodes } from "@/app/dashboard/transactions/options";
 
 const Item = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -68,6 +69,7 @@ const Item = () => {
               required
               name={"Item Type"}
               placeholder={"enter item type code"}
+              options={itemTypeCodes}
               className={" w-[370px]  rounded-sm "}
             />
             <CustomSelect
@@ -88,22 +90,14 @@ const Item = () => {
               placeholder={"Select quantity unit"}
               className={" w-[370px]  rounded-sm "}
             />
-            <CustomInput
-              name={"Unique product code/Barcode"}
-              className={"p-2 w-[370px] border  rounded-sm "}
-            />
+
             <CustomSelect
               required
               name={"Tax Code"}
               placeholder={"Select tax code"}
               className={" w-[370px] rounded-sm "}
             />
-            <CustomSelect
-              required
-              name={"Country"}
-              placeholder={"Select country"}
-              className={"  w-[370px]  rounded-sm "}
-            />
+
             <CustomInput
               required
               name={"Unit Price (KES)"}

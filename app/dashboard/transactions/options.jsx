@@ -168,3 +168,18 @@ export const quantityUnitOptions = [
     label: "Pieces/item[Number]",
   },
 ];
+
+export const itemTypeCodes = [
+  {
+    value: "1",
+    label: "Raw Material",
+  },
+  {
+    value: "2",
+    label: "Finished Product",
+  },
+  {
+    value: "3",
+    label: "Service",
+  },
+];
