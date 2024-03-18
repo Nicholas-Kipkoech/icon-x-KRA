@@ -22,7 +22,9 @@ const AddSaleModal = ({ open, handleClose }) => {
             placeholder={"Enter or select customer"}
             className={"h-[40px] p-2  rounded-md"}
           />
-          <span className="flex justify-end mt-2 ">+ Add Customer</span>
+          <span className="flex justify-end mt-2 cursor-pointer">
+            + Add Customer
+          </span>
 
           <CustomInput
             disabled
