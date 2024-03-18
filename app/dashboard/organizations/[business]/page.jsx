@@ -26,6 +26,7 @@ const BusinessPage = ({ params: { business: organizationID } }) => {
     if (organizationID) {
       fetchOrganization(organizationID, false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [organizationID]);
 
   const handleCloseModal = () => {

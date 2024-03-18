@@ -50,7 +50,7 @@ const BusinessInfoPage = ({ params: { businessInfo: businessId } }) => {
 
   return (
     <div className="m-[20px]">
-      <div className="flex gap-4 justify-center">
+      <div className="flex gap-6 justify-center">
         {TabsData.map((tabItem, index) => (
           <>
             <TabList

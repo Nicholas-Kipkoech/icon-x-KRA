@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["png.pngtree.com", "img.freepik.com", "intraafrica.co.ke"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "png.pngtree.com",
+        port: "",
+        pathname: "",
+      },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+        port: "",
+        pathname: "",
+      },
+      {
+        protocol: "https",
+        hostname: "intraafrica.co.ke",
+      },
+    ],
   },
   env: {
     PROD_URL: process.env.NEXT_PROD_URL,
